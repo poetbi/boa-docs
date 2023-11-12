@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>用户监听器 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">用户监听器</div>
+			<div class="content">
+				<p class="subtitle">概念</p>
+<p>监听器是程序运行到某个位置时触发某事件并执行的类，除系统监听器外，用户可自定义监听器</p>
+
+<p class="subtitle">定义</p>
+<p>自定义监听器一般位于模块listener目录下，文件名即类名，命名空间为：\mod\模块\listener，继承并实现\boa\event\listener接口</p>
+<pre><code class="language language-php">
+namespace mod\home\listener;
+
+class test implements \boa\event\listener {
+	private $res;
+	
+	public function __construct($args){
+		print_r($args);
+		// 接收参数，执行具体业务
+		$this->res = true;
+	}
+
+	public function get(){
+		return $this->res; // 返回处理结果
+	}
+}
+</code></pre>
+<p class="tip tip-help">接口详情参见<a href="../api/boa.event.listener.html">listener接口</a></p>
+
+<p class="subtitle">使用</p>
+<ul>
+	<li>auto=true时，如监听器未注册，则在当前模块listener目录下按文件名查找并触发（若不存在便忽略）
+<pre><code class="language language-php">
+$res = boa::event()->trigger('test'); // 执行 mod/home/listener/test.php
+</code></pre>
+	</li>
+	<li>auto=false时，需先行手动注册监听器，然后触发
+<pre><code class="language language-php">
+$event = boa::event();
+if(!$event->have('test')){
+	$event->register('test', '\\mod\\home\\listener\\test');
+}
+$res = $event->trigger('test');
+</code></pre>
+	</li>
+</ul>							</div>
+			<div class="navigate">
+				<a href="../event/72.html" class="prev">< 事件配置</a>
+				<a class="menu"></a>
+				<a href="../message/index.html" class="next">消息 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>邮件配置 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">邮件配置</div>
+			<div class="content">
+				<p class="subtitle">config.php</p>
+<pre><code class="language-php">'MAIL' => [
+	//配置项
+],
+</code></pre>
+
+<p class="subtitle"><a href="../api/boa.mail.html">邮件配置</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>driver</td><td>smtp</td><td>string</td><td>邮件驱动，可选值：smtp, mail</td></tr></table></p>
+<p class="subtitle"><a href="../api/boa.mail.driver.smtp.html">smtp驱动</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>smtp</td><td>['host'=>'','port'=>25,'user'=>'','pass'=>'','helo'=>'BOA']</td><td>array</td><td>SMTP服务器配置</td></tr><tr><td>from</td><td></td><td>string</td><td>发件人地址+名称，中间空格隔开，名称可省略</td></tr><tr><td>reply</td><td></td><td>string</td><td>邮件回复地址，格式同from</td></tr><tr><td>to</td><td></td><td>string</td><td>收件人，格式同from</td></tr><tr><td>cc</td><td>[]</td><td>array</td><td>抄送人，支持多个，每个格式同from</td></tr><tr><td>bcc</td><td>[]</td><td>array</td><td>暗抄送人，支持多个，每个格式同from</td></tr><tr><td>charset</td><td>UTF-8</td><td>string</td><td>邮件编码</td></tr><tr><td>priority</td><td>3</td><td>int</td><td>邮件优先级</td></tr><tr><td>content_type</td><td>text/html</td><td>string</td><td>邮件文档类型，如text/plain</td></tr><tr><td>eol</td><td>\r\n</td><td>string</td><td>换行符</td></tr><tr><td>conn_timeout</td><td>15</td><td>int</td><td>连接超时（秒）</td></tr><tr><td>conn_protocol</td><td></td><td>string</td><td>连接协议，可选值：tls://, ssl://</td></tr><tr><td>header</td><td>[]</td><td>array</td><td>附加邮件头</td></tr></table></p>
+<p class="subtitle"><a href="../api/boa.mail.driver.mail.html">mail驱动</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>from</td><td></td><td>string</td><td>发件人地址+名称，中间空格隔开，名称可省略</td></tr><tr><td>reply</td><td></td><td>string</td><td>邮件回复地址，格式同from</td></tr><tr><td>to</td><td></td><td>string</td><td>收件人，格式同from</td></tr><tr><td>cc</td><td>[]</td><td>array</td><td>抄送，支持多个，每个格式同from</td></tr><tr><td>bcc</td><td>[]</td><td>array</td><td>暗抄送，支持多个，每个格式同from</td></tr><tr><td>charset</td><td>UTF-8</td><td>string</td><td>邮件编码</td></tr><tr><td>priority</td><td>3</td><td>int</td><td>邮件优先级</td></tr><tr><td>content_type</td><td>text/html</td><td>string</td><td>邮件文档类型，如text/plain</td></tr><tr><td>eol</td><td>\r\n</td><td>string</td><td>换行符</td></tr><tr><td>header</td><td>[]</td><td>array</td><td>附加邮件头</td></tr></table></p>							</div>
+			<div class="navigate">
+				<a href="../config/56.html" class="prev">< HTTP配置</a>
+				<a class="menu"></a>
+				<a href="../config/58.html" class="next">上传配置 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

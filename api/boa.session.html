@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../res/index.js"></script>
+    <title>session类 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">session类</div>
+			<div class="api">
+				<table>
+					<tr>
+						<td width="10%" align="right">版本</td>
+						<td>1.0+</td>
+					</tr>
+					<tr>
+						<td align="right">命名空间</td>
+						<td>boa</td>
+					</tr>
+					<tr>
+						<td align="right">文件</td>
+						<td>boa/session.php</td>
+					</tr>
+					<tr>
+						<td align="right">说明</td>
+						<td>session类（会话服务器端），配置：'SESSION' => [],</td>
+					</tr>
+				</table>
+
+														<div class="subtitle">配置</div>
+										<table class="config">
+						<tr>
+							<th>配置项</th>
+							<th>默认值</th>
+							<th>类型</th>
+							<th>说明</th>
+						</tr>
+											<tr>
+							<td>driver</td>
+							<td>file</td>
+							<td>string</td>
+							<td>会话驱动，可选值：file, memcache, memcached, redis</td>
+						</tr>
+										</table>
+									
+				<div class="subtitle">目录</div>
+				<table class="index">
+					<tr>
+						<th>方法</th>
+						<th>说明</th>
+					</tr>
+									<tr>
+						<td align="center"><a href="#__construct">__construct()</a></td>
+						<td>初始化</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#ttl">ttl()</a></td>
+						<td>设置会话ID（PHPSESSID）的cookie有效期</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#sid">sid()</a></td>
+						<td>获取Session ID</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#get">get()</a></td>
+						<td>读取session</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#set">set()</a></td>
+						<td>设置session</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#del">del()</a></td>
+						<td>删除session</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#gc">gc()</a></td>
+						<td>session回收</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#save">save()</a></td>
+						<td>保存并关闭会话</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#clear">clear()</a></td>
+						<td>销毁会话</td>
+					</tr>
+								</table>	
+
+				<div class="subtitle">方法</div>
+							<a name="__construct"></a>
+				<table>
+					<caption>
+						<h3>__construct()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">初始化</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$cfg</td>
+						<td></td>
+						<td>[]</td>
+						<td>array</td>
+						<td>配置数据</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$session = boa::session();</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="ttl"></a>
+				<table>
+					<caption>
+						<h3>ttl()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置会话ID（PHPSESSID）的cookie有效期</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$second</td>
+						<td>Y</td>
+						<td></td>
+						<td>int</td>
+						<td>cookie有效时长（秒）</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$session-&gt;ttl(3600); // 每次设置相当于从当前时间延长3600秒</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="sid"></a>
+				<table>
+					<caption>
+						<h3>sid()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取Session ID</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回会话ID（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$sid = $session-&gt;sid();</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="get"></a>
+				<table>
+					<caption>
+						<h3>get()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">读取session</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$key</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>键，支持多维数组，如：user.group.name</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回session值（mixed）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$session-&gt;get('user');
+$session-&gt;get('user.group');</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="set"></a>
+				<table>
+					<caption>
+						<h3>set()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置session</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$key</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>键，支持多维数组，如：user.group.name</td>
+					</tr>
+									<tr class="param">
+						<td>$val</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>值</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$session-&gt;set('name', 'boaPHP');
+$session-&gt;set('user.group.name', 'admin');</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="del"></a>
+				<table>
+					<caption>
+						<h3>del()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">删除session</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$key</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>键，支持多维数组，如：user.group.name</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$session-&gt;del('user.group');
+</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="gc"></a>
+				<table>
+					<caption>
+						<h3>gc()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">session回收</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回删除session数量（int），失败返回false（bool）</td>
+					</tr>
+												</table>
+							<a name="save"></a>
+				<table>
+					<caption>
+						<h3>save()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">保存并关闭会话</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回true（bool），失败返回false（bool）</td>
+					</tr>
+												</table>
+							<a name="clear"></a>
+				<table>
+					<caption>
+						<h3>clear()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">销毁会话</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回true（bool），失败返回false（bool）</td>
+					</tr>
+												</table>
+						</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

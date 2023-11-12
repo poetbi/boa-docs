@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../res/index.js"></script>
+    <title>security类 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">security类</div>
+			<div class="api">
+				<table>
+					<tr>
+						<td width="10%" align="right">版本</td>
+						<td>1.0+</td>
+					</tr>
+					<tr>
+						<td align="right">命名空间</td>
+						<td>boa</td>
+					</tr>
+					<tr>
+						<td align="right">文件</td>
+						<td>boa/security.php</td>
+					</tr>
+					<tr>
+						<td align="right">说明</td>
+						<td>安全类，继承base类，配置：'SECURITY' => [],</td>
+					</tr>
+				</table>
+
+														<div class="subtitle">配置</div>
+										<table class="config">
+						<tr>
+							<th>配置项</th>
+							<th>默认值</th>
+							<th>类型</th>
+							<th>说明</th>
+						</tr>
+											<tr>
+							<td>xss_tags</td>
+							<td>['script', 'base']</td>
+							<td>array</td>
+							<td>XSS防御时，过滤HTML标签，忽略大小写</td>
+						</tr>
+											<tr>
+							<td>xss_events</td>
+							<td>['on*']</td>
+							<td>array</td>
+							<td>XSS防御时，过滤DOM事件， *代表正则[a-z]+，忽略大小写</td>
+						</tr>
+											<tr>
+							<td>csrf_key</td>
+							<td>CSRF-TOKEN</td>
+							<td>string</td>
+							<td>CSRF防御时，存储或传送token的键名</td>
+						</tr>
+											<tr>
+							<td>csrf_type</td>
+							<td>1</td>
+							<td>int</td>
+							<td>CSRF防御时，校验类型；0=关闭，1=前端方式，2=后端方式，3=混合方式</td>
+						</tr>
+											<tr>
+							<td>csrf_expire</td>
+							<td>0</td>
+							<td>int</td>
+							<td>CSRF防御时，token有效期（秒），0=不限</td>
+						</tr>
+										</table>
+									
+				<div class="subtitle">目录</div>
+				<table class="index">
+					<tr>
+						<th>方法</th>
+						<th>说明</th>
+					</tr>
+									<tr>
+						<td align="center"><a href="#cfg">cfg()</a></td>
+						<td>获取或设置配置信息</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#xss">xss()</a></td>
+						<td>（XSS）跨站脚本过滤</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#create">create()</a></td>
+						<td>（CSRF）在一个页面中生成token</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#check">check()</a></td>
+						<td>（CSRF）在另一个页面中检查token，type=0时或命令行下不做检查</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#validate">validate()</a></td>
+						<td>（CSRF）在另一个页面中校验token，check()的外层封装，不通过则报错</td>
+					</tr>
+								</table>	
+
+				<div class="subtitle">方法</div>
+							<a name="cfg"></a>
+				<table>
+					<caption>
+						<h3>cfg()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取或设置配置信息</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$k</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>键</td>
+					</tr>
+									<tr class="param">
+						<td>$v</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>值</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">同 base 类</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$security = boa::security();
+$security-&gt;cfg('csrf_expire', 3600);</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="xss"></a>
+				<table>
+					<caption>
+						<h3>xss()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">（XSS）跨站脚本过滤</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$str</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>待过滤的字符串</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回过滤后的字符串（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$content = $security-&gt;xss($this-&gt;content);</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="create"></a>
+				<table>
+					<caption>
+						<h3>create()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">（CSRF）在一个页面中生成token</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回token（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$token = $security-&gt;create();</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="check"></a>
+				<table>
+					<caption>
+						<h3>check()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">（CSRF）在另一个页面中检查token，type=0时或命令行下不做检查</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">通过返回true（bool），不通过返回false（bool）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$res = $security-&gt;check();</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="validate"></a>
+				<table>
+					<caption>
+						<h3>validate()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">（CSRF）在另一个页面中校验token，check()的外层封装，不通过则报错</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">通过时静默，不通过报错</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$security-&gt;validate();</code></pre>
+						</td>
+					</tr>
+								</table>
+						</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

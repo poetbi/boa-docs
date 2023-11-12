@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>缓存使用 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">缓存使用</div>
+			<div class="content">
+				<p>支持标量（字符串、整型、浮点型）、数组、对象等数据类型</p>
+<p class="tip tip-help">详情参见 <a href="../api/boa.cache.html">cache类</a></p>
+<p class="subtitle">读取</p>
+<p>使用 get() 方法读取缓存</p>
+<pre><code class="language-php">
+	$val = boa::cache()->get('key');
+</code></pre>
+
+<p class="subtitle">设置</p>
+<p>使用 set() 方法设置缓存</p>
+<pre><code class="language-php">
+	boa::cache()->set('key', $val, 3600);
+</code></pre>
+
+<p class="subtitle">删除</p>
+<p>使用 del() 方法删除缓存</p>
+<pre><code class="language-php">
+	boa::cache()->del('key');
+</code></pre>
+
+<p class="subtitle">清理</p>
+<p>使用 clear() 方法清理缓存</p>
+<pre><code class="language-php">
+	boa::cache()->clear();
+</code></pre>
+
+<p class="tip tip-alert">使用缓存以后会导致一些修改不得即时生效，开发中遇到此类问题，请先尝试删除临时目录下的缓存（var/www/cache/）</p>							</div>
+			<div class="navigate">
+				<a href="../cache/40.html" class="prev">< 缓存配置</a>
+				<a class="menu"></a>
+				<a href="../cache/43.html" class="next">缓存器 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

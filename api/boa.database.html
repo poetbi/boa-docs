@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../res/index.js"></script>
+    <title>database类 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">database类</div>
+			<div class="api">
+				<table>
+					<tr>
+						<td width="10%" align="right">版本</td>
+						<td>1.0+</td>
+					</tr>
+					<tr>
+						<td align="right">命名空间</td>
+						<td>boa</td>
+					</tr>
+					<tr>
+						<td align="right">文件</td>
+						<td>boa/database.php</td>
+					</tr>
+					<tr>
+						<td align="right">说明</td>
+						<td>数据库操作类，配置：'DATABASE' => [],</td>
+					</tr>
+				</table>
+
+														<div class="subtitle">配置</div>
+										<table class="config">
+						<tr>
+							<th>配置项</th>
+							<th>默认值</th>
+							<th>类型</th>
+							<th>说明</th>
+						</tr>
+											<tr>
+							<td>driver</td>
+							<td>pdo</td>
+							<td>string</td>
+							<td>数据库驱动，可选值：pdo，mysqli</td>
+						</tr>
+											<tr>
+							<td>prefix</td>
+							<td></td>
+							<td>string</td>
+							<td>表前缀</td>
+						</tr>
+											<tr>
+							<td>charset</td>
+							<td>utf8</td>
+							<td>string</td>
+							<td>数据库字符集，不要请置空</td>
+						</tr>
+											<tr>
+							<td>persist</td>
+							<td>false</td>
+							<td>bool</td>
+							<td>是否持久连接</td>
+						</tr>
+											<tr>
+							<td>option</td>
+							<td>[]</td>
+							<td>array</td>
+							<td>数据库选项，因驱动而异</td>
+						</tr>
+											<tr>
+							<td>type</td>
+							<td>mysql</td>
+							<td>string</td>
+							<td>数据库类型，仅对pdo驱动有效<br>支持：mysql，sqlsrv，oci，pgsql，ibm，sqlite，sqlite2，odbc，firebird，cubrid，4D</td>
+						</tr>
+											<tr>
+							<td>host</td>
+							<td>127.0.0.1</td>
+							<td>string</td>
+							<td>数据库主机</td>
+						</tr>
+											<tr>
+							<td>port</td>
+							<td>3306</td>
+							<td>int</td>
+							<td>数据库端口</td>
+						</tr>
+											<tr>
+							<td>name</td>
+							<td></td>
+							<td>string</td>
+							<td>数据库名称</td>
+						</tr>
+											<tr>
+							<td>user</td>
+							<td>null</td>
+							<td>string</td>
+							<td>数据库用户</td>
+						</tr>
+											<tr>
+							<td>pass</td>
+							<td>null</td>
+							<td>string</td>
+							<td>数据库密码</td>
+						</tr>
+											<tr>
+							<td>master</td>
+							<td>[]</td>
+							<td>array</td>
+							<td>主数据库（集），如设置此项，则表示开启读写分离主从模式，单例模式无需设置。<br>里面可以直接设置一组服务器信息，也可以设置多组服务器信息（二维数组）。<br>一组完整设置应该包含：type，charset，persist，option，host，port，name，user，pass字段，<br>省略的字段系统则使用上面相应的默认字段替代</td>
+						</tr>
+											<tr>
+							<td>slave</td>
+							<td>[]</td>
+							<td>array</td>
+							<td>从数据库（集），含义同master</td>
+						</tr>
+											<tr>
+							<td>hashtype</td>
+							<td>0</td>
+							<td>int</td>
+							<td>主从模式哈希计算方式，可选值：0=取模，1=随机</td>
+						</tr>
+										</table>
+									
+				<div class="subtitle">目录</div>
+				<table class="index">
+					<tr>
+						<th>方法</th>
+						<th>说明</th>
+					</tr>
+									<tr>
+						<td align="center"><a href="#__construct">__construct()</a></td>
+						<td>初始化</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#execute">execute()</a></td>
+						<td>无结果集的SQL查询（insert，update，delete等），会产生一条info日志</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#query">query()</a></td>
+						<td>带结果集的SQL查询（select等），会产生一条info日志</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#one">one()</a></td>
+						<td>同query()，仅返回一条记录</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#lastid">lastid()</a></td>
+						<td>得到最近insert操作的插入行ID或指定字段值</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#page">page()</a></td>
+						<td>获得查询相关分页数据，给视图类或前端脚本显示分页</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#begin">begin()</a></td>
+						<td>事务开启</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#commit">commit()</a></td>
+						<td>事务提交</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#rollback">rollback()</a></td>
+						<td>事务回滚</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#stmt_execute">stmt_execute()</a></td>
+						<td>无结果集的预处理查询初始化（insert，update，delete等）</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#stmt_query">stmt_query()</a></td>
+						<td>带结果集的预处理查询初始化（select等）</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#table">table()</a></td>
+						<td>初始化查询构造器类，准备构造一条SQL语句</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#__call">__call()</a></td>
+						<td>魔术方法，映射到查询构造器类中方法，设置SQL语句的各个属性，详见builder类</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#select">select()</a></td>
+						<td>在SQL构造中执行查询操作</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#find">find()</a></td>
+						<td>同select()，仅返回一条记录</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#insert">insert()</a></td>
+						<td>在SQL构造中执行插入操作</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#update">update()</a></td>
+						<td>在SQL构造中执行更新操作</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#delete">delete()</a></td>
+						<td>在SQL构造中执行删除操作</td>
+					</tr>
+								</table>	
+
+				<div class="subtitle">方法</div>
+							<a name="__construct"></a>
+				<table>
+					<caption>
+						<h3>__construct()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">初始化</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$cfg</td>
+						<td></td>
+						<td>[]</td>
+						<td>array</td>
+						<td>配置数据</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$db = boa::db();</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="execute"></a>
+				<table>
+					<caption>
+						<h3>execute()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">无结果集的SQL查询（insert，update，delete等），会产生一条info日志</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$...</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>动态参数，首个参数为SQL语句，其余为该SQL的替换变量</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果成功返回受影响行数（int），如果失败，在错误返回模式下返回false（bool），否则报错（默认）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$res = $db-&gt;execute('INSERT INTO @bs_news (title, content) VALUES (?, ?)', $title, $content); // 插入
+$res = $db-&gt;execute('UPDATE @bs_news SET title = ?, content = ? WHERE id = ?', $title, $content, $id); // 更新
+$res = $db-&gt;execute('DELETE FROM @bs_news WHERE id = ?', $id); // 删除</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="query"></a>
+				<table>
+					<caption>
+						<h3>query()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">带结果集的SQL查询（select等），会产生一条info日志</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$...</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>动态参数，首个参数为SQL语句，其余为该SQL的替换变量</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果成功返回查询结果（array），如果失败，在错误返回模式下返回false（bool），否则报错（默认）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$arr = $db-&gt;query("SELECT * FROM @bs_news WHERE flag = '0' AND cid = ?", $a);</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="one"></a>
+				<table>
+					<caption>
+						<h3>one()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">同query()，仅返回一条记录</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$...</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>动态参数，首个参数为SQL语句，其余为该SQL的替换变量</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果成功返回一条结果（array），如果失败，在错误返回模式下返回false（bool），否则报错（默认）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$arr = $db-&gt;one("SELECT * FROM @bs_news WHERE flag = '0' AND cid = ?", $a);</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="lastid"></a>
+				<table>
+					<caption>
+						<h3>lastid()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">得到最近insert操作的插入行ID或指定字段值</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$name</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>表字段名，如设置则返回该字段值，而非ID（仅pdo驱动支持）</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如设置name参数，则返回name所指定的字段值（string），否则返回ID（int）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$res = $db-&gt;table('news')-&gt;insert($data);
+$id = $db-&gt;lastid();</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="page"></a>
+				<table>
+					<caption>
+						<h3>page()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获得查询相关分页数据，给视图类或前端脚本显示分页</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$pagesize</td>
+						<td></td>
+						<td>10</td>
+						<td>int</td>
+						<td>每页记录数</td>
+					</tr>
+									<tr class="param">
+						<td>$sql</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>查询记录总数的SQL，如未指定则依据最近一次select查询解析出相关SQL</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回分页数据（array），主要包含字段：total（记录总数）、pagesize（每页记录数）、pages（总页数）、current（当前页）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$arr = $db-&gt;query('SELECT * FROM ...'); // 得到查询结果
+$data = $db-&gt;page(); // 得到分页数据，交由视图类或前端JS渲染分页</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="begin"></a>
+				<table>
+					<caption>
+						<h3>begin()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">事务开启</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回true，失败返回false</td>
+					</tr>
+												</table>
+							<a name="commit"></a>
+				<table>
+					<caption>
+						<h3>commit()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">事务提交</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回true，失败返回false</td>
+					</tr>
+												</table>
+							<a name="rollback"></a>
+				<table>
+					<caption>
+						<h3>rollback()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">事务回滚</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回true，失败返回false</td>
+					</tr>
+												</table>
+							<a name="stmt_execute"></a>
+				<table>
+					<caption>
+						<h3>stmt_execute()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">无结果集的预处理查询初始化（insert，update，delete等）</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$sql</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>含?占位符的SQL模板</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回预处理查询类实例（object）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$data = [
+	[1, 'Title1', 'Content1'],
+	[2, 'Title2', 'Content2'],
+	[3, 'Title3', 'Content3']
+];
+
+$stmt = boa::db()-&gt;stmt_execute('INSERT INTO @bs_news (id, title, content) VALUES (?, ? ,?)');
+foreach($data as $v){
+	$stmt-&gt;execute($v, 'iss');
+}</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="stmt_query"></a>
+				<table>
+					<caption>
+						<h3>stmt_query()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">带结果集的预处理查询初始化（select等）</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$sql</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>含?占位符的SQL模板</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回预处理查询类实例（object）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$stmt = boa::db()-&gt;stmt_query('SELECT * FROM @bs_news WHERE id = ?');
+$stmt-&gt;execute(1, 'i');
+$rs = $stmt-&gt;one();</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="table"></a>
+				<table>
+					<caption>
+						<h3>table()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">初始化查询构造器类，准备构造一条SQL语句</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$table</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>要操作的数据表名，支持别名</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回$this（object）</td>
+					</tr>
+												</table>
+							<a name="__call"></a>
+				<table>
+					<caption>
+						<h3>__call()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">魔术方法，映射到查询构造器类中方法，设置SQL语句的各个属性，详见builder类</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$name</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>查询构造器类中方法名</td>
+					</tr>
+									<tr class="param">
+						<td>$args</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>对应方法参数</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回$this（object）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">见 select()</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="select"></a>
+				<table>
+					<caption>
+						<h3>select()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">在SQL构造中执行查询操作</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果成功返回查询结果（array），如果失败，在错误返回模式下返回false（bool），否则报错（默认）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$res = $db-&gt;table('news A')
+-&gt;field('A.*, B.category AS cat_name')
+-&gt;join('category B', 'A.cid = B.id')
+-&gt;where('A.cid = ? AND A.status = ?', $cid, $status)
+-&gt;limit(50, 10)
+-&gt;order('A.sort ASC, A.id DESC')
+-&gt;select();</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="find"></a>
+				<table>
+					<caption>
+						<h3>find()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">同select()，仅返回一条记录</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果成功返回一条结果（array），如果失败，在错误返回模式下返回false（bool），否则报错（默认）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$arr = $db-&gt;table('news')-&gt;where('id = ?', $id)-&gt;find(); // 得到单条记录</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="insert"></a>
+				<table>
+					<caption>
+						<h3>insert()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">在SQL构造中执行插入操作</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$data</td>
+						<td>Y</td>
+						<td></td>
+						<td>array</td>
+						<td>要插入的数据</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果成功返回插入行ID（int），如果失败，在错误返回模式下返回false（bool），否则报错（默认）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$res = boa::db()-&gt;table('news')-&gt;insert(['title'=&gt;$title, 'content'=&gt;$content]);</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="update"></a>
+				<table>
+					<caption>
+						<h3>update()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">在SQL构造中执行更新操作</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$data</td>
+						<td>Y</td>
+						<td></td>
+						<td>array</td>
+						<td>要更新的数据</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果成功返回受影响的行数（int），如果失败，在返错误回模式下返回false（bool），否则报错（默认）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$res = boa::db()-&gt;table('news')-&gt;where('id = ?', $id)-&gt;update(['title'=&gt;$title, 'content'=&gt;$content]);</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="delete"></a>
+				<table>
+					<caption>
+						<h3>delete()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">在SQL构造中执行删除操作</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果成功返回受影响的行数（int），如果失败，在错误返回模式下返回false（bool），否则报错（默认）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$res = boa::db()-&gt;table('news')-&gt;where('id = ?', $id)-&gt;delete();</code></pre>
+						</td>
+					</tr>
+								</table>
+						</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

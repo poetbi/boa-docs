@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>系统配置 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">系统配置</div>
+			<div class="content">
+				<p class="subtitle">config.php</p>
+<pre><code class="language-php">'VERSION' => '',
+'NAME' => '',
+'CHARSET' => '',
+'SALT' => '',
+'DEBUG' => ,
+'LANGUAGE' => '',
+</code></pre>
+<p class="subtitle"><a href="../api/boa.boa.html">配置</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>VERSION</td><td>5.5</td><td>string</td><td>必须；系统版本</td></tr><tr><td>NAME</td><td>BoaSoft.Top</td><td>string</td><td>必须；系统默认名称</td></tr><tr><td>CHARSET</td><td>UTF-8</td><td>string</td><td>必须；系统字符集</td></tr><tr><td>SALT</td><td>boa2020</td><td>string</td><td>必须；系统各种加密盐度值，建议设置复杂一点</td></tr><tr><td>DEBUG</td><td>false</td><td>bool</td><td>可选；是否开启调试模式</td></tr><tr><td>LANGUAGE</td><td>zh-cn</td><td>string</td><td>可选；默认语言包</td></tr></table></p>
+<p class="subtitle">路径常量</p>
+<p>两个必须常量是必须在入口文件中定义的，可选常量可以在config.php中定义，默认为系统自动。如实例资源分离部署到独立服务器，则可以为WWW_RES定义一个http开头的URL路径
+<table>
+	<tr><th>常量</th><th>定义</th><th>说明</th></tr>
+	<tr><td>BS_ROOT</td><td>必须</td><td>系统根目录的绝对路径，如：D:/boasoft.top/</td></tr>
+	<tr><td>BS_WWW</td><td>必须</td><td>当前实例目录（如www）的绝对路径，如：D:/boasoft.top/www/</td></tr>
+	<tr><td>BS_VAR</td><td>可选</td><td>当前临时目录（如var/www）的绝对路径，如：D:/boasoft.top/var/www/</td></tr>
+	<tr><td>BS_BOA</td><td>可选</td><td>内核目录（如boa）的绝对路径，如：D:/boasoft.top/boa/</td></tr>
+	<tr><td>BS_MOD</td><td>可选</td><td>模块目录（如mod）的绝对路径，如：D:/boasoft.top/mod/</td></tr>
+	<tr><td>WWW</td><td>可选</td><td>当前实例目录（如www）的相对路径或URL路径（以http开头），如：/ 或 http://xxx.boasoft.top（手动配置）</td></tr>
+	<tr><td>WWW_RES</td><td>可选</td><td>当前实例资源目录（如www/res）的相对路径或URL路径（以http开头），如：/res/ 或 http://res.boasoft.top（手动配置）</td></tr>
+	<tr><td>WWW_FILE</td><td>可选</td><td>当前实例文件目录（如www/file）的相对路径或URL路径（以http开头），如：/file/ 或 http://file.boasoft.top（手动配置）</td></tr>
+</table></p>
+
+<p class="subtitle">注意</p>
+<p>不支持 cfg() 动态配置</p>							</div>
+			<div class="navigate">
+				<a href="../master/index.html" class="prev">< 总控</a>
+				<a class="menu"></a>
+				<a href="../master/14.html" class="next">系统执行 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

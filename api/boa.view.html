@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../res/index.js"></script>
+    <title>view类 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">view类</div>
+			<div class="api">
+				<table>
+					<tr>
+						<td width="10%" align="right">版本</td>
+						<td>1.0+</td>
+					</tr>
+					<tr>
+						<td align="right">命名空间</td>
+						<td>boa</td>
+					</tr>
+					<tr>
+						<td align="right">文件</td>
+						<td>boa/view.php</td>
+					</tr>
+					<tr>
+						<td align="right">说明</td>
+						<td>视图类，配置：'VIEW' => []</td>
+					</tr>
+				</table>
+
+														<div class="subtitle">配置</div>
+										<table class="config">
+						<tr>
+							<th>配置项</th>
+							<th>默认值</th>
+							<th>类型</th>
+							<th>说明</th>
+						</tr>
+											<tr>
+							<td>xml_root</td>
+							<td>boa</td>
+							<td>string</td>
+							<td>默认的XML文档根元素</td>
+						</tr>
+										</table>
+									
+				<div class="subtitle">目录</div>
+				<table class="index">
+					<tr>
+						<th>方法</th>
+						<th>说明</th>
+					</tr>
+									<tr>
+						<td align="center"><a href="#assign">assign()</a></td>
+						<td>为可视化输出中的变量赋值</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#cli">cli()</a></td>
+						<td>命令行下内容输出</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#str">str()</a></td>
+						<td>输出一段字符串，支持HTML</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#json">json()</a></td>
+						<td>输出或返回json格式内容</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#page">page()</a></td>
+						<td>渲染分页页码</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#html">html()</a></td>
+						<td>输出或返回编译后的HTML模板内容</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#xml">xml()</a></td>
+						<td>输出或返回xml格式内容</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#jsonp">jsonp()</a></td>
+						<td>输出或返回jsonp格式内容</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#jump">jump()</a></td>
+						<td>页面跳转</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#msg">msg()</a></td>
+						<td>系统消息输出</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#lost">lost()</a></td>
+						<td>显示404页面</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#error">error()</a></td>
+						<td>显示500页面</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#file">file()</a></td>
+						<td>直接输出文件到浏览器供下载</td>
+					</tr>
+								</table>	
+
+				<div class="subtitle">方法</div>
+							<a name="assign"></a>
+				<table>
+					<caption>
+						<h3>assign()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">为可视化输出中的变量赋值</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$k</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>键</td>
+					</tr>
+									<tr class="param">
+						<td>$v</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>值</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$this-&gt;view-&gt;assign('title', 'boaPHP is so easy!');</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="cli"></a>
+				<table>
+					<caption>
+						<h3>cli()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">命令行下内容输出</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$str</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>要输出的内容</td>
+					</tr>
+									<tr class="param">
+						<td>$clean</td>
+						<td></td>
+						<td>true</td>
+						<td>bool</td>
+						<td>输出前是否清除缓冲区内容</td>
+					</tr>
+									<tr class="param">
+						<td>$exit</td>
+						<td></td>
+						<td>true</td>
+						<td>bool</td>
+						<td>输出后是否退出程序</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$this-&gt;view-&gt;cli('Hello world');</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="str"></a>
+				<table>
+					<caption>
+						<h3>str()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">输出一段字符串，支持HTML</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$str</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>要输出的内容</td>
+					</tr>
+									<tr class="param">
+						<td>$exit</td>
+						<td></td>
+						<td>true</td>
+						<td>bool</td>
+						<td>输出后是否退出程序</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$this-&gt;view-&gt;str('Hello world');</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="json"></a>
+				<table>
+					<caption>
+						<h3>json()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">输出或返回json格式内容</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$data</td>
+						<td></td>
+						<td>[]</td>
+						<td>array</td>
+						<td>要输出的数据</td>
+					</tr>
+									<tr class="param">
+						<td>$code</td>
+						<td></td>
+						<td>0</td>
+						<td>int</td>
+						<td>状态码，0=无错</td>
+					</tr>
+									<tr class="param">
+						<td>$msg</td>
+						<td></td>
+						<td>OK</td>
+						<td>string</td>
+						<td>提示信息</td>
+					</tr>
+									<tr class="param">
+						<td>$return</td>
+						<td></td>
+						<td>false</td>
+						<td>bool</td>
+						<td>是否返回内容</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果return=true时，返回内容，否则直接输出</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$this-&gt;view-&gt;json(['row1','row2','...']);</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="page"></a>
+				<table>
+					<caption>
+						<h3>page()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">渲染分页页码</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$page</td>
+						<td>Y</td>
+						<td></td>
+						<td>array</td>
+						<td>分页数据，由database类提供</td>
+					</tr>
+									<tr class="param">
+						<td>$url</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>分页URL模板，用#替代页码</td>
+					</tr>
+									<tr class="param">
+						<td>$number</td>
+						<td></td>
+						<td>10</td>
+						<td>int</td>
+						<td>显示多少页码</td>
+					</tr>
+									<tr class="param">
+						<td>$first</td>
+						<td></td>
+						<td>true</td>
+						<td>bool</td>
+						<td>是否显示首页</td>
+					</tr>
+									<tr class="param">
+						<td>$last</td>
+						<td></td>
+						<td>true</td>
+						<td>bool</td>
+						<td>是否显示尾页</td>
+					</tr>
+									<tr class="param">
+						<td>$prev</td>
+						<td></td>
+						<td>false</td>
+						<td>bool</td>
+						<td>是否显示上页</td>
+					</tr>
+									<tr class="param">
+						<td>$next</td>
+						<td></td>
+						<td>false</td>
+						<td>bool</td>
+						<td>是否显示下页</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回分页页码内容（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$url = '/news/#.html';
+$page = $this-&gt;view-&gt;page([total:500, pagesize:10, pages: 50, current: 1], $url);
+
+$page = $this-&gt;view-&gt;page($db-&gt;page());</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="html"></a>
+				<table>
+					<caption>
+						<h3>html()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">输出或返回编译后的HTML模板内容</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$tpl</td>
+						<td></td>
+						<td></td>
+						<td>string</td>
+						<td>模板相对路径，省略则等于当前“控制器/动作”；在实例和模块中，程序优先查找实例中的模板</td>
+					</tr>
+									<tr class="param">
+						<td>$return</td>
+						<td></td>
+						<td>false</td>
+						<td>bool</td>
+						<td>是否返回内容，命令行下默认关闭缓冲（直接输出），如需要返回内容请在适当的地方使用ob_start()开启缓冲</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果return=true时，返回内容，否则直接输出</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$this-&gt;view-&gt;html('index/custom'); // 输出
+$res = $this-&gt;view-&gt;html('', true); // 返回</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="xml"></a>
+				<table>
+					<caption>
+						<h3>xml()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">输出或返回xml格式内容</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$data</td>
+						<td></td>
+						<td>[]</td>
+						<td>array</td>
+						<td>要输出的数据</td>
+					</tr>
+									<tr class="param">
+						<td>$code</td>
+						<td></td>
+						<td>0</td>
+						<td>int</td>
+						<td>状态码，0=无错</td>
+					</tr>
+									<tr class="param">
+						<td>$msg</td>
+						<td></td>
+						<td>OK</td>
+						<td>string</td>
+						<td>提示信息</td>
+					</tr>
+									<tr class="param">
+						<td>$return</td>
+						<td></td>
+						<td>false</td>
+						<td>bool</td>
+						<td>是否返回内容</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果return=true时，返回内容，否则直接输出</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$this-&gt;view-&gt;xml(['row1','row2','...']);</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="jsonp"></a>
+				<table>
+					<caption>
+						<h3>jsonp()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">输出或返回jsonp格式内容</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$callback</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>前端回调函数名称</td>
+					</tr>
+									<tr class="param">
+						<td>$data</td>
+						<td></td>
+						<td>[]</td>
+						<td>array</td>
+						<td>要输出的数据</td>
+					</tr>
+									<tr class="param">
+						<td>$code</td>
+						<td></td>
+						<td>0</td>
+						<td>int</td>
+						<td>状态码，0=无错</td>
+					</tr>
+									<tr class="param">
+						<td>$msg</td>
+						<td></td>
+						<td>OK</td>
+						<td>string</td>
+						<td>提示信息</td>
+					</tr>
+									<tr class="param">
+						<td>$return</td>
+						<td></td>
+						<td>false</td>
+						<td>bool</td>
+						<td>是否返回内容</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果return=true时，返回内容，否则直接输出</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$this-&gt;view-&gt;jsonp('js_callback', ['row1','row2','...']);</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="jump"></a>
+				<table>
+					<caption>
+						<h3>jump()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">页面跳转</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$url</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>要跳转到的链接</td>
+					</tr>
+									<tr class="param">
+						<td>$sec</td>
+						<td></td>
+						<td>0</td>
+						<td>int</td>
+						<td>跳转前等待时长，单位：秒</td>
+					</tr>
+									<tr class="param">
+						<td>$tip</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>跳转提示</td>
+					</tr>
+									<tr class="param">
+						<td>$clean</td>
+						<td></td>
+						<td>true</td>
+						<td>bool</td>
+						<td>输出前是否清除缓冲区内容</td>
+					</tr>
+									<tr class="param">
+						<td>$exit</td>
+						<td></td>
+						<td>true</td>
+						<td>bool</td>
+						<td>输出后是否退出程序</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$this-&gt;view-&gt;jump('/user/login.php', 10, '请登录');</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="msg"></a>
+				<table>
+					<caption>
+						<h3>msg()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">系统消息输出</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$msg</td>
+						<td>Y</td>
+						<td></td>
+						<td>array</td>
+						<td>要输出的消息，二维数组</td>
+					</tr>
+									<tr class="param">
+						<td>$type</td>
+						<td></td>
+						<td>error</td>
+						<td>string</td>
+						<td>消息模板类型，可选值：info、error或其他自定义值</td>
+					</tr>
+									<tr class="param">
+						<td>$data</td>
+						<td></td>
+						<td>[]</td>
+						<td>array</td>
+						<td>可携带入模板的数据</td>
+					</tr>
+									<tr class="param">
+						<td>$clean</td>
+						<td></td>
+						<td>true</td>
+						<td>bool</td>
+						<td>输出前是否清除缓冲区内容</td>
+					</tr>
+									<tr class="param">
+						<td>$exit</td>
+						<td></td>
+						<td>true</td>
+						<td>bool</td>
+						<td>输出后是否退出程序</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$this-&gt;view-&gt;msg([['key' =&gt; 0, 'msg' =&gt; 'done']], 'info', $data);</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="lost"></a>
+				<table>
+					<caption>
+						<h3>lost()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">显示404页面</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$url</td>
+						<td></td>
+						<td></td>
+						<td>string</td>
+						<td>丢失页面的路径，默认为当前页面</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$this-&gt;view-&gt;lost();</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="error"></a>
+				<table>
+					<caption>
+						<h3>error()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">显示500页面</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$this-&gt;view-&gt;error();</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="file"></a>
+				<table>
+					<caption>
+						<h3>file()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">直接输出文件到浏览器供下载</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$file</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>服务器端文件路径</td>
+					</tr>
+									<tr class="param">
+						<td>$name</td>
+						<td></td>
+						<td></td>
+						<td>string</td>
+						<td>浏览器端下载时保存的名称，默认为文件原始名称</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$this-&gt;view-&gt;file(BS_WWW .'file/document.pdf', 'readme.pdf');</code></pre>
+						</td>
+					</tr>
+								</table>
+						</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

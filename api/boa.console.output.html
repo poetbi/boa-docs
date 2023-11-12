@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../res/index.js"></script>
+    <title>output类 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">output类</div>
+			<div class="api">
+				<table>
+					<tr>
+						<td width="10%" align="right">版本</td>
+						<td>1.0+</td>
+					</tr>
+					<tr>
+						<td align="right">命名空间</td>
+						<td>boa\console</td>
+					</tr>
+					<tr>
+						<td align="right">文件</td>
+						<td>boa/console/output.php</td>
+					</tr>
+					<tr>
+						<td align="right">说明</td>
+						<td>控制台输出类，继承base类，配置：'CONSOLE' => [],</td>
+					</tr>
+				</table>
+
+														<div class="subtitle">配置</div>
+										<table class="config">
+						<tr>
+							<th>配置项</th>
+							<th>默认值</th>
+							<th>类型</th>
+							<th>说明</th>
+						</tr>
+											<tr>
+							<td>border</td>
+							<td>false</td>
+							<td>bool</td>
+							<td>是否显示表格边框</td>
+						</tr>
+											<tr>
+							<td>border_h</td>
+							<td>-</td>
+							<td>char</td>
+							<td>单元格水平制表符，如：= + *</td>
+						</tr>
+											<tr>
+							<td>border_v</td>
+							<td>|</td>
+							<td>char</td>
+							<td>单元格垂直制表符</td>
+						</tr>
+											<tr>
+							<td>wrap</td>
+							<td>&lt;br&gt;</td>
+							<td>string</td>
+							<td>表格内容断行标志</td>
+						</tr>
+										</table>
+									
+				<div class="subtitle">目录</div>
+				<table class="index">
+					<tr>
+						<th>方法</th>
+						<th>说明</th>
+					</tr>
+									<tr>
+						<td align="center"><a href="#cfg">cfg()</a></td>
+						<td>获取或设置配置信息</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#line">line()</a></td>
+						<td>输出空行</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#printl">printl()</a></td>
+						<td>输出带换行的字符串</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#printw">printw()</a></td>
+						<td>输出等宽字符串，不足填充空白</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#prints">prints()</a></td>
+						<td>输出字符串</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#table">table()</a></td>
+						<td>输出表格</td>
+					</tr>
+								</table>	
+
+				<div class="subtitle">方法</div>
+							<a name="cfg"></a>
+				<table>
+					<caption>
+						<h3>cfg()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取或设置配置信息</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$k</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>键</td>
+					</tr>
+									<tr class="param">
+						<td>$v</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>值</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">同 base 类</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$out = new \boa\console\output();
+$out-&gt;cfg('border', true);</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="line"></a>
+				<table>
+					<caption>
+						<h3>line()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">输出空行</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$num</td>
+						<td></td>
+						<td>1</td>
+						<td>int</td>
+						<td>空行数</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$out-&gt;line(10)</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="printl"></a>
+				<table>
+					<caption>
+						<h3>printl()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">输出带换行的字符串</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$str</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>字符串</td>
+					</tr>
+									<tr class="param">
+						<td>$num</td>
+						<td></td>
+						<td>1</td>
+						<td>int</td>
+						<td>空行数</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$out-&gt;printl('完成', 2)</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="printw"></a>
+				<table>
+					<caption>
+						<h3>printw()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">输出等宽字符串，不足填充空白</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$str</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>字符串</td>
+					</tr>
+									<tr class="param">
+						<td>$width</td>
+						<td>Y</td>
+						<td></td>
+						<td>int</td>
+						<td>每行字符数</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$out-&gt;printw('完成', 50)</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="prints"></a>
+				<table>
+					<caption>
+						<h3>prints()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">输出字符串</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$str</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>字符串</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$out-&gt;prints('完成')</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="table"></a>
+				<table>
+					<caption>
+						<h3>table()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">输出表格</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$body</td>
+						<td>Y</td>
+						<td></td>
+						<td>array</td>
+						<td>表格数据，由行和列组成的二维数组</td>
+					</tr>
+									<tr class="param">
+						<td>$head</td>
+						<td></td>
+						<td>[]</td>
+						<td>array</td>
+						<td>表格头部标题</td>
+					</tr>
+									<tr class="param">
+						<td>$border</td>
+						<td></td>
+						<td>null</td>
+						<td>bool</td>
+						<td>是否显示表格边框</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$arr = [[...]];
+$out-&gt;table($arr);</code></pre>
+						</td>
+					</tr>
+								</table>
+						</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

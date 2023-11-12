@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../res/index.js"></script>
+    <title>msg类 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">msg类</div>
+			<div class="api">
+				<table>
+					<tr>
+						<td width="10%" align="right">版本</td>
+						<td>1.0+</td>
+					</tr>
+					<tr>
+						<td align="right">命名空间</td>
+						<td>boa</td>
+					</tr>
+					<tr>
+						<td align="right">文件</td>
+						<td>boa/msg.php</td>
+					</tr>
+					<tr>
+						<td align="right">说明</td>
+						<td>消息类，静态类，配置：<br>
+'MSG_DISPLAY' => '',<br>
+'MSG_TYPE' => '', <br>
+'MSG_TYPE_VAR' => '',<br>
+'MSG_JSONP_CB' => '',<br>
+'MSG_STR_CLASS' => '',<br>
+'MSG_LOG_NOTICE' => ,
+</td>
+					</tr>
+				</table>
+
+														<div class="subtitle">配置</div>
+										<table class="config">
+						<tr>
+							<th>配置项</th>
+							<th>默认值</th>
+							<th>类型</th>
+							<th>说明</th>
+						</tr>
+											<tr>
+							<td>MSG_DISPLAY</td>
+							<td>php_exception,php_error</td>
+							<td>string</td>
+							<td>可选；设置PHP错误输出类型，可选值：php_exception, php_warning, php_error, php_deprecated, php_strict</td>
+						</tr>
+											<tr>
+							<td>MSG_TYPE</td>
+							<td></td>
+							<td>string</td>
+							<td>可选；设置全局默认消息输出类型，如：json、xml等</td>
+						</tr>
+											<tr>
+							<td>MSG_TYPE_VAR</td>
+							<td>_msg</td>
+							<td>string</td>
+							<td>可选；通过前端设置消息输出类型，$_REQUEST取值时的键，表示取_msg字段</td>
+						</tr>
+											<tr>
+							<td>MSG_JSONP_CB</td>
+							<td>message</td>
+							<td>string</td>
+							<td>可选；当消息为jsonp类型时，前端JS回调函数名称</td>
+						</tr>
+											<tr>
+							<td>MSG_STR_CLASS</td>
+							<td>boa_msg</td>
+							<td>string</td>
+							<td>可选；当消息输出时，前端CSS默认class名称</td>
+						</tr>
+											<tr>
+							<td>MSG_LOG_NOTICE</td>
+							<td>false</td>
+							<td>bool</td>
+							<td>可选；是否处理PHP的notice消息</td>
+						</tr>
+										</table>
+									
+				<div class="subtitle">目录</div>
+				<table class="index">
+					<tr>
+						<th>方法</th>
+						<th>说明</th>
+					</tr>
+									<tr>
+						<td align="center"><a href="#set_data">set_data()</a></td>
+						<td>设置数据，可以作为json、xml等类型输出时的数据项</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#set_type">set_type()</a></td>
+						<td>设置消息输出类型，默认跟随系统，无需手动设置</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#begin">begin()</a></td>
+						<td>开启批量输出，默认每产生一条消息就会自动输出，调用此方法关闭自动输出</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#commit">commit()</a></td>
+						<td>手动确认输出，配合begin()使用</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#setE">setE()</a></td>
+						<td>设置PHP错误</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#setEx">setEx()</a></td>
+						<td>设置PHP异常</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#set">set()</a></td>
+						<td>设置系统消息</td>
+					</tr>
+								</table>	
+
+				<div class="subtitle">方法</div>
+							<a name="set_data"></a>
+				<table>
+					<caption>
+						<h3>set_data()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置数据，可以作为json、xml等类型输出时的数据项</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$data</td>
+						<td></td>
+						<td>[]</td>
+						<td>array</td>
+						<td>附加数据</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">msg::set_data([...]);
+msg::set('boa.info.done');</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="set_type"></a>
+				<table>
+					<caption>
+						<h3>set_type()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置消息输出类型，默认跟随系统，无需手动设置</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$type</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>消息类型，可选值：<ul><li>xml：以XML格式输出</li><li>json：以JSON格式输出</li><li>str：以HTML片段输出</li><li>msg：使用消息模板输出</li><li>cli：命令行下输出</li><li>jsonp：以JSONP格式输出</li></ul></td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">msg::set_type('xml');
+msg::set("It's wrong!");</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="begin"></a>
+				<table>
+					<caption>
+						<h3>begin()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">开启批量输出，默认每产生一条消息就会自动输出，调用此方法关闭自动输出</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">msg::begin();
+...
+msg::set('boa.error.1', 'wrong1');
+...
+msg::set('boa.error.2', 'wrong2');
+...
+msg::commit();</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="commit"></a>
+				<table>
+					<caption>
+						<h3>commit()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">手动确认输出，配合begin()使用</td>
+					</tr>
+																				</table>
+							<a name="setE"></a>
+				<table>
+					<caption>
+						<h3>setE()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置PHP错误</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$no</td>
+						<td>Y</td>
+						<td></td>
+						<td>int</td>
+						<td>错误码</td>
+					</tr>
+									<tr class="param">
+						<td>$str</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>错误描述</td>
+					</tr>
+									<tr class="param">
+						<td>$file</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>发生文件</td>
+					</tr>
+									<tr class="param">
+						<td>$line</td>
+						<td>Y</td>
+						<td></td>
+						<td>int</td>
+						<td>发生行号</td>
+					</tr>
+																				</table>
+							<a name="setEx"></a>
+				<table>
+					<caption>
+						<h3>setEx()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置PHP异常</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$e</td>
+						<td>Y</td>
+						<td></td>
+						<td>object</td>
+						<td>异常</td>
+					</tr>
+																				</table>
+							<a name="set"></a>
+				<table>
+					<caption>
+						<h3>set()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置系统消息</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$...</td>
+						<td>Y</td>
+						<td></td>
+						<td>mixed</td>
+						<td>动态参数<ul><li>首个参数：消息内容，必须的，支持节点式语言标签</li><li>更多参数，参见boa::lang()，可选的</li></ul></td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">msg::set('You are awesome!');
+msg::set('boa.error.1', 'You are wrong!');
+msg::set('boa.error.5', 'test');
+msg::set('home.error.10', 'test', 1);</code></pre>
+						</td>
+					</tr>
+								</table>
+						</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

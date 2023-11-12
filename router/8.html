@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>路由定义 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">路由定义</div>
+			<div class="content">
+				<p>路由表位于实例cfg目录下（如：<i>/www/cfg/router.php</i>），在开启路由的情况下，解析URL和生成URL均优先检索此表。一条完整的路由规则如下：</p>
+	<pre><code class="language-php">
+	[
+		'url'    => 'news/{name}/{id}.html',
+		'act'    => 'news.content.show',
+		'method' => 'get',
+		'scheme' => 'http',
+		'param'  => [
+			'id' => '(\d+)'
+		]
+	]
+	</code></pre>
+
+<p class="subtitle">url</p>
+<p>必须，待匹配的URL规则，和请求URL中的路径部分进行匹配</p>
+<p class="tip tip-help">开头和结尾的 / 可以省略，不影响匹配结果</p>
+
+<p class="subtitle">act</p>
+<p>必须，模块.控制器.动作（节点式），发生匹配后，则路由到这里</p>
+
+<p class="subtitle">method</p>
+<p>可选，请求方式（如post），限定该规则只对该方式有效</p>
+<p class="tip tip-help">请求方式不区分大小写</p>
+
+<p class="subtitle">scheme</p>
+<p>可选，请求协议（如https），限定该规则只对该协议有效</p>
+
+<p class="subtitle">param</p>
+<p>可选，限定url中参数值的匹配规则，使用正则表达式。如本例中，{name}参数未设置匹配规则，则默认使用配置中<b>param_val</b>定义的规则（匹配非常宽松），{id}参数设置了规则 (\d+) ，表示只匹配数字。
+	<ul>
+		<li><span class="explain">http://boasoft.top/</span>news/a0/c8.html <span class="explain">{id}不匹配，限定为数字</span></li>
+		<li><span class="explain">http://boasoft.top/</span>news/b1/1.html <span class="explain">匹配，得到一组环境数据：</span>
+<pre><code class="language-php">
+[
+	'mod' => 'news',
+	'con' => 'content',
+	'act' => 'show',
+	'var' => [
+		'name' => 'b1'
+		'id'   => 1
+	]
+]
+</code></pre></li>
+	</ul>
+</p>
+<p>程序会执行 'news.content.show' 动作，在该动作中可以用 $this->name 和 $this->id 来访问参数</p>
+
+<p class="tip tip-alert">开发中遇到路由表修改后不生效的问题，请先尝试删除临时目录下的缓存（var/www/cache/）</p>							</div>
+			<div class="navigate">
+				<a href="../router/7.html" class="prev">< 路由配置</a>
+				<a class="menu"></a>
+				<a href="../router/9.html" class="next">路由分组 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

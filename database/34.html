@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>查询分页 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">查询分页</div>
+			<div class="content">
+				<p>要对一个查询结果分页，可以指使用page()来获取分页数据，然后交由<b>view类</b>（后端分页）或<b>前端JS</b>（前端分页）渲染分页效果，一组分页数据包括：
+<ul>
+	<li>total：记录总数</li>
+	<li>pagesize：每页记录数</li>
+	<li>pages：总页数，由 ceil(total / pagesize) 算得</li>
+	<li>current：当前页码，由 boa::env('var.page') 获取</li>
+</ul>
+<p>本例中由数据库类 $db->page() 自动获得，也可以手动设置一个数组，只要包含以上四项就可以。</p>
+<pre><code class="language-php">
+$db = boa::db();
+
+$url = '?m=home&c=index&a=index&page=#'; // 指定分页模板（#=页码），不指定则自动生成
+$arr = $db->query('SELECT * FROM ...');
+$page = $this->view->page($db->page(), $url); //后端view类处理
+
+$arr = $db->table('test')->select();
+$page = $db->page(); //交给前端JS处理
+
+</code></pre></p>
+
+<p class="tip tip-help">更多参见database类和view类的page()方法</p>							</div>
+			<div class="navigate">
+				<a href="../database/33.html" class="prev">< 存储过程</a>
+				<a class="menu"></a>
+				<a href="../database/35.html" class="next">数据模型 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

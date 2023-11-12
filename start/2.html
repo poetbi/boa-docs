@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>目录结构 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">目录结构</div>
+			<div class="content">
+				<pre><code class="language-ini">
+/                  根目录
+├─boa              内核目录
+├─mod              模块目录
+├─var              临时目录（写权限）
+├─www              实例目录（写权限）
+├─...              更多实例（写权限）
+│
+├─composer.json    composer配置文件
+├─boa.chm          开发手册
+├─tool.php         规则测试工具
+└─index.php        入口文件
+	</code></pre>
+<p class="tip tip-help">实例即一般意义上的站点，用户可以创建更多实例，例如：test.com</p>
+
+<p class="subtitle">boa目录</p>
+<p>boa是框架内核，为了后续升级不建议修改，可以在各自模块内进行自定义功能扩展。</p>
+
+<p class="subtitle">mod目录</p>
+<p>
+	mod是模块目录，主要用于存放后端程序，每个子目录就是一个模块，目录名即模块名。以test为例创建模块：
+	<pre><code class="language-bash">php boa -m test</code></pre>
+</p>
+<p>
+	每个模块的目录结构：
+	<pre><code class="language-ini">
+/mod/test/                 test模块
+      ├─cacher             缓存器
+      ├─controller         控制器
+      ├─installer          安装器
+      ├─listener           监听器
+      ├─validater          验证器
+      │    ├─checker.php        检查器文件
+      │    └─filter.php         过滤器文件
+      ├─variable           自动验证配置
+      ├─language           语言包
+      ├─library            类库
+      ├─model              模型
+      ├─public             资源
+      ├─view               视图
+      │
+      └─config.php         模块配置文件
+	</code></pre>
+</p>
+<p class="tip tip-help">创建模块时，public会被移至www/res/test目录；view会被移至www/tpl/test目录</p>
+
+<p class="subtitle">www目录</p>
+<p>
+	www是默认实例目录，主要用于存放前端文件，目录名即实例名。以test.com为例创建实例：
+	<pre><code class="language-bash">php boa -w test.com</code></pre>
+</p>
+<p class="tip tip-help">创建实例的同时，会在var下创建该实例对应的临时目录</p>
+<p>
+	每个实例的目录结构：
+	<pre><code class="language-ini">
+/test.com/            test.com实例
+     ├─cfg            存放配置文件，如路由、权限等
+     ├─file           存放用户文件，如上传的图片
+     ├─res            存放资源文件，如JS、CSS、图片
+     ├─tpl            存放视图文件，如模板、404页面
+     ├─...            更多自定义目录，如存放html等
+     │
+     ├─.htaccess      Apache配置文件
+     ├─web.config     IIS配置文件
+     ├─favicon.ico    网站头像文件
+     ├─robots.txt     搜索引擎配置文件
+     ├─boa            boa命令
+     └─index.php      入口文件
+	</code></pre>
+</p>
+<p>然后将 test.com 域名绑定到该目录。</p>
+
+<p class="subtitle">var目录</p>
+<p>
+	var是实例运行时的临时目录，主要用于存放临时数据，目录名即实例名。
+</p>
+<p>
+	每个临时目录结构：
+	<pre><code class="language-ini">
+/var/test.com/       test.com实例的临时目录
+        │
+        ├─cache      cache类数据，比如缓存数据
+        ├─crypt      crypt类数据，比如RSA公钥、私钥
+        ├─http       http类数据，比如curl证书
+        ├─image      image类数据，比如字体、水印
+        ├─log        log类数据，比如系统日志
+        ├─session    session类数据，比如用户会话
+        ├─view       view类数据，比如模板缓存
+        │
+        └─...        更多其他动态数据
+	</code></pre>
+</p>
+<p class="tip tip-alert">鉴于安全性，建议禁止外部访问var目录</p>
+
+<p class="subtitle">入口文件</p>
+<p>
+	根目录下的index.php、各实例目录下的index.php以及用户自定义的其他文件。其中必须要定义2个常量：
+	<li>BS_ROOT ：根路径</li>
+	<li>BS_WWW ：实例路径</li>
+</p>
+<p>
+	调用 boa::start() 启动。
+</p>
+							</div>
+			<div class="navigate">
+				<a href="../start/1.html" class="prev">< 安装运行</a>
+				<a class="menu"></a>
+				<a href="../start/3.html" class="next">逻辑结构 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

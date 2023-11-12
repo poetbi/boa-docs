@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>后向引用 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">后向引用</div>
+			<div class="content">
+				<p>路由分组的组名可以使用动态参数（%+数字），所代表的变量可以被后续内容引用，这样规则相似的路由可以合并为一条。比如：</p>
+	<pre><code class="language-php">
+'//%0.boasoft.top/%1/' => [
+	'url' => '%1/{name}/{id}.html',
+	'act' => '%0.%1.show'
+]
+	</code></pre>
+<p class="tip tip-help">动态参数的匹配规则可以用 url_word 配置</p>
+<p class="tip tip-alert">组名如包含主机名，则必须以协议（如http://）或其简写 // 开头，否则会被当作路径</p>
+<p class="subtitle">例子</p>
+<ul>
+	<li>对于URL：http://news.boasoft.top/it/php/1.html</li>
+	<ul>
+		<li>%0 代表： news</li>
+		<li>%1 代表： it</li>
+		<li>url 等于：it/{name}/{id}.html</li>
+		<li>act 等于：news.it.show</li>
+	</ul>
+<p>&nbsp;</p>
+	<li>对于URL：http://en.boasoft.top/it/php/1.html</li>
+	<ul>
+		<li>%0 代表： en</li>
+		<li>%1 代表： it</li>
+		<li>url 等于：it/{name}/{id}.html</li>
+		<li>act 等于：en.it.show</li>
+	</ul>
+</ul>
+							</div>
+			<div class="navigate">
+				<a href="../router/9.html" class="prev">< 路由分组</a>
+				<a class="menu"></a>
+				<a href="../router/11.html" class="next">未获匹配 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

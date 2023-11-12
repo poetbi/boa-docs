@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>视图配置 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">视图配置</div>
+			<div class="content">
+				<p class="subtitle">config.php</p>
+<pre><code class="language-php">'VIEW' => [
+	//视图配置项
+],
+'COMPILER' => [
+	//编译配置项
+],
+'PAGE' => [
+	//分页配置项，@和#为可替换内容
+]
+</code></pre>
+<p class="subtitle"><a href="../api/boa.view.html">视图配置</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>xml_root</td><td>boa</td><td>string</td><td>默认的XML文档根元素</td></tr></table></p>
+<p class="subtitle"><a href="../api/boa.view.compiler.html">编译配置</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>static</td><td>true</td><td>bool</td><td>语言标签是否静态编译</td></tr></table></p>
+<p class="subtitle"><a href="../api/boa.view.page.html">分页配置</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>url</td><td></td><td>string</td><td>分页URL模板，用#替代页码</td></tr><tr><td>first</td><td>&lt;li class="first"&gt;&lt;a href="@"&gt;#&lt;/a&gt;&lt;/li&gt;</td><td>string</td><td>首页模板</td></tr><tr><td>prev</td><td>&lt;li class="prev"&gt;&lt;a href="@"&gt;#&lt;/a&gt;&lt;/li&gt;</td><td>string</td><td>上一页模板</td></tr><tr><td>page</td><td>&lt;li&gt;&lt;a href="@"&gt;#&lt;/a&gt;&lt;/li&gt;</td><td>string</td><td>页码模板</td></tr><tr><td>current</td><td>&lt;li class="current"&gt;&lt;i&gt;#&lt;/i&gt;&lt;/li&gt;</td><td>string</td><td>当前页模板</td></tr><tr><td>next</td><td>&lt;li class="next"&gt;&lt;a href="@"&gt;#&lt;/a&gt;&lt;/li&gt;</td><td>string</td><td>下一页模板</td></tr><tr><td>last</td><td>&lt;li class="last"&gt;&lt;a href="@"&gt;#&lt;/a&gt;&lt;/li&gt;</td><td>string</td><td>末页模板</td></tr><tr><td>pages</td><td>&lt;ul class="pages"&gt;#&lt;/ul&gt;</td><td>string</td><td>页码区模板</td></tr></table></p>
+<p class="subtitle">注意</p>
+<p>开发模式下（DEBUG = true），为了便于开发测试模板是实时更新的，线上生产环境中务必关闭 DEBUG 模式。</p>							</div>
+			<div class="navigate">
+				<a href="../view/index.html" class="prev">< 视图</a>
+				<a class="menu"></a>
+				<a href="../view/37.html" class="next">模板语法 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

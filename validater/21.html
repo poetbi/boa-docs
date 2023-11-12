@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>请求变量 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">请求变量</div>
+			<div class="content">
+				<p class="subtitle">用户变量</p>
+<p>用户变量是指用户从前端页面传入的数据，主要包括：
+	<ul>
+		<li>环境变量：路由解析所得，存于环境var字段中</li>
+		<li>$_POST变量：表单输入</li>
+		<li>$_GET变量：URL传入</li>
+		<li>$_COOKIE变量：浏览器cookie</li>
+	</ul>
+</p>
+<p class="subtitle">变量访问</p>
+<p>要获取以上变量中某个参数值，在控制器中可以直接用 <b>$this->字段</b>，例如 $this->name ，系统会依次从以上4个变量中取值，然后执行自动验证。</p>
+<p class="tip tip-alert">如果控制器类中已有同名属性，可以使用 <b>$this->request->name</b> 或 <b>$this->request->v('name')</b> 来访问</p>							</div>
+			<div class="navigate">
+				<a href="../validater/index.html" class="prev">< 验证</a>
+				<a class="menu"></a>
+				<a href="../validater/22.html" class="next">自动验证 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../res/index.js"></script>
+    <title>imagick类 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">imagick类</div>
+			<div class="api">
+				<table>
+					<tr>
+						<td width="10%" align="right">版本</td>
+						<td>1.0+</td>
+					</tr>
+					<tr>
+						<td align="right">命名空间</td>
+						<td>boa\image\driver</td>
+					</tr>
+					<tr>
+						<td align="right">文件</td>
+						<td>boa/image/driver/imagick.php</td>
+					</tr>
+					<tr>
+						<td align="right">说明</td>
+						<td>imagick驱动类，继承driver类</td>
+					</tr>
+				</table>
+
+													
+				<div class="subtitle">目录</div>
+				<table class="index">
+					<tr>
+						<th>方法</th>
+						<th>说明</th>
+					</tr>
+									<tr>
+						<td align="center"><a href="#watermark">watermark()</a></td>
+						<td>添加水印</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#scale">scale()</a></td>
+						<td>图像缩放</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#crop">crop()</a></td>
+						<td>图像剪裁</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#rotate">rotate()</a></td>
+						<td>图像旋转</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#flatten">flatten()</a></td>
+						<td>背景填充</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#flip">flip()</a></td>
+						<td>图像翻转</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#text">text()</a></td>
+						<td>图像上写文字</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#save">save()</a></td>
+						<td>保存图像</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#output">output()</a></td>
+						<td>输出图像</td>
+					</tr>
+								</table>	
+
+				<div class="subtitle">方法</div>
+							<a name="watermark"></a>
+				<table>
+					<caption>
+						<h3>watermark()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">添加水印</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$type</td>
+						<td>Y</td>
+						<td></td>
+						<td>int</td>
+						<td>水印类型</td>
+					</tr>
+																				</table>
+							<a name="scale"></a>
+				<table>
+					<caption>
+						<h3>scale()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">图像缩放</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$dst_w</td>
+						<td>Y</td>
+						<td></td>
+						<td>int</td>
+						<td>目标宽度，-1=自动</td>
+					</tr>
+									<tr class="param">
+						<td>$dst_h</td>
+						<td></td>
+						<td>-1</td>
+						<td>int</td>
+						<td>目标高度，-1=自动</td>
+					</tr>
+																				</table>
+							<a name="crop"></a>
+				<table>
+					<caption>
+						<h3>crop()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">图像剪裁</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$dst_w</td>
+						<td>Y</td>
+						<td></td>
+						<td>int</td>
+						<td>剪裁宽度</td>
+					</tr>
+									<tr class="param">
+						<td>$dst_h</td>
+						<td>Y</td>
+						<td></td>
+						<td>int</td>
+						<td>剪裁高度</td>
+					</tr>
+									<tr class="param">
+						<td>$src_x</td>
+						<td></td>
+						<td>0</td>
+						<td>int</td>
+						<td>剪裁起点X坐标</td>
+					</tr>
+									<tr class="param">
+						<td>$src_y</td>
+						<td></td>
+						<td>0</td>
+						<td>int</td>
+						<td>剪裁起点Y坐标</td>
+					</tr>
+																				</table>
+							<a name="rotate"></a>
+				<table>
+					<caption>
+						<h3>rotate()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">图像旋转</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$angle</td>
+						<td>Y</td>
+						<td></td>
+						<td>int</td>
+						<td>旋转角度</td>
+					</tr>
+									<tr class="param">
+						<td>$bgcolor</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>旋转后背景填充色</td>
+					</tr>
+																				</table>
+							<a name="flatten"></a>
+				<table>
+					<caption>
+						<h3>flatten()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">背景填充</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$bgcolor</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>背景填充色</td>
+					</tr>
+																				</table>
+							<a name="flip"></a>
+				<table>
+					<caption>
+						<h3>flip()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">图像翻转</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$mode</td>
+						<td>Y</td>
+						<td></td>
+						<td>int</td>
+						<td>翻转模式<ul><li>-1=水平翻转</li><li>1=垂直翻转</li><li>0=同时翻转</li></ul></td>
+					</tr>
+																				</table>
+							<a name="text"></a>
+				<table>
+					<caption>
+						<h3>text()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">图像上写文字</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$text</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>文字</td>
+					</tr>
+									<tr class="param">
+						<td>$cfg</td>
+						<td>Y</td>
+						<td></td>
+						<td>array</td>
+						<td>同父类text()</td>
+					</tr>
+																				</table>
+							<a name="save"></a>
+				<table>
+					<caption>
+						<h3>save()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">保存图像</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$to</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>保存路径</td>
+					</tr>
+									<tr class="param">
+						<td>$quality</td>
+						<td>Y</td>
+						<td></td>
+						<td>int</td>
+						<td>图像质量</td>
+					</tr>
+																				</table>
+							<a name="output"></a>
+				<table>
+					<caption>
+						<h3>output()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">输出图像</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$type</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>输出类型，可选值：png, jpeg, gif</td>
+					</tr>
+																				</table>
+						</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

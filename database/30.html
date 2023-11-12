@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>构造查询 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">构造查询</div>
+			<div class="content">
+				<p>使用构造器来构造SQL语句（相当于原生查询的替代，但没原生查询灵活），一定要以<b>table()方法</b>开始，以<b>查询动作</b>结束</p>
+<p class="subtitle">查询动作</p>
+<p>主要支持以下5个动作：</p>
+<ul>
+	<li>增：insert()</li>
+	<li>删：delete()</li>
+	<li>改：update()</li>
+	<li>查：select()</li>
+	<li>查：find()，单条记录</li>
+</ul>
+<pre><code class="language-php">
+$db = boa::db();
+$data = ['title'=&gt;'Title', 'content'=&gt;'Content'];
+
+$res = $db-&gt;table('news')-&gt;insert($data); // 插入
+$res = $db-&gt;table('news')-&gt;where('id = ?', $id)-&gt;delete(); // 删除
+$res = $db-&gt;table('news')-&gt;where('id = ?', $id)-&gt;update($data); // 更新
+
+$arr = $db-&gt;table('news A')
+-&gt;field('A.*, B.category AS cat, COUNT(C.*) total')
+-&gt;join('category B', 'A.cid = B.id')
+-&gt;join('tag C', 'A.id = C.pid')
+-&gt;where('A.cid = ? AND A.status = ?', $cid, $status)
+-&gt;limit(50, 10)
+-&gt;order('A.sort ASC, A.id DESC')
+-&gt;select(); // 查询
+
+$arr = $db-&gt;table('news')-&gt;where('id = ?', $id)-&gt;find(); // 单条查询
+</code></pre>
+
+<p class="subtitle">查询属性</p>
+<p>可以通过distinct()、field()等方法设置SQL相应属性</p>
+<p class="tip tip-help">更多方法参见 <a href="../api/boa.database.builder.html">builder类</a></p>
+
+<p class="subtitle">子查询</p>
+<pre><code class="language-php">
+$db = boa::db();
+$sql = $db-&gt;table('news')-&gt;field('id')-&gt;where('id &lt; ?', $id)-&gt;getsql()-&gt;select(); // getsql()方法返回SQL语句
+$arr = $db-&gt;table('test')-&gt;where("pid IN ($sql)")-&gt;select();
+</code></pre>							</div>
+			<div class="navigate">
+				<a href="../database/29.html" class="prev">< 原生查询</a>
+				<a class="menu"></a>
+				<a href="../database/31.html" class="next">预处理查询 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

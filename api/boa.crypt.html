@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../res/index.js"></script>
+    <title>crypt类 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">crypt类</div>
+			<div class="api">
+				<table>
+					<tr>
+						<td width="10%" align="right">版本</td>
+						<td>1.0+</td>
+					</tr>
+					<tr>
+						<td align="right">命名空间</td>
+						<td>boa</td>
+					</tr>
+					<tr>
+						<td align="right">文件</td>
+						<td>boa/crypt.php</td>
+					</tr>
+					<tr>
+						<td align="right">说明</td>
+						<td>加密解密类，继承base类，配置：'CRYPT' => [],</td>
+					</tr>
+				</table>
+
+														<div class="subtitle">配置</div>
+										<table class="config">
+						<tr>
+							<th>配置项</th>
+							<th>默认值</th>
+							<th>类型</th>
+							<th>说明</th>
+						</tr>
+											<tr>
+							<td>cipher</td>
+							<td>aes-128-cbc</td>
+							<td>string</td>
+							<td>加解密方式，用openssl_get_cipher_methods()列出所支持方式</td>
+						</tr>
+											<tr>
+							<td>key</td>
+							<td></td>
+							<td>string</td>
+							<td>加解密key</td>
+						</tr>
+											<tr>
+							<td>options</td>
+							<td>0</td>
+							<td>int</td>
+							<td>加解密选项，可选值：OPENSSL_RAW_DATA，OPENSSL_ZERO_PADDING</td>
+						</tr>
+											<tr>
+							<td>iv</td>
+							<td></td>
+							<td>string</td>
+							<td>初始化向量<br><b>以上4个配置用于对称加解密enc()和dec()</b></td>
+						</tr>
+											<tr>
+							<td>pubkey</td>
+							<td>BS_VAR .'crypt/pubkey.pem'</td>
+							<td>string</td>
+							<td>公钥，用于公钥加解密public_enc()和public_dec()</td>
+						</tr>
+											<tr>
+							<td>prikey</td>
+							<td>BS_VAR .'crypt/prikey.pem'</td>
+							<td>string</td>
+							<td>私钥，用于私钥加解密private_enc()和private_dec()</td>
+						</tr>
+											<tr>
+							<td>pripass</td>
+							<td></td>
+							<td>string</td>
+							<td>私钥密码</td>
+						</tr>
+											<tr>
+							<td>sign_alg</td>
+							<td>sha1</td>
+							<td>string</td>
+							<td>签名算法，用于签名sign()和验签verify()，用openssl_get_md_methods()列出所支持算法</td>
+						</tr>
+										</table>
+									
+				<div class="subtitle">目录</div>
+				<table class="index">
+					<tr>
+						<th>方法</th>
+						<th>说明</th>
+					</tr>
+									<tr>
+						<td align="center"><a href="#__construct">__construct()</a></td>
+						<td>初始化</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#enc">enc()</a></td>
+						<td>对称加密</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#dec">dec()</a></td>
+						<td>对称解密</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#public_enc">public_enc()</a></td>
+						<td>公钥加密</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#private_dec">private_dec()</a></td>
+						<td>私钥解密</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#private_enc">private_enc()</a></td>
+						<td>私钥加密</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#public_dec">public_dec()</a></td>
+						<td>公钥解密</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#sign">sign()</a></td>
+						<td>私钥签名</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#verify">verify()</a></td>
+						<td>公钥验签</td>
+					</tr>
+								</table>	
+
+				<div class="subtitle">方法</div>
+							<a name="__construct"></a>
+				<table>
+					<caption>
+						<h3>__construct()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">初始化</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$cfg</td>
+						<td></td>
+						<td>[]</td>
+						<td>array</td>
+						<td>配置数据</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$crypt = boa::crypt()</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="enc"></a>
+				<table>
+					<caption>
+						<h3>enc()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">对称加密</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$data</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>明文</td>
+					</tr>
+									<tr class="param">
+						<td>$cipher</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>加解密方式，默认为配置cipher</td>
+					</tr>
+									<tr class="param">
+						<td>$key</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>加解密key，默认为配置key</td>
+					</tr>
+									<tr class="param">
+						<td>$options</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>加解密选项，默认为配置options</td>
+					</tr>
+									<tr class="param">
+						<td>$iv</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>初始化向量，默认为配置iv</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回密文（string），出错则报错</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$str = $crypt-&gt;enc('boaPHP is so easy'); // EFDTn+PuMa7QDlbrWSwLagKQ4+ZXTTyx5VMzp0tniZo=</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="dec"></a>
+				<table>
+					<caption>
+						<h3>dec()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">对称解密</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$data</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>密文</td>
+					</tr>
+									<tr class="param">
+						<td>$cipher</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>加解密方式，默认为配置cipher</td>
+					</tr>
+									<tr class="param">
+						<td>$key</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>加解密key，默认为配置key</td>
+					</tr>
+									<tr class="param">
+						<td>$options</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>加解密选项，默认为配置options</td>
+					</tr>
+									<tr class="param">
+						<td>$iv</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>初始化向量，默认为配置iv</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回明文（string），出错则报错</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$str = $crypt-&gt;dec('EFDTn+PuMa7QDlbrWSwLagKQ4+ZXTTyx5VMzp0tniZo='); // boaPHP is so easy</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="public_enc"></a>
+				<table>
+					<caption>
+						<h3>public_enc()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">公钥加密</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$data</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>明文</td>
+					</tr>
+									<tr class="param">
+						<td>$padding</td>
+						<td></td>
+						<td>OPENSSL_PKCS1_PADDING</td>
+						<td>int</td>
+						<td>可选值：OPENSSL_PKCS1_PADDING, OPENSSL_SSLV23_PADDING, OPENSSL_PKCS1_OAEP_PADDING, OPENSSL_NO_PADDING</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回密文（string），出错则报错</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$enc = $crypt-&gt;public_enc('boaPHP is so easy');</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="private_dec"></a>
+				<table>
+					<caption>
+						<h3>private_dec()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">私钥解密</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$data</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>密文</td>
+					</tr>
+									<tr class="param">
+						<td>$padding</td>
+						<td></td>
+						<td>OPENSSL_PKCS1_PADDING</td>
+						<td>int</td>
+						<td>可选值：OPENSSL_PKCS1_PADDING, OPENSSL_SSLV23_PADDING, OPENSSL_PKCS1_OAEP_PADDING, OPENSSL_NO_PADDING</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回明文（string），出错则报错</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$str = $crypt-&gt;private_dec($enc); // boaPHP is so easy</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="private_enc"></a>
+				<table>
+					<caption>
+						<h3>private_enc()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">私钥加密</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$data</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>明文</td>
+					</tr>
+									<tr class="param">
+						<td>$padding</td>
+						<td></td>
+						<td>OPENSSL_PKCS1_PADDING</td>
+						<td>int</td>
+						<td>可选值：OPENSSL_PKCS1_PADDING, OPENSSL_NO_PADDING</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回密文（string），出错则报错</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$enc = $crypt-&gt;private_enc('boaPHP就这么简单');</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="public_dec"></a>
+				<table>
+					<caption>
+						<h3>public_dec()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">公钥解密</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$data</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>密文</td>
+					</tr>
+									<tr class="param">
+						<td>$padding</td>
+						<td></td>
+						<td>OPENSSL_PKCS1_PADDING</td>
+						<td>int</td>
+						<td>可选值：OPENSSL_PKCS1_PADDING, OPENSSL_NO_PADDING</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回明文（string），出错则报错</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$str = $crypt-&gt;public_dec($enc); // boaPHP就这么简单</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="sign"></a>
+				<table>
+					<caption>
+						<h3>sign()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">私钥签名</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$data</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>数据</td>
+					</tr>
+									<tr class="param">
+						<td>$sign_alg</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>签名算法，默认为配置sign_alg</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回签名（string），出错则报错</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$key = base64_encode($crypt-&gt;sign('boaPHP is so easy'));</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="verify"></a>
+				<table>
+					<caption>
+						<h3>verify()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">公钥验签</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$data</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>数据</td>
+					</tr>
+									<tr class="param">
+						<td>$sign</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>签名</td>
+					</tr>
+									<tr class="param">
+						<td>$sign_alg</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>签名算法，默认为配置sign_alg</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">签名正确返回1（int），签名错误返回0（int），内部出错则报错</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$res = $crypt-&gt;verify('boaPHP is so easy', base64_decode($key));</code></pre>
+						</td>
+					</tr>
+								</table>
+						</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

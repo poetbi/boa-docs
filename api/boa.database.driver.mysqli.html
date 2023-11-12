@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../res/index.js"></script>
+    <title>mysqli类 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">mysqli类</div>
+			<div class="api">
+				<table>
+					<tr>
+						<td width="10%" align="right">版本</td>
+						<td>1.0+</td>
+					</tr>
+					<tr>
+						<td align="right">命名空间</td>
+						<td>boa\database\driver</td>
+					</tr>
+					<tr>
+						<td align="right">文件</td>
+						<td>boa/database/driver/mysqli.php</td>
+					</tr>
+					<tr>
+						<td align="right">说明</td>
+						<td>mysqli驱动类</td>
+					</tr>
+				</table>
+
+														<div class="subtitle">配置</div>
+										<table class="config">
+						<tr>
+							<th>配置项</th>
+							<th>默认值</th>
+							<th>类型</th>
+							<th>说明</th>
+						</tr>
+											<tr>
+							<td>charset</td>
+							<td>utf8</td>
+							<td>string</td>
+							<td>数据库字符集</td>
+						</tr>
+											<tr>
+							<td>persist</td>
+							<td>false</td>
+							<td>bool</td>
+							<td>是否持久连接</td>
+						</tr>
+											<tr>
+							<td>option</td>
+							<td>[]</td>
+							<td>array</td>
+							<td>mysqli驱动选项</td>
+						</tr>
+											<tr>
+							<td>host</td>
+							<td>127.0.0.1</td>
+							<td>string</td>
+							<td>数据库主机</td>
+						</tr>
+											<tr>
+							<td>port</td>
+							<td>3306</td>
+							<td>int</td>
+							<td>数据库端口</td>
+						</tr>
+											<tr>
+							<td>name</td>
+							<td></td>
+							<td>string</td>
+							<td>数据库名称</td>
+						</tr>
+											<tr>
+							<td>user</td>
+							<td>null</td>
+							<td>string</td>
+							<td>数据库用户</td>
+						</tr>
+											<tr>
+							<td>pass</td>
+							<td>null</td>
+							<td>string</td>
+							<td>数据库密码</td>
+						</tr>
+										</table>
+									
+				<div class="subtitle">目录</div>
+				<table class="index">
+					<tr>
+						<th>方法</th>
+						<th>说明</th>
+					</tr>
+									<tr>
+						<td align="center"><a href="#__construct">__construct()</a></td>
+						<td>初始化</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#execute">execute()</a></td>
+						<td>无结果集的SQL查询（insert，update，delete等）</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#query">query()</a></td>
+						<td>带结果集的SQL查询（select等）</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#one">one()</a></td>
+						<td>同query()，仅返回一条记录</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#lastid">lastid()</a></td>
+						<td>得到最近insert操作的插入行ID或指定字段值</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#page">page()</a></td>
+						<td>获得记录总数</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#begin">begin()</a></td>
+						<td>事务开启</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#commit">commit()</a></td>
+						<td>事务提交</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#rollback">rollback()</a></td>
+						<td>事务回滚</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#prepare">prepare()</a></td>
+						<td>准备一条预处理SQL</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#stmt_bind">stmt_bind()</a></td>
+						<td>预处理查询参数绑定</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#stmt_one">stmt_one()</a></td>
+						<td>获取预处理查询结果集下一行</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#stmt_all">stmt_all()</a></td>
+						<td>获取预处理查询结果集所有行</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#stmt_lastid">stmt_lastid()</a></td>
+						<td>获取预处理插入行ID</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#stmt_affected">stmt_affected()</a></td>
+						<td>获取预处理查询受影响行数</td>
+					</tr>
+								</table>	
+
+				<div class="subtitle">方法</div>
+							<a name="__construct"></a>
+				<table>
+					<caption>
+						<h3>__construct()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">初始化</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$cfg</td>
+						<td></td>
+						<td>[]</td>
+						<td>array</td>
+						<td>配置数据</td>
+					</tr>
+																				</table>
+							<a name="execute"></a>
+				<table>
+					<caption>
+						<h3>execute()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">无结果集的SQL查询（insert，update，delete等）</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$sql</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>原生SQL</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回受影响行数（int），失败返回false（bool）</td>
+					</tr>
+												</table>
+							<a name="query"></a>
+				<table>
+					<caption>
+						<h3>query()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">带结果集的SQL查询（select等）</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$sql</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>原生SQL</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回查询结果（array），失败返回false（bool）</td>
+					</tr>
+												</table>
+							<a name="one"></a>
+				<table>
+					<caption>
+						<h3>one()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">同query()，仅返回一条记录</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$sql</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>原生SQL</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回一条结果（array），失败返回false（bool）</td>
+					</tr>
+												</table>
+							<a name="lastid"></a>
+				<table>
+					<caption>
+						<h3>lastid()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">得到最近insert操作的插入行ID或指定字段值</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$name</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>表字段名</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如设置name参数，则返回name所指定的字段值（string），否则返回ID（int）</td>
+					</tr>
+												</table>
+							<a name="page"></a>
+				<table>
+					<caption>
+						<h3>page()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获得记录总数</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$sql</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>查询记录总数的SQL，如未指定则依据最近一次select查询解析出相关SQL</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回记录数（int）</td>
+					</tr>
+												</table>
+							<a name="begin"></a>
+				<table>
+					<caption>
+						<h3>begin()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">事务开启</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回true，失败返回false</td>
+					</tr>
+												</table>
+							<a name="commit"></a>
+				<table>
+					<caption>
+						<h3>commit()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">事务提交</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回true，失败返回false</td>
+					</tr>
+												</table>
+							<a name="rollback"></a>
+				<table>
+					<caption>
+						<h3>rollback()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">事务回滚</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回true，失败返回false</td>
+					</tr>
+												</table>
+							<a name="prepare"></a>
+				<table>
+					<caption>
+						<h3>prepare()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">准备一条预处理SQL</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$sql</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>含占位符?的SQL模板</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回语句对象（object），失败返回false（bool）</td>
+					</tr>
+												</table>
+							<a name="stmt_bind"></a>
+				<table>
+					<caption>
+						<h3>stmt_bind()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">预处理查询参数绑定</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$stmt</td>
+						<td>Y</td>
+						<td></td>
+						<td>object</td>
+						<td>语句对象</td>
+					</tr>
+									<tr class="param">
+						<td>$para</td>
+						<td>Y</td>
+						<td></td>
+						<td>array</td>
+						<td>待绑定参数</td>
+					</tr>
+									<tr class="param">
+						<td>$type</td>
+						<td></td>
+						<td></td>
+						<td>string</td>
+						<td>见stmt类execute()</td>
+					</tr>
+																				</table>
+							<a name="stmt_one"></a>
+				<table>
+					<caption>
+						<h3>stmt_one()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取预处理查询结果集下一行</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$stmt</td>
+						<td>Y</td>
+						<td></td>
+						<td>object</td>
+						<td>语句对象</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回一条记录（array），失败返回false（bool）</td>
+					</tr>
+												</table>
+							<a name="stmt_all"></a>
+				<table>
+					<caption>
+						<h3>stmt_all()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取预处理查询结果集所有行</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$stmt</td>
+						<td>Y</td>
+						<td></td>
+						<td>object</td>
+						<td>语句对象</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回结果集（array），失败返回false（bool）</td>
+					</tr>
+												</table>
+							<a name="stmt_lastid"></a>
+				<table>
+					<caption>
+						<h3>stmt_lastid()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取预处理插入行ID</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$stmt</td>
+						<td>Y</td>
+						<td></td>
+						<td>object</td>
+						<td>语句对象</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回ID（int）</td>
+					</tr>
+												</table>
+							<a name="stmt_affected"></a>
+				<table>
+					<caption>
+						<h3>stmt_affected()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取预处理查询受影响行数</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$stmt</td>
+						<td>Y</td>
+						<td></td>
+						<td>object</td>
+						<td>语句对象</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回行数（int）</td>
+					</tr>
+												</table>
+						</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

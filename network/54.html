@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>上传配置 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">上传配置</div>
+			<div class="content">
+				<p class="subtitle">config.php</p>
+<pre><code class="language-php">'UPLOAD' => [
+	//配置项
+],
+</code></pre>
+<p class="subtitle"><a href="../api/boa.upload.html">上传配置</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>strict</td><td>false</td><td>bool</td><td>严格模式，开启后将验证文件的MIME类型</td></tr><tr><td>size</td><td>2</td><td>float</td><td>允许的文件大小（MB），0=不限</td></tr><tr><td>exts</td><td>jpg,png,gif</td><td>string</td><td>允许的文件后缀</td></tr><tr><td>path</td><td>BS_WWW .'file/'</td><td>string</td><td>文件保存位置</td></tr><tr><td>name</td><td>null</td><td>mixed</td><td>自定义文件保存名称，支持单个（string）或多个（array），名称可以包含目录</td></tr></table></p>							</div>
+			<div class="navigate">
+				<a href="../network/53.html" class="prev">< 邮件配置</a>
+				<a class="menu"></a>
+				<a href="../network/55.html" class="next">下载配置 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

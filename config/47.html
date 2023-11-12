@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>安全配置 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">安全配置</div>
+			<div class="content">
+				<p class="subtitle">config.php</p>
+<pre><code class="language-php">
+'CRYPT' => [
+	//加密解密
+],
+'CORS' => [
+	//跨域请求授权
+],
+'SECURITY' => [
+	//csrf和xss防御
+],
+'FILTER' => '', //变量验证
+</code></pre>
+<p class="subtitle"><a href="../api/boa.crypt.html">CRYPT配置</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>cipher</td><td>aes-128-cbc</td><td>string</td><td>加解密方式，用openssl_get_cipher_methods()列出所支持方式</td></tr><tr><td>key</td><td></td><td>string</td><td>加解密key</td></tr><tr><td>options</td><td>0</td><td>int</td><td>加解密选项，可选值：OPENSSL_RAW_DATA，OPENSSL_ZERO_PADDING</td></tr><tr><td>iv</td><td></td><td>string</td><td>初始化向量<br><b>以上4个配置用于对称加解密enc()和dec()</b></td></tr><tr><td>pubkey</td><td>BS_VAR .'crypt/pubkey.pem'</td><td>string</td><td>公钥，用于公钥加解密public_enc()和public_dec()</td></tr><tr><td>prikey</td><td>BS_VAR .'crypt/prikey.pem'</td><td>string</td><td>私钥，用于私钥加解密private_enc()和private_dec()</td></tr><tr><td>pripass</td><td></td><td>string</td><td>私钥密码</td></tr><tr><td>sign_alg</td><td>sha1</td><td>string</td><td>签名算法，用于签名sign()和验签verify()，用openssl_get_md_methods()列出所支持算法</td></tr></table></p>
+<p class="subtitle"><a href="###">CORS配置</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>origin</td><td></td><td>string</td><td>接受的源（协议+域名+端口），多个用逗号（,）隔开，*号表示接受所有</td></tr><tr><td>headers</td><td></td><td>string</td><td>接受除基本HTTP头以外的额外头信息字段，逗号分隔</td></tr><tr><td>methods</td><td>GET,POST</td><td>string</td><td>接受的请求动作</td></tr></table></p>
+<p class="subtitle"><a href="../api/boa.security.html">SECURITY配置</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>xss_tags</td><td>['script', 'base']</td><td>array</td><td>XSS防御时，过滤HTML标签，忽略大小写</td></tr><tr><td>xss_events</td><td>['on*']</td><td>array</td><td>XSS防御时，过滤DOM事件， *代表正则[a-z]+，忽略大小写</td></tr><tr><td>csrf_key</td><td>CSRF-TOKEN</td><td>string</td><td>CSRF防御时，存储或传送token的键名</td></tr><tr><td>csrf_type</td><td>1</td><td>int</td><td>CSRF防御时，校验类型；0=关闭，1=前端方式，2=后端方式，3=混合方式</td></tr><tr><td>csrf_expire</td><td>0</td><td>int</td><td>CSRF防御时，token有效期（秒），0=不限</td></tr></table></p>
+<p class="subtitle"><a href="../api/boa.validater.html">FILTER配置</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>FILTER</td><td></td><td>string</td><td>如果设置，自动变量验证时如未设置过滤，则使用此值，比如：htmlspecialchars</td></tr></table></p>							</div>
+			<div class="navigate">
+				<a href="../config/41.html" class="prev">< 缓存配置</a>
+				<a class="menu"></a>
+				<a href="../config/56.html" class="next">HTTP配置 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>生成静态 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">生成静态</div>
+			<div class="content">
+				<p>支持将当前页面的内容保存到HTML文件中，可以在控制器中通过 <b>boa::save($path, $force = false)</b> 来设置保存路径，PHP请求结束后会自动调用boa::finish()方法来保存当前页面</p>
+<p class="subtitle">参数</p>
+<ul>
+	<li>$path 为HTML文件的绝对路径，必须</li>
+	<li>$force = true 表示强制覆盖已有HTML文件，默认为否</li>
+</ul>
+<p class="tip tip-help">在循环使用boa::call()中可以手动调用boa::finish()来模拟页面结束，更多参见 <a href="../api/boa.boa.html">boa类finish()方法</a></p>
+
+<p class="subtitle">使用</p>
+<pre><code class="language-php">
+class test extends controller{ // test控制器
+	public function index(){
+		foreach(...){
+			boa::call('content', ['id' => $id, 'v' => $data]); // call()模拟浏览器访问动作
+		}
+	}
+	
+	public function content(){
+		......
+		boa::save(BS_WWW ."news/{$this->id}.html", true); // 设置页面保存路径
+		$this->view->html();
+		boa::finish(); // 从浏览器访问会自动调用finish()，用call()模拟请求手动调用
+	}
+}
+</code></pre>
+<p>或者也可以使用以下方法，使用view类的html()返回功能，具体参见<a href="../api/boa.view.html">view类</a>：</p>
+<pre><code class="language-php">
+class test extends controller{
+	public function index(){
+		foreach(...){
+			$html = $this->content($id, $data); // 获取返回页面，手动设置保存
+		}
+	}
+	
+	public function content($id, $data){
+		......
+		return $this->view->html('', true);
+	}
+}
+</code></pre>
+<p class="tip tip-help">call()方式可以跨模块跨控制器访问动作，可以携带参数来标识浏览器访问还是call()访问，从而判断是否需要手动调用finish()</p>							</div>
+			<div class="navigate">
+				<a href="../master/16.html" class="prev">< 类的访问</a>
+				<a class="menu"></a>
+				<a href="../router/index.html" class="next">路由 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../res/index.js"></script>
+    <title>fileinfo类 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">fileinfo类</div>
+			<div class="api">
+				<table>
+					<tr>
+						<td width="10%" align="right">版本</td>
+						<td>1.0+</td>
+					</tr>
+					<tr>
+						<td align="right">命名空间</td>
+						<td>boa</td>
+					</tr>
+					<tr>
+						<td align="right">文件</td>
+						<td>boa/fileinfo.php</td>
+					</tr>
+					<tr>
+						<td align="right">说明</td>
+						<td>获取文件信息类</td>
+					</tr>
+				</table>
+
+													
+				<div class="subtitle">目录</div>
+				<table class="index">
+					<tr>
+						<th>方法</th>
+						<th>说明</th>
+					</tr>
+									<tr>
+						<td align="center"><a href="#__construct">__construct()</a></td>
+						<td>初始化</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#md5">md5()</a></td>
+						<td>获取文件md5</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#sha1">sha1()</a></td>
+						<td>获取文件sha1</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#mime_type">mime_type()</a></td>
+						<td>获取文件MIME类型</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#charset">charset()</a></td>
+						<td>获取文件MIME编码</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#mime">mime()</a></td>
+						<td>获取文件MIME类型和编码</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#devices">devices()</a></td>
+						<td>获取设备块内容</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#raw">raw()</a></td>
+						<td>获取文件原始设备信息</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#ext">ext()</a></td>
+						<td>获取文件后缀（小写）</td>
+					</tr>
+								</table>	
+
+				<div class="subtitle">方法</div>
+							<a name="__construct"></a>
+				<table>
+					<caption>
+						<h3>__construct()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">初始化</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$file</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>文件路径</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$file = boa::fileinfo(BS_VAR .'debug.txt')</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="md5"></a>
+				<table>
+					<caption>
+						<h3>md5()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取文件md5</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回md5（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$md5 = $file-&gt;md5()</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="sha1"></a>
+				<table>
+					<caption>
+						<h3>sha1()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取文件sha1</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回sha1（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$sha1 = $file-&gt;sha1()</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="mime_type"></a>
+				<table>
+					<caption>
+						<h3>mime_type()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取文件MIME类型</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回mime类型（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$res = $file-&gt;mime_type(); // text/plain</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="charset"></a>
+				<table>
+					<caption>
+						<h3>charset()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取文件MIME编码</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回mime编码（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$res = $file-&gt;charset(); // charset=utf-8</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="mime"></a>
+				<table>
+					<caption>
+						<h3>mime()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取文件MIME类型和编码</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回mime类型和编码（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$res = $file-&gt;mime(); // text/plain; charset=utf-8</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="devices"></a>
+				<table>
+					<caption>
+						<h3>devices()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取设备块内容</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回设备块内容（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$res = $file-&gt;devices(); // ASCII text, with no line terminators</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="raw"></a>
+				<table>
+					<caption>
+						<h3>raw()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取文件原始设备信息</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回原始设备信息（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$res = $file-&gt;raw(); // ASCII text, with CRLF line terminators</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="ext"></a>
+				<table>
+					<caption>
+						<h3>ext()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取文件后缀（小写）</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回文件后缀（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$res = $file-&gt;ext(); // txt</code></pre>
+						</td>
+					</tr>
+								</table>
+						</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

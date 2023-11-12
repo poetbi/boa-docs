@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../res/index.js"></script>
+    <title>builder类 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">builder类</div>
+			<div class="api">
+				<table>
+					<tr>
+						<td width="10%" align="right">版本</td>
+						<td>1.0+</td>
+					</tr>
+					<tr>
+						<td align="right">命名空间</td>
+						<td>boa\database</td>
+					</tr>
+					<tr>
+						<td align="right">文件</td>
+						<td>boa/database/builder.php</td>
+					</tr>
+					<tr>
+						<td align="right">说明</td>
+						<td>查询构造器类</td>
+					</tr>
+				</table>
+
+													
+				<div class="subtitle">目录</div>
+				<table class="index">
+					<tr>
+						<th>方法</th>
+						<th>说明</th>
+					</tr>
+									<tr>
+						<td align="center"><a href="#__construct">__construct()</a></td>
+						<td>初始化</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#distinct">distinct()</a></td>
+						<td>设置SQL中distinct部分，用于排重</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#field">field()</a></td>
+						<td>设置SQL中field部分，查询字段，如未设置系统则使用 *</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#force">force()</a></td>
+						<td>设置SQL中force index部分，强制索引</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#join">join()</a></td>
+						<td>设置SQL中join部分，连接查询，支持多表（多次调用）</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#where">where()</a></td>
+						<td>设置SQL中where部分，查询条件</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#group">group()</a></td>
+						<td>设置SQL中group by部分，分组汇总</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#having">having()</a></td>
+						<td>设置SQL中having部分，过滤条件</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#order">order()</a></td>
+						<td>设置SQL中order by部分，结果排序</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#limit">limit()</a></td>
+						<td>设置SQL中limit部分，用于结果分页</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#union">union()</a></td>
+						<td>设置SQL中union部分，联合查询，支持多次调用</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#union_all">union_all()</a></td>
+						<td>设置SQL中union all部分，允许重复记录的联合查询，支持多次调用</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#lock">lock()</a></td>
+						<td>设置SQL中锁部分，操作加锁</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#getsql">getsql()</a></td>
+						<td>设置返回SQL语句，而不是操作结果（SQL没有实际执行）</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#select">select()</a></td>
+						<td>查询操作</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#insert">insert()</a></td>
+						<td>插入操作</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#update">update()</a></td>
+						<td>更新操作</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#delete">delete()</a></td>
+						<td>删除操作</td>
+					</tr>
+								</table>	
+
+				<div class="subtitle">方法</div>
+							<a name="__construct"></a>
+				<table>
+					<caption>
+						<h3>__construct()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">初始化</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$table</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>要操作的数据表名，支持别名</td>
+					</tr>
+																				</table>
+							<a name="distinct"></a>
+				<table>
+					<caption>
+						<h3>distinct()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置SQL中distinct部分，用于排重</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$field</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>要排重的字段名，支持别名</td>
+					</tr>
+																				</table>
+							<a name="field"></a>
+				<table>
+					<caption>
+						<h3>field()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置SQL中field部分，查询字段，如未设置系统则使用 *</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$field</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>字段或聚合函数，支持别名</td>
+					</tr>
+																				</table>
+							<a name="force"></a>
+				<table>
+					<caption>
+						<h3>force()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置SQL中force index部分，强制索引</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$index</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>索引名</td>
+					</tr>
+																				</table>
+							<a name="join"></a>
+				<table>
+					<caption>
+						<h3>join()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置SQL中join部分，连接查询，支持多表（多次调用）</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$table</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>要连接的数据表名，支持别名</td>
+					</tr>
+									<tr class="param">
+						<td>$on</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>连接条件</td>
+					</tr>
+									<tr class="param">
+						<td>$type</td>
+						<td></td>
+						<td>LEFT</td>
+						<td>string</td>
+						<td>连接类型，INNER=交集，LEFT=左连，RIGHT=右连，FULL=并集</td>
+					</tr>
+																				</table>
+							<a name="where"></a>
+				<table>
+					<caption>
+						<h3>where()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置SQL中where部分，查询条件</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$where</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>条件语句，支持占位符?</td>
+					</tr>
+																				</table>
+							<a name="group"></a>
+				<table>
+					<caption>
+						<h3>group()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置SQL中group by部分，分组汇总</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$field</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>字段或聚合函数</td>
+					</tr>
+																				</table>
+							<a name="having"></a>
+				<table>
+					<caption>
+						<h3>having()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置SQL中having部分，过滤条件</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$where</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>条件语句，支持占位符?</td>
+					</tr>
+																				</table>
+							<a name="order"></a>
+				<table>
+					<caption>
+						<h3>order()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置SQL中order by部分，结果排序</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$order</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>字段或聚合函数的排序条件，支持多列</td>
+					</tr>
+																				</table>
+							<a name="limit"></a>
+				<table>
+					<caption>
+						<h3>limit()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置SQL中limit部分，用于结果分页</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$limit</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>设置偏移和行数</td>
+					</tr>
+																				</table>
+							<a name="union"></a>
+				<table>
+					<caption>
+						<h3>union()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置SQL中union部分，联合查询，支持多次调用</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$sql</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>SQL语句，支持占位符?</td>
+					</tr>
+																				</table>
+							<a name="union_all"></a>
+				<table>
+					<caption>
+						<h3>union_all()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置SQL中union all部分，允许重复记录的联合查询，支持多次调用</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$sql</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>SQL语句，支持占位符?</td>
+					</tr>
+																				</table>
+							<a name="lock"></a>
+				<table>
+					<caption>
+						<h3>lock()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置SQL中锁部分，操作加锁</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$lock</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>锁类型，支持自定义值<br>share=共享锁，update=排他锁</td>
+					</tr>
+																				</table>
+							<a name="getsql"></a>
+				<table>
+					<caption>
+						<h3>getsql()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置返回SQL语句，而不是操作结果（SQL没有实际执行）</td>
+					</tr>
+																				</table>
+							<a name="select"></a>
+				<table>
+					<caption>
+						<h3>select()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">查询操作</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$type</td>
+						<td></td>
+						<td>0</td>
+						<td>int</td>
+						<td>返回类型，0=返回所有记录，1=返回一条记录</td>
+					</tr>
+									<tr class="param">
+						<td>$db</td>
+						<td>Y</td>
+						<td></td>
+						<td>object</td>
+						<td>数据库驱动实例</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果设置getsql()，直接返回SQL语句（string），否则返回操作结果：成功时数组（array），失败时false（bool）</td>
+					</tr>
+												</table>
+							<a name="insert"></a>
+				<table>
+					<caption>
+						<h3>insert()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">插入操作</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$data</td>
+						<td>Y</td>
+						<td></td>
+						<td>array</td>
+						<td>要插入的数据</td>
+					</tr>
+									<tr class="param">
+						<td>$db</td>
+						<td>Y</td>
+						<td></td>
+						<td>object</td>
+						<td>数据库驱动实例</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果设置getsql()，直接返回SQL语句（string），否则返回操作结果：成功时ID（int），失败时false（bool）</td>
+					</tr>
+												</table>
+							<a name="update"></a>
+				<table>
+					<caption>
+						<h3>update()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">更新操作</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$data</td>
+						<td>Y</td>
+						<td></td>
+						<td>array</td>
+						<td>要更新的数据</td>
+					</tr>
+									<tr class="param">
+						<td>$db</td>
+						<td>Y</td>
+						<td></td>
+						<td>object</td>
+						<td>数据库驱动实例</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果设置getsql()，直接返回SQL语句（string），否则返回操作结果：成功时受影响的行数（int），失败时false（bool）</td>
+					</tr>
+												</table>
+							<a name="delete"></a>
+				<table>
+					<caption>
+						<h3>delete()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">删除操作</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$db</td>
+						<td>Y</td>
+						<td></td>
+						<td>object</td>
+						<td>数据库驱动实例</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果设置getsql()，直接返回SQL语句（string），否则返回操作结果：成功时受影响的行数（int），失败时false（bool）</td>
+					</tr>
+												</table>
+						</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

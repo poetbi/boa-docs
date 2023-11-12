@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>消息配置 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">消息配置</div>
+			<div class="content">
+				<p class="subtitle">config.php</p>
+<pre><code class="language-php">
+'MSG_DISPLAY' => '',<br>
+'MSG_TYPE' => '',<br>
+'MSG_TYPE_VAR' => '',<br>
+'MSG_JSONP_CB' => '',<br>
+'MSG_STR_CLASS' => '',<br>
+'MSG_LOG_NOTICE' => ,
+</code></pre>
+<p class="subtitle"><a href="../api/boa.msg.html">消息配置</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>MSG_DISPLAY</td><td>php_exception,php_error</td><td>string</td><td>可选；设置PHP错误输出类型，可选值：php_exception, php_warning, php_error, php_deprecated, php_strict</td></tr><tr><td>MSG_TYPE</td><td></td><td>string</td><td>可选；设置全局默认消息输出类型，如：json、xml等</td></tr><tr><td>MSG_TYPE_VAR</td><td>_msg</td><td>string</td><td>可选；通过前端设置消息输出类型，$_REQUEST取值时的键，表示取_msg字段</td></tr><tr><td>MSG_JSONP_CB</td><td>message</td><td>string</td><td>可选；当消息为jsonp类型时，前端JS回调函数名称</td></tr><tr><td>MSG_STR_CLASS</td><td>boa_msg</td><td>string</td><td>可选；当消息输出时，前端CSS默认class名称</td></tr><tr><td>MSG_LOG_NOTICE</td><td>false</td><td>bool</td><td>可选；是否处理PHP的notice消息</td></tr></table></p>
+<p class="subtitle">注意</p>
+<p>除了全局配置 MSG_TYPE 默认的消息输出类型，还可以在请求URL、表单action中附加_msg=json这样参数或使用表单隐藏域来灵活实现。参数名称 _msg 由 MSG_TYPE_VAR 定义</p>
+<p>除了前述方式，还可以使用 msg::set_type() 来动态设置消息输出类型，优先级大于前者，整个页面仅需设置一次</p>							</div>
+			<div class="navigate">
+				<a href="../config/73.html" class="prev">< 事件配置</a>
+				<a class="menu"></a>
+				<a href="../config/78.html" class="next">日志配置 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

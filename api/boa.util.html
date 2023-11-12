@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../res/index.js"></script>
+    <title>util类 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">util类</div>
+			<div class="api">
+				<table>
+					<tr>
+						<td width="10%" align="right">版本</td>
+						<td>1.0+</td>
+					</tr>
+					<tr>
+						<td align="right">命名空间</td>
+						<td>boa</td>
+					</tr>
+					<tr>
+						<td align="right">文件</td>
+						<td>boa/util.php</td>
+					</tr>
+					<tr>
+						<td align="right">说明</td>
+						<td>辅助工具类，静态类</td>
+					</tr>
+				</table>
+
+													
+				<div class="subtitle">目录</div>
+				<table class="index">
+					<tr>
+						<th>方法</th>
+						<th>说明</th>
+					</tr>
+									<tr>
+						<td align="center"><a href="#convert">convert()</a></td>
+						<td>字符串编码转换</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#len">len()</a></td>
+						<td>计算字符串字符数</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#mimetype">mimetype()</a></td>
+						<td>通过后缀获取文件MIME类型</td>
+					</tr>
+								</table>	
+
+				<div class="subtitle">方法</div>
+							<a name="convert"></a>
+				<table>
+					<caption>
+						<h3>convert()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">字符串编码转换</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$str</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>字符串</td>
+					</tr>
+									<tr class="param">
+						<td>$from</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>源编码</td>
+					</tr>
+									<tr class="param">
+						<td>$to</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>目标编码</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回转换后的字符串（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$str = \boa\util::convert($str, 'gbk', CHARSET); // GBK =&gt; UTF-8</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="len"></a>
+				<table>
+					<caption>
+						<h3>len()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">计算字符串字符数</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$str</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>字符串</td>
+					</tr>
+									<tr class="param">
+						<td>$charset</td>
+						<td></td>
+						<td>CHARSET</td>
+						<td>string</td>
+						<td>编码</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回字符个数（int）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$num = \boa\util::len($str)</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="mimetype"></a>
+				<table>
+					<caption>
+						<h3>mimetype()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">通过后缀获取文件MIME类型</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$ext</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>文件后缀</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回MIME类型（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$mime= \boa\util::mimetype('zip'); // application/zip</code></pre>
+						</td>
+					</tr>
+								</table>
+						</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>未获匹配 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">未获匹配</div>
+			<div class="content">
+				<p>开启路由后，当从路由表中未得到匹配时，如果强制路由开启（force=true），则报404错误，否则将依据URL类型（type）继续解析当前URL，从而得到环境数据；不论type为何值，动态URL始终都会被解析；如果最后仍未能得到预期结果，最终都会指向首页。</p>
+<p class="tip tip-help">自定义404页面：实例目录下tpl/$mod/msg/404.html</p>
+
+<p class="subtitle">type=0</p>
+<p>动态模式，形如：http://boasoft.top/index.php?m=home&c=content&a=show&id=1，解析得环境数据：
+	<pre><code class="language-php">
+[
+	'mod' => 'home',
+	'con' => 'content',
+	'act' => 'show',
+	'var' => [
+		'id' => 1
+	]
+]
+	</code></pre>
+</p>
+<p class="subtitle">type=1</p>
+<p>Pathinfo模式，形如：http://boasoft.top/index.php/home/content/show/id-1/，解析得环境数据：
+	<pre><code class="language-php">
+[
+	'mod' => 'home',
+	'con' => 'content',
+	'act' => 'show',
+	'var' => [
+		'id' => 1
+	]
+]
+	</code></pre>
+</p>
+<p class="subtitle">type=2</p>
+<p>Rewrite模式，形如：http://boasoft.top/home/content/show/1.html，解析得环境数据：
+	<pre><code class="language-php">
+[
+	'mod' => 'home',
+	'con' => 'content',
+	'act' => 'show',
+	'var' => [
+		'id' => 1
+	]
+]
+	</code></pre>
+</p>
+<p class="tip tip-help">没有开启路由时，也按照这个方式解析；type=2 或 type=3 时仍然支持动态URL的使用和解析</p>
+							</div>
+			<div class="navigate">
+				<a href="../router/10.html" class="prev">< 后向引用</a>
+				<a class="menu"></a>
+				<a href="../router/12.html" class="next">生成URL ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../res/index.js"></script>
+    <title>cookie类 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">cookie类</div>
+			<div class="api">
+				<table>
+					<tr>
+						<td width="10%" align="right">版本</td>
+						<td>1.0+</td>
+					</tr>
+					<tr>
+						<td align="right">命名空间</td>
+						<td>boa</td>
+					</tr>
+					<tr>
+						<td align="right">文件</td>
+						<td>boa/cookie.php</td>
+					</tr>
+					<tr>
+						<td align="right">说明</td>
+						<td>cookie类（会话客户端），继承base类，配置：'COOKIE' => [],</td>
+					</tr>
+				</table>
+
+														<div class="subtitle">配置</div>
+										<table class="config">
+						<tr>
+							<th>配置项</th>
+							<th>默认值</th>
+							<th>类型</th>
+							<th>说明</th>
+						</tr>
+											<tr>
+							<td>prefix</td>
+							<td>bs_</td>
+							<td>string</td>
+							<td>cookie前缀</td>
+						</tr>
+											<tr>
+							<td>lifetime</td>
+							<td>0</td>
+							<td>int</td>
+							<td>cookie有效期（秒），0=关闭浏览器就失效</td>
+						</tr>
+											<tr>
+							<td>path</td>
+							<td>/</td>
+							<td>string</td>
+							<td>cookie有效路径</td>
+						</tr>
+											<tr>
+							<td>domain</td>
+							<td></td>
+							<td>string</td>
+							<td>cookie有效域名</td>
+						</tr>
+											<tr>
+							<td>secure</td>
+							<td>false</td>
+							<td>bool</td>
+							<td>cookie是否仅通过HTTPS传输</td>
+						</tr>
+											<tr>
+							<td>httponly</td>
+							<td>true</td>
+							<td>bool</td>
+							<td>cookie是否无法通过JavaScript等脚本访问</td>
+						</tr>
+										</table>
+									
+				<div class="subtitle">目录</div>
+				<table class="index">
+					<tr>
+						<th>方法</th>
+						<th>说明</th>
+					</tr>
+									<tr>
+						<td align="center"><a href="#cfg">cfg()</a></td>
+						<td>获取或设置配置信息</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#get">get()</a></td>
+						<td>获取cookie</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#set">set()</a></td>
+						<td>设置cookie</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#del">del()</a></td>
+						<td>删除cookie</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#clear">clear()</a></td>
+						<td>清理cookie</td>
+					</tr>
+								</table>	
+
+				<div class="subtitle">方法</div>
+							<a name="cfg"></a>
+				<table>
+					<caption>
+						<h3>cfg()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取或设置配置信息</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$k</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>键</td>
+					</tr>
+									<tr class="param">
+						<td>$v</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>值</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">同 base 类</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$cookie = boa::cookie();
+$cookie-&gt;cfg('domain', '.boasoft.top'); // 设置域</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="get"></a>
+				<table>
+					<caption>
+						<h3>get()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取cookie</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$key</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>cookie名称</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回有效期内cookie值（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$name = $cookie-&gt;get('name');</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="set"></a>
+				<table>
+					<caption>
+						<h3>set()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置cookie</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$key</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>cookie名称</td>
+					</tr>
+									<tr class="param">
+						<td>$val</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>cookie值</td>
+					</tr>
+									<tr class="param">
+						<td>$ttl</td>
+						<td></td>
+						<td>null</td>
+						<td>int</td>
+						<td>cookie有效期（秒），默认为lifetime配置</td>
+					</tr>
+									<tr class="param">
+						<td>$enc</td>
+						<td></td>
+						<td>false</td>
+						<td>bool</td>
+						<td>是否加密</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回true（bool），失败返回false（bool）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$cookie-&gt;set('name', $name, 86400); // 1天有效期</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="del"></a>
+				<table>
+					<caption>
+						<h3>del()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">删除cookie</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$key</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>cookie名称</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回true（bool），失败返回false（bool）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$cookie-&gt;del('name');</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="clear"></a>
+				<table>
+					<caption>
+						<h3>clear()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">清理cookie</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$cookie-&gt;clear(); // 删除同域下所有cookie</code></pre>
+						</td>
+					</tr>
+								</table>
+						</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

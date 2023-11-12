@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../res/index.js"></script>
+    <title>driver类 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">driver类</div>
+			<div class="api">
+				<table>
+					<tr>
+						<td width="10%" align="right">版本</td>
+						<td>1.0+</td>
+					</tr>
+					<tr>
+						<td align="right">命名空间</td>
+						<td>boa\http</td>
+					</tr>
+					<tr>
+						<td align="right">文件</td>
+						<td>boa/http/driver.php</td>
+					</tr>
+					<tr>
+						<td align="right">说明</td>
+						<td>HTTP驱动基础类，继承base类，被所有HTTP驱动继承</td>
+					</tr>
+				</table>
+
+													
+				<div class="subtitle">目录</div>
+				<table class="index">
+					<tr>
+						<th>方法</th>
+						<th>说明</th>
+					</tr>
+									<tr>
+						<td align="center"><a href="#cfg">cfg()</a></td>
+						<td>获取或设置配置信息</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#get_posttype">get_posttype()</a></td>
+						<td>获取POST请求类型</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#get_header">get_header()</a></td>
+						<td>获取响应头</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#get_body">get_body()</a></td>
+						<td>获取响应正文，可能为压缩的</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#get_status">get_status()</a></td>
+						<td>获取响应状态码</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#get_error">get_error()</a></td>
+						<td>获取响应错误</td>
+					</tr>
+								</table>	
+
+				<div class="subtitle">方法</div>
+							<a name="cfg"></a>
+				<table>
+					<caption>
+						<h3>cfg()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取或设置配置信息</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$k</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>键</td>
+					</tr>
+									<tr class="param">
+						<td>$v</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>值</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">同 base 类</td>
+					</tr>
+												</table>
+							<a name="get_posttype"></a>
+				<table>
+					<caption>
+						<h3>get_posttype()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取POST请求类型</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回请求类型（string）</td>
+					</tr>
+												</table>
+							<a name="get_header"></a>
+				<table>
+					<caption>
+						<h3>get_header()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取响应头</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回响应头（string）</td>
+					</tr>
+												</table>
+							<a name="get_body"></a>
+				<table>
+					<caption>
+						<h3>get_body()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取响应正文，可能为压缩的</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回响应正文（string）</td>
+					</tr>
+												</table>
+							<a name="get_status"></a>
+				<table>
+					<caption>
+						<h3>get_status()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取响应状态码</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回响应状态码（int）</td>
+					</tr>
+												</table>
+							<a name="get_error"></a>
+				<table>
+					<caption>
+						<h3>get_error()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取响应错误</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回响应错误（string）</td>
+					</tr>
+												</table>
+						</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

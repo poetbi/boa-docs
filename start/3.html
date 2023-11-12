@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>逻辑结构 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">逻辑结构</div>
+			<div class="content">
+				<p>一次完整的请求执行流程如下：</p>
+	<pre><code class="language-ini">
+入口
+ │
+总控
+ │
+ ├─初始化：系统配置
+ │     ├─错误捕获
+ │     ├─自动加载
+ │     ├─跨域请求[CORS]检查
+ │     ├─系统常量
+ │     ├─错误输出
+ │     ├─环境配置
+ │     └─初始化构建（首次）
+ │
+ ├─触发事件：init监听器
+ ├─消息设置：系统消息输出类型
+ │
+路由
+ │
+模块
+ │
+ ├─初始化：模块配置
+ ├─触发事件：module监听器
+ │
+控制器
+ │
+ ├─初始化：请求类
+ ├─初始化：视图类
+ ├─初始化：公用类库
+ ├─触发事件：controller监听器
+ ├─请求变量映射
+ │
+动作
+ │
+ ├─跨站请求[CSRF]检查
+ ├─请求变量自动验证
+ ├─用户业务  &lt;─────────┐
+ │                   模型（数据供给） &lt;── 数据库、缓存等
+视图  &lt;────────────────┘
+ │
+输出/返回
+ │
+ ├─触发事件：action监听器
+ │
+完成
+ ├─记录日志
+ └─生成HTML
+	</code></pre>
+<p class="tip tip-help">程序中的所有操作均由总控（boa静态类）统一调度</p>
+<p class="subtitle">执行优先级</p>
+<p>如何提升用户代码的执行优先级？</p>
+<ul>
+	<li>监听器：写在监听器中的代码会在系统各个执行环节中运行。使用前先自定义监听器替代系统监听器，具体参看 <a href="../event/72.html">事件配置</a></li>
+	<li>公用库：写在common公用库（lirary目录中） __construct() 中代码会在各用户控制器之前执行</li>
+	<li>控制器：写在用户控制器 __construct() 中代码会在各动作之前执行</li>
+</ul>
+<p class="tip tip-help">常用来放置用户登录检测、权限验证、系统配置等，不必在每个动作中写一遍</p>							</div>
+			<div class="navigate">
+				<a href="../start/2.html" class="prev">< 目录结构</a>
+				<a class="menu"></a>
+				<a href="../start/4.html" class="next">配置结构 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

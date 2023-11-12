@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>命令行用法 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">命令行用法</div>
+			<div class="content">
+				<p class="subtitle">语法</p>
+<p><b>php boa [命令] [参数]</b></p>
+<p class="subtitle">命令</p>
+<table>
+	<tr><th>命令</th><th>简写</th><th>说明</th></tr>
+	<tr><td>help</td><td>-h</td><td>查看帮助</td></tr>
+	<tr><td>version</td><td>-v</td><td>查看版本</td></tr>
+	<tr><td>build</td><td>-b</td><td>初始化构建</td></tr>
+	<tr><td>www</td><td>-w</td><td>根据参数创建新实例，例如：-w boasoft.top</td></tr>
+	<tr><td>mod</td><td>-m</td><td>根据参数创建新模块，例如：-m news</td></tr>
+	<tr><td>clear</td><td>-c</td><td>清空当前实例缓存</td></tr>
+	<tr><td>install</td><td>-i</td><td>根据参数安装已有模块，例如：-i demo</td></tr>
+	<tr><td>uninstall</td><td>-u</td><td>根据参数卸载已有模块，例如：-u demo</td></tr>
+	<tr><td>run</td><td>-r</td><td>根据参数执行程序，支持输入多个参数，<br>第一个参数指定要执行的程序，必填，其结构：<b>模块.控制器.动作</b>。<br>例如：-r news.index.count arg3=1 arg4=2</td></tr>
+</table>
+<p class="subtitle">特点</p>
+<p>除少量涉及浏览器终端功能，如cookie（可以通过配置HTTP_COOKIE来实现）等无效外，绝大部分动作都可以直接使用run命令执行</p>
+<p>对<b>模块.控制器.动作</b>传参可以使用URL访问时键值对模式，如：a=1 b=2 c=3。在动作中像正常一样取值： <i>$this->参数</i></p>
+
+<p class="subtitle">交互</p>
+<p>用 php boa -r 执行控制器动作，在动作中如下实现命令行交互，参见 <a href="../api/boa.console.input.html">input类</a>、 <a href="../validater/22.html">自动验证</a></p>
+<pre><code class="language language-php">
+	$in = new \boa\console\input();
+	$rule = [ // 输入使用自动验证规则
+		'label' => '输入值',
+		'check' => 'required', // 必填
+		'filter' => 'intval' // 过滤非数字
+	];
+	$res = $in->prompt('请输入数字', $rule);
+	echo '您输入了：'. $res; // 获取验证后的输入，并执行后续操作
+</code></pre>
+
+<p class="subtitle">表格</p>
+<p>除了交互，还可以将数据以表格格式打印出来，参见 <a href="../api/boa.console.output.html">output类</a></p>
+<pre><code class="language language-php">
+	$out = new \boa\console\output();
+	$out->cfg('border', true);
+	$arr = [[...]]; // 务必二维数组
+	$out->table($arr);
+</code></pre>
+
+<p class="subtitle">日志</p>
+<p>命令行下日志和CGI环境下日志是分开的，会在日志文件名称中添加.cli来区分，其他基本一致</p>
+							</div>
+			<div class="navigate">
+				<a href="../console/79.html" class="prev">< 命令行配置</a>
+				<a class="menu"></a>
+				<a href="../mq/index.html" class="next">中间件 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>消息队列配置 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">消息队列配置</div>
+			<div class="content">
+				<p class="subtitle">config.php</p>
+<pre><code class="language-php">'MQ' => [
+     //配置项
+],
+</code></pre>
+<p class="subtitle"><a href="../api/boa.mq.html">消息队列配置</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>driver</td><td>stomp</td><td>string</td><td>消息队列驱动；可选值：stomp, zeromq</td></tr></table></p>
+<p class="subtitle"><a href="../api/boa.mq.driver.stomp.html">stomp驱动</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>broker</td><td>tcp://127.0.0.1:61613</td><td>string</td><td>消息中间件服务器，支持tcp, ssl等</td></tr><tr><td>username</td><td>null</td><td>string</td><td>认证用户</td></tr><tr><td>password</td><td>null</td><td>string</td><td>认证密码</td></tr><tr><td>headers</td><td>[]</td><td>array</td><td>附加请求头，如：client-id等</td></tr><tr><td>timeout</td><td>0</td><td>int</td><td>消费消息超时（秒），0=默认</td></tr><tr><td>queue</td><td>/queue/boa</td><td>string</td><td>发布/订阅的消息队列</td></tr></table></p>
+<p class="subtitle"><a href="../api/boa.mq.driver.zeromq.html">zeromq驱动</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>broker</td><td>tcp://127.0.0.1:5555</td><td>string</td><td>消息中间件服务器，支持inproc, ipc, tcp, pgm, epgm</td></tr><tr><td>persist_id</td><td>null</td><td>string</td><td>持久连接ID</td></tr><tr><td>queue</td><td>boa</td><td>string</td><td>发布/订阅的消息队列</td></tr></table></p>							</div>
+			<div class="navigate">
+				<a href="../config/81.html" class="prev">< 命令行配置</a>
+				<a class="menu"></a>
+				<a href="../master/index.html" class="next">总控 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../res/index.js"></script>
+    <title>request类 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">request类</div>
+			<div class="api">
+				<table>
+					<tr>
+						<td width="10%" align="right">版本</td>
+						<td>1.0+</td>
+					</tr>
+					<tr>
+						<td align="right">命名空间</td>
+						<td>boa\validater</td>
+					</tr>
+					<tr>
+						<td align="right">文件</td>
+						<td>boa/validater/request.php</td>
+					</tr>
+					<tr>
+						<td align="right">说明</td>
+						<td>请求检查器</td>
+					</tr>
+				</table>
+
+													
+				<div class="subtitle">目录</div>
+				<table class="index">
+					<tr>
+						<th>方法</th>
+						<th>说明</th>
+					</tr>
+									<tr>
+						<td align="center"><a href="#is_get">is_get()</a></td>
+						<td>判断是否GET请求</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#is_post">is_post()</a></td>
+						<td>判断是否POST请求</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#is_head">is_head()</a></td>
+						<td>判断是否HEAD请求</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#is_options">is_options()</a></td>
+						<td>判断是否OPTIONS请求</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#is_put">is_put()</a></td>
+						<td>判断是否PUT请求</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#is_delete">is_delete()</a></td>
+						<td>判断是否DELETE请求</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#is_cli">is_cli()</a></td>
+						<td>判断是否CLI模式</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#is_cgi">is_cgi()</a></td>
+						<td>判断是否CGI模式</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#is_ssl">is_ssl()</a></td>
+						<td>判断是否HTTPS请求</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#is_ajax">is_ajax()</a></td>
+						<td>判断是否AJAX请求</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#is_pjax">is_pjax()</a></td>
+						<td>判断是否PJAX请求</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#is_mobile">is_mobile()</a></td>
+						<td>判断是否移动端请求</td>
+					</tr>
+								</table>	
+
+				<div class="subtitle">方法</div>
+							<a name="is_get"></a>
+				<table>
+					<caption>
+						<h3>is_get()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">判断是否GET请求</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果是返回true（bool），否则返回false（bool）</td>
+					</tr>
+												</table>
+							<a name="is_post"></a>
+				<table>
+					<caption>
+						<h3>is_post()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">判断是否POST请求</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果是返回true（bool），否则返回false（bool）</td>
+					</tr>
+												</table>
+							<a name="is_head"></a>
+				<table>
+					<caption>
+						<h3>is_head()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">判断是否HEAD请求</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果是返回true（bool），否则返回false（bool）</td>
+					</tr>
+												</table>
+							<a name="is_options"></a>
+				<table>
+					<caption>
+						<h3>is_options()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">判断是否OPTIONS请求</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果是返回true（bool），否则返回false（bool）</td>
+					</tr>
+												</table>
+							<a name="is_put"></a>
+				<table>
+					<caption>
+						<h3>is_put()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">判断是否PUT请求</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果是返回true（bool），否则返回false（bool）</td>
+					</tr>
+												</table>
+							<a name="is_delete"></a>
+				<table>
+					<caption>
+						<h3>is_delete()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">判断是否DELETE请求</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果是返回true（bool），否则返回false（bool）</td>
+					</tr>
+												</table>
+							<a name="is_cli"></a>
+				<table>
+					<caption>
+						<h3>is_cli()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">判断是否CLI模式</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果是返回true（bool），否则返回false（bool）</td>
+					</tr>
+												</table>
+							<a name="is_cgi"></a>
+				<table>
+					<caption>
+						<h3>is_cgi()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">判断是否CGI模式</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果是返回true（bool），否则返回false（bool）</td>
+					</tr>
+												</table>
+							<a name="is_ssl"></a>
+				<table>
+					<caption>
+						<h3>is_ssl()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">判断是否HTTPS请求</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果是返回true（bool），否则返回false（bool）</td>
+					</tr>
+												</table>
+							<a name="is_ajax"></a>
+				<table>
+					<caption>
+						<h3>is_ajax()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">判断是否AJAX请求</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$param</td>
+						<td></td>
+						<td>_ajax</td>
+						<td>string</td>
+						<td>ajax请求手动标示字段，如前端请求指定该字段，则表示是ajax请求</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果手动指定param值字段或包含HTTP_X_REQUESTED_WITH请求头返回true（bool），否则返回false（bool）</td>
+					</tr>
+												</table>
+							<a name="is_pjax"></a>
+				<table>
+					<caption>
+						<h3>is_pjax()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">判断是否PJAX请求</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$param</td>
+						<td></td>
+						<td>_pjax</td>
+						<td>string</td>
+						<td>pjax请求手动标示字段，如前端请求指定该字段，则表示是pjax请求</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果手动指定param值字段或包含HTTP_X_PJAX请求头返回true（bool），否则返回false（bool）</td>
+					</tr>
+												</table>
+							<a name="is_mobile"></a>
+				<table>
+					<caption>
+						<h3>is_mobile()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">判断是否移动端请求</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果是返回true（bool），否则返回false（bool）</td>
+					</tr>
+												</table>
+						</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

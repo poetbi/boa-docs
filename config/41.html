@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>缓存配置 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">缓存配置</div>
+			<div class="content">
+				<p class="subtitle">config.php</p>
+<pre><code class="language-php">'CACHE' => [
+	//配置项
+],
+</code></pre>
+<p class="subtitle"><a href="../api/boa.cache.html">缓存配置</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>driver</td><td>file</td><td>string</td><td>缓存驱动，可选值：apcu, file, memcache, memcached, redis, wincache, xcache</td></tr></table></p>
+<p class="subtitle"><a href="../api/boa.cache.driver.apcu.html">apcu驱动</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>expire</td><td>0</td><td>int</td><td>缓存时长（秒）；过期下次请求生效；0=不限</td></tr><tr><td>prefix</td><td></td><td>string</td><td>缓存前缀</td></tr></table></p>
+<p class="subtitle"><a href="../api/boa.cache.driver.file.html">file驱动</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>path</td><td>BS_VAR .'cache/'</td><td>string</td><td>缓存路径</td></tr><tr><td>expire</td><td>0</td><td>int</td><td>缓存时长（秒）；0=不限</td></tr><tr><td>prefix</td><td></td><td>string</td><td>缓存前缀</td></tr></table></p>
+<p class="subtitle"><a href="../api/boa.cache.driver.memcache.html">memcache驱动</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>compress</td><td>false</td><td>bool</td><td>是否开启压缩</td></tr><tr><td>expire</td><td>0</td><td>int</td><td>缓存时长（秒）；0=不限，最大 2592000</td></tr><tr><td>prefix</td><td></td><td>string</td><td>缓存前缀</td></tr><tr><td>server</td><td>['127.0.0.1', 11211, true, 1, 1]</td><td>array</td><td>服务器池，支持多组服务器（二维数组），5个元素分别表示：<ul><li>0：主机，必须；socket方式如 /path/memcache.sock</li><li>1：端口，可选；默认 11211，为0时使用socket方式连接</li><li>2：持久连接，可选；默认 false</li><li>3：服务器权重，可选；默认 1</li><li>4：连接超时（秒），可选；默认 1</li></ul></td></tr></table></p>
+<p class="subtitle"><a href="../api/boa.cache.driver.memcached.html">memcached驱动</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>compress</td><td>false</td><td>bool</td><td>是否开启压缩</td></tr><tr><td>expire</td><td>0</td><td>int</td><td>缓存时长（秒）；0=不限，最大 2592000</td></tr><tr><td>prefix</td><td></td><td>string</td><td>缓存前缀</td></tr><tr><td>persist</td><td>persist_id</td><td>string</td><td>持久化连接ID，所有相同ID的实例共享同一连接</td></tr><tr><td>timeout</td><td>0</td><td>int</td><td>连接超时（秒），0=默认</td></tr><tr><td>user</td><td></td><td>string</td><td>连接认证用户</td></tr><tr><td>pass</td><td></td><td>string</td><td>连接认证密码</td></tr><tr><td>server</td><td>['127.0.0.1', 11211, 1]</td><td>array</td><td>服务器池，支持多组服务器（二维数组），3个元素分别表示：<ul><li>0：主机，必须；socket方式如 /path/memcached.sock</li><li>1：端口，可选；默认 11211，为0时使用socket方式连接</li><li>2：服务器权重，可选；默认 1</li></ul></td></tr><tr><td>option</td><td>[]</td><td>array</td><td>选项</td></tr></table></p>
+<p class="subtitle"><a href="../api/boa.cache.driver.redis.html">redis驱动</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>server</td><td>['127.0.0.1', 6379, 0]</td><td>array</td><td>服务器，4个元素分别表示：<ul><li>0：主机，必须；支持tls://协议，socket方式如 /path/redis.sock</li><li>1：端口，可选；默认 6379，为0时使用socket方式连接</li><li>2：数据库索引，可选；默认 0</li><li>3：连接认证，可选；格式：<b>口令</b>（string）或 <b>[用户,口令]</b>（array）</li></ul></td></tr><tr><td>expire</td><td>0</td><td>int</td><td>缓存时长（秒），0=不限</td></tr><tr><td>prefix</td><td></td><td>string</td><td>缓存前缀</td></tr><tr><td>persist</td><td>true</td><td>bool</td><td>是否持久连接</td></tr><tr><td>timeout</td><td>0</td><td>int</td><td>连接超时（秒），0=默认</td></tr><tr><td>option</td><td>[]</td><td>array</td><td>附加选项</td></tr></table></p>
+<p class="subtitle"><a href="../api/boa.cache.driver.wincache.html">wincache驱动</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>expire</td><td>0</td><td>int</td><td>缓存时长（秒）；0=不限</td></tr><tr><td>prefix</td><td></td><td>string</td><td>缓存前缀</td></tr></table></p>
+<p class="subtitle"><a href="../api/boa.cache.driver.xcache.html">xcache驱动</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>expire</td><td>0</td><td>int</td><td>缓存时长（秒）；过期下次请求生效；0=不限</td></tr><tr><td>prefix</td><td></td><td>string</td><td>缓存前缀</td></tr></table></p>
+<p class="subtitle">注意</p>
+<p>不支持cfg()动态配置。</p>							</div>
+			<div class="navigate">
+				<a href="../config/39.html" class="prev">< 视图配置</a>
+				<a class="menu"></a>
+				<a href="../config/47.html" class="next">安全配置 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

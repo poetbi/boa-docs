@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../res/index.js"></script>
+    <title>installer类 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">installer类</div>
+			<div class="api">
+				<table>
+					<tr>
+						<td width="10%" align="right">版本</td>
+						<td>1.0+</td>
+					</tr>
+					<tr>
+						<td align="right">命名空间</td>
+						<td>boa</td>
+					</tr>
+					<tr>
+						<td align="right">文件</td>
+						<td>boa/installer.php</td>
+					</tr>
+					<tr>
+						<td align="right">说明</td>
+						<td>安装器类</td>
+					</tr>
+				</table>
+
+													
+				<div class="subtitle">目录</div>
+				<table class="index">
+					<tr>
+						<th>方法</th>
+						<th>说明</th>
+					</tr>
+									<tr>
+						<td align="center"><a href="#initlize">initlize()</a></td>
+						<td>初始构建、初始一个新模块或初始一个新实例</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#install">install()</a></td>
+						<td>安装模块，具体执行模块中安装器安装</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#uninstall">uninstall()</a></td>
+						<td>卸载模块，具体执行模块中安装器卸载</td>
+					</tr>
+								</table>	
+
+				<div class="subtitle">方法</div>
+							<a name="initlize"></a>
+				<table>
+					<caption>
+						<h3>initlize()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">初始构建、初始一个新模块或初始一个新实例</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$www</td>
+						<td></td>
+						<td>www</td>
+						<td>string</td>
+						<td>初始一个实例（同时创建对应的临时目录）</td>
+					</tr>
+									<tr class="param">
+						<td>$mod</td>
+						<td></td>
+						<td>home</td>
+						<td>string</td>
+						<td>初始一个模块</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">命令行中执行：
+php boa -b //初始化构建
+php boa -m test //创建test模块
+php boa -w boasoft.top //创建boasoft.top实例</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="install"></a>
+				<table>
+					<caption>
+						<h3>install()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">安装模块，具体执行模块中安装器安装</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$mod</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>模块名</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">命令行中执行：
+php boa -i demo // 安装demo模块</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="uninstall"></a>
+				<table>
+					<caption>
+						<h3>uninstall()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">卸载模块，具体执行模块中安装器卸载</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$mod</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>模块名</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">命令行中执行：
+php boa -u demo // 卸载demo模块</code></pre>
+						</td>
+					</tr>
+								</table>
+						</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

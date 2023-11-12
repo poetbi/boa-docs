@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>压缩解压 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">压缩解压</div>
+			<div class="content">
+				<p class="subtitle">字符串</p>
+<pre><code class="language language-php">
+	$obj = boa::archive();
+	$type = 'bzip2'; // 支持 raw, zlib, deflate, lzf, bzip2 等格式
+	$res = $obj->encode('boaPHP就这么简单', $type); // 压缩
+	$res = $obj->decode($res, $type); // 解压
+</code></pre>
+
+<p class="subtitle">zip格式</p>
+<pre><code class="language language-php">
+	$obj = boa::archive();
+	$obj->cfg('password', '888888');
+	$res = $obj->compress('D:/test/', 'D:/test.zip'); // 压缩
+	$res = $obj->decompress('D:/test.zip', 'D:/test/'); // 解压
+</code></pre>
+<p>还可以通过phar驱动来操作zip格式</p>
+<pre><code class="language language-php">
+	$obj = boa::archive(['driver' => 'phar']);
+	$obj->cfg('type', 'zip');
+	$res = $obj->compress('D:/test/', 'D:/test.zip'); // 压缩
+	$res = $obj->decompress('D:/test.zip', 'D:/test/'); // 解压
+</code></pre>
+
+<p class="subtitle">phar格式</p>
+<p>phar驱动可以操作zip、 phar、 gzip、 bzip2等多种格式，需配置（下同）：'ARCHIVE' => ['driver' => 'phar']</p>
+<pre><code class="language language-php">
+	$obj = boa::archive();
+	$obj->cfg('type', 'phar');
+	$res = $obj->compress('D:/test/', 'D:/test.phar'); // 压缩
+	$res = $obj->decompress('D:/test.phar', 'D:/test/'); // 解压
+</code></pre>
+<p>注意：php.ini 中 phar.readonly 要关闭（Off）</p>
+
+<p class="subtitle">gzip格式</p>
+<pre><code class="language language-php">
+	$obj = boa::archive();
+	$obj->cfg('type', 'gzip');
+	$res = $obj->compress('D:/test/', 'D:/test.tar.gz'); // 压缩
+	$res = $obj->decompress('D:/test.tar.gz', 'D:/test/'); // 解压
+</code></pre>
+
+<p class="subtitle">bzip2格式</p>
+<pre><code class="language language-php">
+	$obj = boa::archive();
+	$obj->cfg('type', 'bzip2');
+	$res = $obj->compress('D:/test/', 'D:/test.tar.bz2'); // 压缩
+	$res = $obj->decompress('D:/test.tar.bz2', 'D:/test/'); // 解压
+</code></pre>							</div>
+			<div class="navigate">
+				<a href="../document/65.html" class="prev">< XML配置</a>
+				<a class="menu"></a>
+				<a href="../document/92.html" class="next">图像处理 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

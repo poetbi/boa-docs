@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>用户会话 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">用户会话</div>
+			<div class="content">
+				<p>Cookie数据存储在浏览器端，Session数据存储在服务器端，Cookie在浏览器和服务器的请求与响应之间传输，通过携带的会话ID（PHPSESSID）与Session关联，这就叫用户会话。分别使用 <a href="../api/boa.cookie.html">cookie类</a> 和 <a href="../api/boa.session.html">session类</a></p>
+<p class="subtitle">Cookie</p>
+<pre><code class="language-php">
+	$cookie = boa::cookie();
+	$cookie->cfg('lifetime', 86400); // 设置全体cookie默认有效期：1天
+	$cookie->set('uid', 123, 3600, true); // 设置uid=123，有效期3600秒，加密存储
+	$uid = $cookie->get('uid'); // 获取uid
+	
+	$cookie->del('uid'); // 删除uid
+</code></pre>
+<p>在模板中使用：</p>
+<pre><code class="language-php">	{$_COOKIE.uid}</code></pre>
+
+
+<p class="subtitle">Session</p>
+<pre><code class="language-php">
+	$session = boa::session();
+
+	$session->set('name', 'boaPHP'); // 设置name
+	$name = $session->get('name'); // 获取name
+
+	$session->set('user.group.name', 'admin'); // 支持数组，节点式写法
+	$group = $session->get('user.group'); // 得到数组
+	
+	$session->del('user.group'); // 删除session
+</code></pre>
+<p>在模板中使用：</p>
+<pre><code class="language-php">	{$_SESSION.user.group.id}</code></pre>
+							</div>
+			<div class="navigate">
+				<a href="../session/45.html" class="prev">< SESSION配置</a>
+				<a class="menu"></a>
+				<a href="../security/index.html" class="next">安全 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

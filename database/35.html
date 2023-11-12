@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>数据模型 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">数据模型</div>
+			<div class="content">
+				<p>模型是一些常用的数据库表直接操作的封装类，为业务供给数据，便于维护和复用</p>
+<p class="subtitle">定义</p>
+<p>自定义模型位于每个模块下model目录中，例如：mod/home/model/test.php。不必一定要继承boa目录中的model文件，系统model文件往往起到一种演示作用
+<pre><code class="language-php">
+namespace mod\home\model;
+
+use boa\model;
+
+class test extends model{
+	public function __construct(){
+		parent::__construct(['table' => 'test']);
+	}
+	
+	public function my_method($key, $num){
+		$arr = $this->db->query('SELECT * FROM ...');
+		foreach($arr as $k => $v){
+			......
+		}
+		return $arr;
+	}
+}
+
+</code></pre></p>
+<p class="subtitle">使用</p>
+<ul>
+	<li>PHP中：<pre><code class="language-php">
+$arr = boa::model('home.test')->my_method('hello world', 10);
+</code></pre></li>
+	<li>模板中：<pre><code class="language-php">
+{$arr home.test.my_method 'hello world' 10} // 然后用list标签循环$arr
+</code></pre></li>
+</ul>							</div>
+			<div class="navigate">
+				<a href="../database/34.html" class="prev">< 查询分页</a>
+				<a class="menu"></a>
+				<a href="../view/index.html" class="next">视图 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

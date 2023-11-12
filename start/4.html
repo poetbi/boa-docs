@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>配置结构 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">配置结构</div>
+			<div class="content">
+				<pre><code class="language-ini">
+配置
+  ├─系统表
+  │    ├─默认配置
+  │    ├─静态配置
+  │    │    ├─全局配置
+  │    │    └─模块配置
+  │    │
+  │    └─动态配置
+  │
+  ├─路由表
+  └─权限表
+</code></pre>
+<p class="tip tip-help">可以使用程序生成和管理配置</p>
+<p class="subtitle">默认配置</p>
+<p>固定在程序中的初始配置（类中私有属性 <i>$cfg = []</i>），可以被用户配置覆盖</p>
+<p class="subtitle">静态配置</p>
+<p>用户在config.php中的配置，覆盖默认配置，类初始化时使用
+	<ul>
+		<li>全局配置：位于实例cfg目录下的config.php（如：<i>/www/cfg/config.php</i>）</li>
+		<li>模块配置：位于各模块下的config.php（如：<i>/mod/home/config.php</i>），定义在模块命名空间下</li>
+	</ul>
+</p>
+<p class="tip tip-help">在模块中，模块配置覆盖全局配置</p>
+<p class="subtitle">动态配置</p>
+<p>带参数初始化或者使用 <b>cfg()</b> 配置，覆盖静态配置</p>
+<pre><code class="language language-php">
+	/* 带参数初始化，boa命名空间下的类都可以这么访问，都可以传参（只要支持静态配置） */
+	$cookie = boa::cookie(['expire' => 999]);
+
+	/* 或者初始化后使用cfg()，不是所有类都支持 */
+	$http = boa::http();
+	$http->cfg('header', [...]);
+	$http->cfg('header.Referer', '...'); // 支持二维数组（节点式写法）
+	echo $http->cfg('header.Referer');
+</code></pre>
+<p class="tip tip-help">关于配置项参见相关 <a href="../config/index.html">配置表</a></p>
+<p class="subtitle">优先级</p>
+<p>动态配置 &gt; 静态配置（模块配置 &gt; 全局配置） &gt; 默认配置</p>
+<p class="subtitle">配置访问</p>
+<p>config.php里的数组按键名依次定义为常量，名称大写
+<ul>
+	<li>PHP中：boa::const('NAME') 或 NAME（模块配置使用：\模块\NAME）</li>
+	<li>模板中：{NAME}</li>
+</ul>
+</p>
+							</div>
+			<div class="navigate">
+				<a href="../start/3.html" class="prev">< 逻辑结构</a>
+				<a class="menu"></a>
+				<a href="../start/5.html" class="next">开发调试 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

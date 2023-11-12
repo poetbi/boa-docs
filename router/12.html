@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>生成URL - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">生成URL</div>
+			<div class="content">
+				<p>生成URL的方法如下：</p>
+	<pre><code class="language-php">
+$param = [
+	'name' => 'test',
+	'id' => 1, // 可为空字符''，但不要为null
+	'more' => '' // 路由规则中没有的参数
+];
+$url = boa::router()->url('home.content.show', $param);
+	</code></pre>
+<p class="tip tip-help">url()参数含义及用法参见：<a href="../api/boa.router.html">router类url方法</a></p>
+
+<p class="subtitle">匹配路由</p>
+<p>如果开启路由功能，将优先检索路由表，注意$param数组中的参数要和路由规则中定义的参数一致，才被匹配，多余的参数也会被附加在生成的URL上。假设匹配以下路由规则：
+	<pre><code class="language-php">
+[
+	'url' => '/content/{name}/5-{id}/',
+	'act' => 'home.content.show'
+]
+	</code></pre>
+	将得到$url为：/content/test/5-1/?more=
+</p>
+
+<p class="subtitle">未获匹配</p>
+<p>如果关闭路由功能或路由未获匹配，将依据type（URL类型）生成URL：
+<ul>
+	<li>type=0：得到 /index.php?m=home&c=content&a=show&name=test&id=1&more=</li>
+	<li>type=1：得到 /index.php/home/content/show/name-test/id-1/more-/</li>
+	<li>type=2：得到 /home/content/show/name-test/id-1/more-/</li>
+</ul>
+</p>
+
+<p class="subtitle">额外参数</p>
+<p>对于路由规则中额外的参数，将以QUERY_STRING的方式附加在匹配到的url后面，比如：
+	<pre><code class="language-php">
+$param = [
+	'name' => 'test',
+	'id' => 1,
+	'more' => 'a',
+	'other' => 2
+];
+$url = boa::router()->url('home.content.show', $param);
+	</code></pre>
+匹配后得到 /content/test/5-1/?more=a&other=2，未获匹配时URL生成规则如前所述</p>							</div>
+			<div class="navigate">
+				<a href="../router/11.html" class="prev">< 未获匹配</a>
+				<a class="menu"></a>
+				<a href="../router/85.html" class="next">重写规则 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

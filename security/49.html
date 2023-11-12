@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>加密解密 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">加密解密</div>
+			<div class="content">
+				<p class="tip tip-help">详情参见 <a href="../api/boa.crypt.html">crypt类</a></p>
+<p class="subtitle">对称加密</p>
+<p>加密和解密采用相同方式，主要是openssl_get_cipher_methods()函数支持的方式，比如 aes等</p>
+<p>加密方法：enc()；解密方法：dec()</p>
+<pre><code class="language language-php">
+	$crypt = boa::crypt();
+	$crypt->cfg('iv', '12345');
+	$str = $crypt->enc('boaPHP is so easy');
+	$str = $crypt->dec($str); // boaPHP is so easy
+</code></pre>
+		
+	
+<p class="subtitle">非对称加密</p>
+<p>加密和解密采用互斥方式，比如 rsa，公钥加密则用对应的私钥解密，反之亦然</p>
+<p>公钥加密：public_enc()；私钥解密：private_dec()</p>
+<p>私钥加密：private_enc()；公钥解密：public_dec()</p>
+<pre><code class="language language-php">
+	$crypt = boa::crypt();
+	$str = $crypt->public_enc('boaPHP is so easy');
+	$str = $crypt->private_dec($str); // boaPHP is so easy
+
+	$str = $crypt->private_enc('boaPHP就这么简单');
+	$str = $crypt->public_dec($str); // boaPHP就这么简单
+</code></pre>
+
+<p class="subtitle">签名验签</p>
+<p>为了保护数据的完整性，有时需要对数据附加签名</p>
+<p>私钥签名：sign()；公钥验签：verify()</p>
+<pre><code class="language language-php">
+	$crypt = boa::crypt();
+	$key = base64_encode($crypt->sign('boaPHP is so easy'));
+	$res = $crypt->verify('boaPHP is so easy', base64_decode($key));
+</code></pre>
+
+<p class="subtitle">证书生成</p>
+<p>下载<a href="https://slproweb.com/products/Win32OpenSSL.html" target="_blank">OpenSSL</a>，进入安装目录中bin目录，在命令行中执行以下命令，将公钥、私钥放到 <i>BS_VAR .'crypt'</i>目录下，如使用带密码的私钥，需要配置 pripass 项</p>
+<pre><code class="language language-bash">
+	= 生成私钥
+	openssl genrsa -out D:/prikey.pem
+	
+	= 生成带密码的私钥
+	openssl genrsa -des3 -out D:/prikey_pass.pem
+	
+	= 生成10年期自签证书
+	openssl req -new -x509 -key D:/prikey.pem -out D:/cacert.pem -days 3650
+	
+	= 从私钥生成公钥
+	openssl rsa -in D:/prikey.pem -inform pem -pubout -out D:/pubkey.pem
+</code></pre>							</div>
+			<div class="navigate">
+				<a href="../security/48.html" class="prev">< 权限验证</a>
+				<a class="menu"></a>
+				<a href="../security/50.html" class="next">安全防御 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

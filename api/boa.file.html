@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../res/index.js"></script>
+    <title>file类 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">file类</div>
+			<div class="api">
+				<table>
+					<tr>
+						<td width="10%" align="right">版本</td>
+						<td>1.0+</td>
+					</tr>
+					<tr>
+						<td align="right">命名空间</td>
+						<td>boa</td>
+					</tr>
+					<tr>
+						<td align="right">文件</td>
+						<td>boa/file.php</td>
+					</tr>
+					<tr>
+						<td align="right">说明</td>
+						<td>文件系统操作类，继承base类，配置：'FILE' => [],</td>
+					</tr>
+				</table>
+
+														<div class="subtitle">配置</div>
+										<table class="config">
+						<tr>
+							<th>配置项</th>
+							<th>默认值</th>
+							<th>类型</th>
+							<th>说明</th>
+						</tr>
+											<tr>
+							<td>mode</td>
+							<td>0755</td>
+							<td>int</td>
+							<td>创建目录时的模式，八进制值</td>
+						</tr>
+											<tr>
+							<td>safe_mode</td>
+							<td>false</td>
+							<td>bool</td>
+							<td>是否开启安全模式</td>
+						</tr>
+											<tr>
+							<td>safe_path</td>
+							<td>BS_WWW</td>
+							<td>string</td>
+							<td>安全模式下仅允许在该目录下操作</td>
+						</tr>
+										</table>
+									
+				<div class="subtitle">目录</div>
+				<table class="index">
+					<tr>
+						<th>方法</th>
+						<th>说明</th>
+					</tr>
+									<tr>
+						<td align="center"><a href="#__construct">__construct()</a></td>
+						<td>初始化</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#read">read()</a></td>
+						<td>读文件</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#write">write()</a></td>
+						<td>写文件</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#chmod">chmod()</a></td>
+						<td>改变目录下文件模式</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#realpath">realpath()</a></td>
+						<td>从相对路径计算绝对路径，如果想同时检测文件是否存在请直接PHP函数realpath()</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#read_dir">read_dir()</a></td>
+						<td>读取目录，受safe_mode影响</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#copy_dir">copy_dir()</a></td>
+						<td>拷贝目录，受safe_mode影响</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#clear_dir">clear_dir()</a></td>
+						<td>清理目录，受safe_mode影响</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#count_dir">count_dir()</a></td>
+						<td>统计目录</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#replace_dir">replace_dir()</a></td>
+						<td>内容查找替换，受safe_mode影响</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#preg_replace_dir">preg_replace_dir()</a></td>
+						<td>使用正则查找替换内容，受safe_mode影响</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#file2url">file2url()</a></td>
+						<td>文件本地路径转网页路径</td>
+					</tr>
+								</table>	
+
+				<div class="subtitle">方法</div>
+							<a name="__construct"></a>
+				<table>
+					<caption>
+						<h3>__construct()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">初始化</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$cfg</td>
+						<td></td>
+						<td>[]</td>
+						<td>array</td>
+						<td>配置数据</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$file = boa::file()</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="read"></a>
+				<table>
+					<caption>
+						<h3>read()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">读文件</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$file</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>文件路径</td>
+					</tr>
+									<tr class="param">
+						<td>$maxlen</td>
+						<td></td>
+						<td>0</td>
+						<td>int</td>
+						<td>最大读取长度，默认读取全部</td>
+					</tr>
+									<tr class="param">
+						<td>$offset</td>
+						<td></td>
+						<td>0</td>
+						<td>int</td>
+						<td>读取位置，默认从头读取</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回内容（string）；失败返回false（bool）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$str = $file-&gt;read(BS_VAR .'debug.txt')</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="write"></a>
+				<table>
+					<caption>
+						<h3>write()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">写文件</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$file</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>文件路径，不存在则自动创建</td>
+					</tr>
+									<tr class="param">
+						<td>$str</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>待写入内容</td>
+					</tr>
+									<tr class="param">
+						<td>$append</td>
+						<td></td>
+						<td>false</td>
+						<td>bool</td>
+						<td>是否追加写入</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回写入字节数（int），失败返回false（bool）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$res = $file-&gt;write(BS_VAR .'debug.txt', $str, true)</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="chmod"></a>
+				<table>
+					<caption>
+						<h3>chmod()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">改变目录下文件模式</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$path</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>目录</td>
+					</tr>
+									<tr class="param">
+						<td>$mode</td>
+						<td></td>
+						<td>0755</td>
+						<td>int</td>
+						<td>文件模式</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回true（bool）；失败返回false（bool）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$res = $file-&gt;chmod(BS_VAR, 0777)</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="realpath"></a>
+				<table>
+					<caption>
+						<h3>realpath()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">从相对路径计算绝对路径，如果想同时检测文件是否存在请直接PHP函数realpath()</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$path</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>相对路径</td>
+					</tr>
+									<tr class="param">
+						<td>$root</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>相对于该路径计算绝对路径，默认为BS_ROOT</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回绝对路径（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$path = $file-&gt;realpath('../../test.txt')</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="read_dir"></a>
+				<table>
+					<caption>
+						<h3>read_dir()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">读取目录，受safe_mode影响</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$path</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>目录路径</td>
+					</tr>
+									<tr class="param">
+						<td>$type</td>
+						<td></td>
+						<td>0</td>
+						<td>int</td>
+						<td>返回类型；1=目录，2=文件，0=全部</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功依据type返回结果（array）；失败返回false（bool）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$arr = $file-&gt;read_dir('D:/soft', 1)</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="copy_dir"></a>
+				<table>
+					<caption>
+						<h3>copy_dir()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">拷贝目录，受safe_mode影响</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$source</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>源路径</td>
+					</tr>
+									<tr class="param">
+						<td>$dest</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>目标路径，不存在则自动创建</td>
+					</tr>
+									<tr class="param">
+						<td>$override</td>
+						<td></td>
+						<td>false</td>
+						<td>bool</td>
+						<td>文件存在时是否覆盖</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回true（bool）；失败返回false（bool）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$res = $file-&gt;copy_dir('D:/github/test', 'D:/test/test')</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="clear_dir"></a>
+				<table>
+					<caption>
+						<h3>clear_dir()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">清理目录，受safe_mode影响</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$path</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>目录</td>
+					</tr>
+									<tr class="param">
+						<td>$deldir</td>
+						<td></td>
+						<td>false</td>
+						<td>bool</td>
+						<td>是否删除当前目录</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回true（bool）；失败返回false（bool）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$res = $file-&gt;clear_dir('D:/test', true)</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="count_dir"></a>
+				<table>
+					<caption>
+						<h3>count_dir()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">统计目录</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$path</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>目录</td>
+					</tr>
+									<tr class="param">
+						<td>$recursive</td>
+						<td></td>
+						<td>false</td>
+						<td>bool</td>
+						<td>是否包括子目录</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回统计信息（array）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$arr = $file-&gt;count_dir('D:/github/test', true); // 得到数组 Array
+(
+    [bytes] =&gt; 10939
+    [files] =&gt; 3
+    [folders] =&gt; 4
+)
+</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="replace_dir"></a>
+				<table>
+					<caption>
+						<h3>replace_dir()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">内容查找替换，受safe_mode影响</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$path</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>查找目录</td>
+					</tr>
+									<tr class="param">
+						<td>$search</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>查找内容</td>
+					</tr>
+									<tr class="param">
+						<td>$repalce</td>
+						<td></td>
+						<td></td>
+						<td>string</td>
+						<td>替换内容</td>
+					</tr>
+									<tr class="param">
+						<td>$exts</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>限定文件后缀，如：php|txt|ini</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回true（bool）；失败返回false（bool）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$res = $file-&gt;replace_dir('D:/github/test', 'title', '', 'txt')</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="preg_replace_dir"></a>
+				<table>
+					<caption>
+						<h3>preg_replace_dir()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">使用正则查找替换内容，受safe_mode影响</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$path</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>查找目录</td>
+					</tr>
+									<tr class="param">
+						<td>$search</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>查找内容，完整的正则表达式，如：/[a-c]+/i</td>
+					</tr>
+									<tr class="param">
+						<td>$repalce</td>
+						<td></td>
+						<td></td>
+						<td>string</td>
+						<td>替换内容</td>
+					</tr>
+									<tr class="param">
+						<td>$filter</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>限定文件，完整的正则表达式，如：/\.txt$/i</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回true（bool）；失败返回false（bool）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$res = $file-&gt;preg_replace_dir('D:/github/test', '/&lt;[a-z\/]+?&gt;/i', '', '/\.txt$/i')</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="file2url"></a>
+				<table>
+					<caption>
+						<h3>file2url()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">文件本地路径转网页路径</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$path</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>文件绝对路径</td>
+					</tr>
+									<tr class="param">
+						<td>$host</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>指定主机地址，默认自动计算</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回转换后的路径（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$path = $file-&gt;file2url(BS_WWW .'test/'); // /www/test/
+
+$path = $file-&gt;file2url(BS_WWW .'test/', 'http://boasoft.top'); // http://boasoft.top/www/test/</code></pre>
+						</td>
+					</tr>
+								</table>
+						</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

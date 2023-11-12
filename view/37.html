@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>模板语法 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">模板语法</div>
+			<div class="content">
+				<p>为简化书写，模板语法设计原则上不使用单引号、双引号、逗号等，元素和元素之间一律使用空格，每个标签使用{和}包括起来，<em>支持标签中多层嵌套标签</em></p>
+<p class="tip tip-alert">如果遇到含有空格的元素，可以使用单引号或双引号包括起来，比如：{date 'Y-m-d h:i:s' {time}}，否则会被当做不同元素；空值也可以使用引号，如：''</p>
+<p class="subtitle">包含标签</p>
+<p>用来包含其他模板文件，语法：<b>{inc 模块.控制器.模板}</b>，模块和控制器可省略，省略则代表当前所处环境
+<pre><code class="language-javascript">
+{inc home.index.head}
+{inc index.head}
+{inc head}
+</code></pre></p>
+<p class="subtitle">常量标签</p>
+<p>输出PHP常量或配置，语法：<b>{常量}</b>，常量必须大写，模块常量和全局常量写法一致，优先使用模块常量
+<pre><code class="language-javascript">
+{CHARSET}
+{DATABASE.user} //数组常量用节点式写法
+</code></pre></p>
+<p class="subtitle">变量标签</p>
+<p>输出变量，语法：<b>{$变量}</b>，必须以$开头。系统环境变量为：<b>$_ENV</b>
+<pre><code class="language-javascript">
+{$test_name}
+{$_GET.title}
+{$_COOKIE.name}
+{$_SESSION.user.id}
+{$_ENV.var.page} //环境变量['var']['page']
+</code></pre></p>
+<p class="subtitle">语言标签</p>
+<p>用于多语言环境，语法：<b>{@语言标签}</b>，必须以@开头，语言标签采用节点式写法，分别表示模块.语言文件.键
+<pre><code class="language-javascript">
+{@boa.error.100}
+{@home.index.title}
+{@home.index.status.0}
+</code></pre></p>
+<p class="subtitle">条件标签</p>
+<p>进行条件判断，语法：<b>{if 条件表达式}...{elseif 条件表达式}...{else}...{/if}</b>，{elseif}和{else}可选，条件表达式支持标签</p>
+<p>支持的逻辑运算符：<ul>
+	<li>逻辑与：&& 或 and</li>
+	<li>逻辑或：|| 或 or</li>
+	<li>优先级：()</li>
+</ul></p>
+<p>支持的比较运算符：<ul>
+	<li>恒等于：===</li>
+	<li>非恒等于：!==</li>
+	<li>不等于：!= 或 neq</li>
+	<li>小于等于：<= 或 le</li>
+	<li>大于等于：>= 或 ge</li>
+	<li>等于：== 或 eq</li>
+	<li>大于：> 或 gt</li>
+	<li>小于：< 或 lt</li>
+</ul></p>
+<pre><code class="language-javascript">
+{if {date Y-m-d} == {$d} or ($a > 1 && $b == 2)}
+	...
+{elseif {date Y-m-d} == {$b} || $c == 3}
+	...
+{else}
+	...
+{/if}
+</code></pre>
+<p class="subtitle">循环标签</p>
+<p>遍历一组数据，语法：<b>{list 数据 键 值}</b>，键可选，数据支持标签
+<pre><code class="language-javascript">
+{$i++}
+{list $arr $k $v}
+	{$i++}：{$k} = {$v} &lt;br&gt;
+{/list}
+</code></pre></p>
+<p class="subtitle">数据标签</p>
+<p>获取模型中的数据，语法：<b>{$结果变量 模块.模型文件.方法 参数1 参数2 ...}</b>，获得的数据赋值给结果变量，方法的参数可选，并支持标签
+<pre><code class="language-javascript">
+{$cat home.category.list}
+{$con home.news.content 1 {$a} world}
+</code></pre>
+可以使用循环标签{list}展示获得的数据</p>
+<p class="subtitle">函数标签</p>
+<p>使用PHP函数，语法：<b>{函数名 参数1 参数2 ...}</b>，参数可选（空值使用引号：''），并支持标签
+<pre><code class="language-javascript">
+{date Y-m-d {time}}
+</code></pre></p>
+							</div>
+			<div class="navigate">
+				<a href="../view/36.html" class="prev">< 视图配置</a>
+				<a class="menu"></a>
+				<a href="../view/38.html" class="next">视图输出 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>路由分组 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">路由分组</div>
+			<div class="content">
+				<p>路由分组便于管理以及提升程序性能，比如以下路由表：</p>
+	<pre><code class="language-php">
+[
+	'url' => '/doc/',
+	'act' => 'doc.index.index'
+],
+
+[
+	'url' => '/doc/{cat}.html',
+	'act' => 'doc.index.doc_show'
+]
+	</code></pre>
+<p>规则url前面有相同部分可以归为一组，本例中只有请求URL路径以/doc/开头，才会进入该组（减少逐个规则检测）进行下一步匹配：</p>
+<p><pre><code class="language-php">
+'/doc/' => [
+	[
+		'url' => '/doc/',
+		'act' => 'doc.index.index'
+	],
+
+	[
+		'url' => '/doc/{cat}.html',
+		'act' => 'doc.index.doc_show'
+	]
+]
+	</code></pre>
+<ul>
+	<li><span class="explain">http://boasoft.top/</span>doc/it.html <span class="explain">匹配组</span></li>
+	<li><span class="explain">http://boasoft.top/</span>it/doc.html <span class="explain">不匹配组</span></li>
+	<li><span class="explain">http://boasoft.top/</span>docs.html <span class="explain">若组名没有/结尾，此例也匹配组</span></li>
+</ul></p>
+
+<p class="tip tip-alert">组名结尾的 / 对匹配结果有影响（目录和文件若同名会混淆，都会匹配），参见上例</p>
+							</div>
+			<div class="navigate">
+				<a href="../router/8.html" class="prev">< 路由定义</a>
+				<a class="menu"></a>
+				<a href="../router/10.html" class="next">后向引用 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

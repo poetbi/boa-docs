@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../res/index.js"></script>
+    <title>boa类 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">boa类</div>
+			<div class="api">
+				<table>
+					<tr>
+						<td width="10%" align="right">版本</td>
+						<td>1.0+</td>
+					</tr>
+					<tr>
+						<td align="right">命名空间</td>
+						<td>boa</td>
+					</tr>
+					<tr>
+						<td align="right">文件</td>
+						<td>boa/boa.php</td>
+					</tr>
+					<tr>
+						<td align="right">说明</td>
+						<td>系统的总控，静态类，程序的启动、初始化、子过程的调度、类的访问等均通过此类，配置：<br>
+'VERSION'  => '',<br>
+'NAME'     => '',<br>
+'CHARSET'  => '',<br>
+'SALT'     => '',<br>
+'DEBUG'    => ,<br>
+'LANGUAGE' => '',</td>
+					</tr>
+				</table>
+
+														<div class="subtitle">配置</div>
+										<table class="config">
+						<tr>
+							<th>配置项</th>
+							<th>默认值</th>
+							<th>类型</th>
+							<th>说明</th>
+						</tr>
+											<tr>
+							<td>VERSION</td>
+							<td>5.5</td>
+							<td>string</td>
+							<td>必须；系统版本</td>
+						</tr>
+											<tr>
+							<td>NAME</td>
+							<td>BoaSoft.Top</td>
+							<td>string</td>
+							<td>必须；系统默认名称</td>
+						</tr>
+											<tr>
+							<td>CHARSET</td>
+							<td>UTF-8</td>
+							<td>string</td>
+							<td>必须；系统字符集</td>
+						</tr>
+											<tr>
+							<td>SALT</td>
+							<td>boa2020</td>
+							<td>string</td>
+							<td>必须；系统各种加密盐度值，建议设置复杂一点</td>
+						</tr>
+											<tr>
+							<td>DEBUG</td>
+							<td>false</td>
+							<td>bool</td>
+							<td>可选；是否开启调试模式</td>
+						</tr>
+											<tr>
+							<td>LANGUAGE</td>
+							<td>zh-cn</td>
+							<td>string</td>
+							<td>可选；默认语言包</td>
+						</tr>
+										</table>
+									
+				<div class="subtitle">目录</div>
+				<table class="index">
+					<tr>
+						<th>方法</th>
+						<th>说明</th>
+					</tr>
+									<tr>
+						<td align="center"><a href="#init">init()</a></td>
+						<td>初始化，完成系统的一些初始设置和配置，完成后触发 \boa\event\listener\init 监听器</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#start">start()</a></td>
+						<td>启动主程序</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#call">call()</a></td>
+						<td>后端调用控制器中的动作（不经路由），达到模拟浏览器请求，完成后触发 \boa\event\listener\action 监听器</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#info">info()</a></td>
+						<td>获取或设置$info变量信息，$info包含了系统的运行时间、内存等信息</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#env">env()</a></td>
+						<td>获取和设置当前环境数据</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#route">route()</a></td>
+						<td>解析当前URL得到环境数据</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#in_env">in_env()</a></td>
+						<td>返回当前环境的上层环境</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#lang">lang()</a></td>
+						<td>解析语言文本</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#model">model()</a></td>
+						<td>访问各模块中的模型</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#const">const()</a></td>
+						<td>获取常量</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#db">db()</a></td>
+						<td>boa::database()别名，参见 __callStatic()</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#lib">lib()</a></td>
+						<td>访问各模块中的类</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#save">save()</a></td>
+						<td>设置页面保存路径，如果设定，页面执行后会将HTML内容保存到该位置</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#getkey">getkey()</a></td>
+						<td>根据常量值获取常量键</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#finish">finish()</a></td>
+						<td>生成静态和写日志等，PHP请求结束会自动调用，使用boa::call()时可以手动调用此方法来模拟每个页面执行结束</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#debug">debug()</a></td>
+						<td>调试变量，输出到临时目录 debug.txt</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#__callStatic">__callStatic()</a></td>
+						<td>魔术方法，容器式调用类</td>
+					</tr>
+								</table>	
+
+				<div class="subtitle">方法</div>
+							<a name="init"></a>
+				<table>
+					<caption>
+						<h3>init()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">初始化，完成系统的一些初始设置和配置，完成后触发 \boa\event\listener\init 监听器</td>
+					</tr>
+																				</table>
+							<a name="start"></a>
+				<table>
+					<caption>
+						<h3>start()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">启动主程序</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$env</td>
+						<td></td>
+						<td>[]</td>
+						<td>array</td>
+						<td>设置启动环境，否则从默认环境启动</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">boa::start();</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="call"></a>
+				<table>
+					<caption>
+						<h3>call()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">后端调用控制器中的动作（不经路由），达到模拟浏览器请求，完成后触发 \boa\event\listener\action 监听器</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$key</td>
+						<td></td>
+						<td></td>
+						<td>string</td>
+						<td>'模块.控制器.动作'（节点式），要调用的动作，省略的节点则代表当前环境</td>
+					</tr>
+									<tr class="param">
+						<td>$var</td>
+						<td></td>
+						<td>[]</td>
+						<td>array</td>
+						<td>设置环境var参数</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果执行的动作有返回值，则返回</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$res = boa::call('news.content.show', ['id' =&gt; $id]);
+
+$res = boa::call('list', ['page' =&gt; 1]);</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="info"></a>
+				<table>
+					<caption>
+						<h3>info()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取或设置$info变量信息，$info包含了系统的运行时间、内存等信息</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$k</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>键</td>
+					</tr>
+									<tr class="param">
+						<td>$v</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>值</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果设定$k和$v：则设置$info中$k项，无返回值；<br>
+如果只设定$k：则返回$info中$k值（string）；<br>
+如果都未设定：则返回整个$info数组（array）；</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$info = boa::info();</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="env"></a>
+				<table>
+					<caption>
+						<h3>env()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取和设置当前环境数据</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$k</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>键，支持二维数组（节点式写法），比如 var.page 表示var参数中page参数</td>
+					</tr>
+									<tr class="param">
+						<td>$v</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>值</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">如果设定$k和$v：则设置当前环境中$k项，无返回值；<br>
+如果只设定$k：则返回当前环境中$k值（string）；<br>
+如果都未设定：则返回整个当前环境数据（array）；</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$mod = boa::env('mod');
+$page= boa::env('var.page');
+$env = boa::env();</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="route"></a>
+				<table>
+					<caption>
+						<h3>route()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">解析当前URL得到环境数据</td>
+					</tr>
+																				</table>
+							<a name="in_env"></a>
+				<table>
+					<caption>
+						<h3>in_env()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">返回当前环境的上层环境</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回上层环境（array）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$env = boa::in_env();</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="lang"></a>
+				<table>
+					<caption>
+						<h3>lang()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">解析语言文本</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$...</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>动态参数；首个参数为语言标签，节点式写法，最少三级，必须；后续参数为该语言文本中的可替换项，可选</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回语言文本（string 或 array）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">boa::lang('home.index.name');   //boasoft
+boa::lang('home.index.type');   //['a'=&gt;'1', 'b'=&gt;'2', 'c'=&gt;'3']
+boa::lang('home.index.type.b'); //2</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="model"></a>
+				<table>
+					<caption>
+						<h3>model()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">访问各模块中的模型</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$key</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>'模块.模型'（节点式写法）</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回模型类（object）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$arr = boa::model('home.category')-&gt;list($id);</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="const"></a>
+				<table>
+					<caption>
+						<h3>const()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取常量</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$key</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>常量名称，优先得到模块中常量</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回常量（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">echo boa::const('NAME');</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="db"></a>
+				<table>
+					<caption>
+						<h3>db()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">boa::database()别名，参见 __callStatic()</td>
+					</tr>
+																				</table>
+							<a name="lib"></a>
+				<table>
+					<caption>
+						<h3>lib()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">访问各模块中的类</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$key</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>'[模块.]类'（节点式写法），省略模块节点则表示当前模块</td>
+					</tr>
+									<tr class="param">
+						<td>$args</td>
+						<td></td>
+						<td>null</td>
+						<td>mixed</td>
+						<td>类的初始化参数</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回类（object）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$cls = boa::lib('user.test'); // 初始化mod/user/library/test.php</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="save"></a>
+				<table>
+					<caption>
+						<h3>save()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置页面保存路径，如果设定，页面执行后会将HTML内容保存到该位置</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$path</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>绝对路径用以保存HTML</td>
+					</tr>
+									<tr class="param">
+						<td>$force</td>
+						<td></td>
+						<td>false</td>
+						<td>bool</td>
+						<td>是否强制覆盖已有HTML文件</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">boa::save(BS_WWW ."news/$id.html", true);</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="getkey"></a>
+				<table>
+					<caption>
+						<h3>getkey()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">根据常量值获取常量键</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$val</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>常量值</td>
+					</tr>
+									<tr class="param">
+						<td>$type</td>
+						<td></td>
+						<td>0</td>
+						<td>int</td>
+						<td>常量类型，可选值：<br>0：PHP全局常量<br>1：类的内部常量</td>
+					</tr>
+									<tr class="param">
+						<td>$class</td>
+						<td></td>
+						<td></td>
+						<td>string</td>
+						<td>组名或类名，<br>type=0时：PHP常量分组名称，留空则全部<br>type=1时：常量所在类的名称</td>
+					</tr>
+									<tr class="param">
+						<td>$prefix</td>
+						<td></td>
+						<td></td>
+						<td>string</td>
+						<td>常量前缀，不同常量会有相同值，为了精确获取</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回常量键名（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$key = boa::getkey($v, 1, 'ZipArchive', 'ER_'); // 获取ZipArchive类内部常量
+
+$key = boa::getkey($v, 0, 'json', 'JSON_ERROR_'); // 获取json常量</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="finish"></a>
+				<table>
+					<caption>
+						<h3>finish()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">生成静态和写日志等，PHP请求结束会自动调用，使用boa::call()时可以手动调用此方法来模拟每个页面执行结束</td>
+					</tr>
+																				</table>
+							<a name="debug"></a>
+				<table>
+					<caption>
+						<h3>debug()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">调试变量，输出到临时目录 debug.txt</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$v</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>要调试的变量，支持字符串、数组、对象等</td>
+					</tr>
+									<tr class="param">
+						<td>$k</td>
+						<td></td>
+						<td>-</td>
+						<td>string</td>
+						<td>变量名称，便于区别</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">boa::debug($v);</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="__callStatic"></a>
+				<table>
+					<caption>
+						<h3>__callStatic()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">魔术方法，容器式调用类</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$name</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>要调用的类名</td>
+					</tr>
+									<tr class="param">
+						<td>$cfg</td>
+						<td></td>
+						<td>[]</td>
+						<td>array</td>
+						<td>动态配置，默认使用config.php中配置</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回类（object）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$db = boa::db() // 得到database类
+
+$http = boa::http($cfg) // 得到http类</code></pre>
+						</td>
+					</tr>
+								</table>
+						</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

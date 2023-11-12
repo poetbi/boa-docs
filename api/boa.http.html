@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../res/index.js"></script>
+    <title>http类 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">http类</div>
+			<div class="api">
+				<table>
+					<tr>
+						<td width="10%" align="right">版本</td>
+						<td>1.0+</td>
+					</tr>
+					<tr>
+						<td align="right">命名空间</td>
+						<td>boa</td>
+					</tr>
+					<tr>
+						<td align="right">文件</td>
+						<td>boa/http.php</td>
+					</tr>
+					<tr>
+						<td align="right">说明</td>
+						<td>HTTP请求类，配置：'HTTP' => [],</td>
+					</tr>
+				</table>
+
+														<div class="subtitle">配置</div>
+										<table class="config">
+						<tr>
+							<th>配置项</th>
+							<th>默认值</th>
+							<th>类型</th>
+							<th>说明</th>
+						</tr>
+											<tr>
+							<td>driver</td>
+							<td>curl</td>
+							<td>string</td>
+							<td>HTTP驱动，可选值：curl, socket</td>
+						</tr>
+										</table>
+									
+				<div class="subtitle">目录</div>
+				<table class="index">
+					<tr>
+						<th>方法</th>
+						<th>说明</th>
+					</tr>
+									<tr>
+						<td align="center"><a href="#__construct">__construct()</a></td>
+						<td>初始化</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#cfg">cfg()</a></td>
+						<td>获取或设置配置信息</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#get_posttype">get_posttype()</a></td>
+						<td>获取POST请求类型</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#get_header">get_header()</a></td>
+						<td>获取响应头</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#get_body">get_body()</a></td>
+						<td>获取响应正文</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#get_status">get_status()</a></td>
+						<td>获取响应状态码</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#get_error">get_error()</a></td>
+						<td>获取响应错误</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#set_cookie">set_cookie()</a></td>
+						<td>设置请求头Cookie</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#head">head()</a></td>
+						<td>仅获取头信息</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#get">get()</a></td>
+						<td>GET请求，产生一条info日志</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#post">post()</a></td>
+						<td>POST请求，产生一条info日志</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#upload">upload()</a></td>
+						<td>POST传输文件，产生一条info日志</td>
+					</tr>
+								</table>	
+
+				<div class="subtitle">方法</div>
+							<a name="__construct"></a>
+				<table>
+					<caption>
+						<h3>__construct()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">初始化</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$cfg</td>
+						<td></td>
+						<td>[]</td>
+						<td>array</td>
+						<td>配置数据</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$http = boa::http();</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="cfg"></a>
+				<table>
+					<caption>
+						<h3>cfg()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取或设置配置信息</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$k</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>键</td>
+					</tr>
+									<tr class="param">
+						<td>$v</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>值</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">同 base 类</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$http-&gt;cfg('posttype', 'json');</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="get_posttype"></a>
+				<table>
+					<caption>
+						<h3>get_posttype()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取POST请求类型</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回请求类型（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$http-&gt;post('http://...', [...]);
+$posttype = $http-&gt;get_posttype();</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="get_header"></a>
+				<table>
+					<caption>
+						<h3>get_header()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取响应头</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回响应头（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$http-&gt;get('http://boasoft.top');
+$header = $http-&gt;get_header();</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="get_body"></a>
+				<table>
+					<caption>
+						<h3>get_body()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取响应正文</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$encode</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>响应正文压缩类型，设置后自动解压，可选值：gzip, deflate</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回响应正文（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$http-&gt;get('http://xxxx.com');
+$body = $http-&gt;get_body();
+$body = $http-&gt;get_body('deflate'); // 对压缩过的页面解压</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="get_status"></a>
+				<table>
+					<caption>
+						<h3>get_status()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取响应状态码</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回响应状态码（int）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$http-&gt;get('http://boasoft.top');
+$status = $http-&gt;get_status();</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="get_error"></a>
+				<table>
+					<caption>
+						<h3>get_error()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取响应错误</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回响应错误（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$http-&gt;get('http://test.abc');
+$error = $http-&gt;get_error();</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="set_cookie"></a>
+				<table>
+					<caption>
+						<h3>set_cookie()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置请求头Cookie</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$cookie</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>cookie字符串或cookie文件地址，cookie内容格式：x=1; y=2</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回$this（object）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$http-&gt;set_cookie('PHPSESSID=4oipi9oep7a0qdvrtha81bges4');
+$http-&gt;set_cookie(BS_VAR .'cookie/a.com.txt'); // 也可以为cookie文件
+$http-&gt;get('http://boasoft.top');</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="head"></a>
+				<table>
+					<caption>
+						<h3>head()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">仅获取头信息</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$url</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>要请求的URL</td>
+					</tr>
+									<tr class="param">
+						<td>$key</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>要请求的头字段</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回头信息（array），如设置key，则返回该字段的头信息（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$head = $http-&gt;head('http://boasoft.top');</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="get"></a>
+				<table>
+					<caption>
+						<h3>get()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">GET请求，产生一条info日志</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$url</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>要请求的URL</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回$this（object）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$http-&gt;get('http://boasoft.top');</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="post"></a>
+				<table>
+					<caption>
+						<h3>post()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">POST请求，产生一条info日志</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$url</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>要请求的URL</td>
+					</tr>
+									<tr class="param">
+						<td>$data</td>
+						<td></td>
+						<td>null</td>
+						<td>mixed</td>
+						<td>请求正文字符串，如json、xml、表单等，如为数组则会依据posttype自动转为相应类型字符串</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回$this（object）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$http-&gt;post('http://boasoft.top/login.php', ['user' =&gt; 'poetbi', 'pass' =&gt; '888888']);</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="upload"></a>
+				<table>
+					<caption>
+						<h3>upload()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">POST传输文件，产生一条info日志</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$url</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>要请求的URL</td>
+					</tr>
+									<tr class="param">
+						<td>$file</td>
+						<td>Y</td>
+						<td></td>
+						<td>mixed</td>
+						<td>单个文件（string）或多个文件（array），数组中每个文件格式：<b>'表单字段' => '文件路径[;文件MIME]'</b>，文件MIME可省略</td>
+					</tr>
+									<tr class="param">
+						<td>$form</td>
+						<td></td>
+						<td>[]</td>
+						<td>array</td>
+						<td>附加表单数据</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回$this（object）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$file = ['avatar' =&gt; BS_WWW .'res/img.png;image/png', 'readme' =&gt; BS_WWW .'/res/file.txt;text/plain'];
+$data = ['name' =&gt; 'test', 'age' =&gt; 18];
+$http-&gt;upload('http://boasoft.top/test.php', $file, $data);</code></pre>
+						</td>
+					</tr>
+								</table>
+						</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

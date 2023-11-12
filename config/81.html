@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>命令行配置 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">命令行配置</div>
+			<div class="content">
+				<p class="subtitle">config.php</p>
+<pre><code class="language-php">'CONSOLE' => [
+     //配置项
+],
+</code></pre>
+<p class="subtitle"><a href="../api/boa.console.html">命令行配置</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>DOCUMENT_ROOT</td><td>BS_WWW</td><td>string</td><td>同$_SERVER['DOCUMENT_ROOT']</td></tr><tr><td>SERVER_PORT</td><td>80</td><td>int</td><td>同$_SERVER['SERVER_PORT']</td></tr><tr><td>SERVER_NAME</td><td>localhost</td><td>string</td><td>同$_SERVER['SERVER_NAME']</td></tr><tr><td>HTTP_HOST</td><td>localhost</td><td>string</td><td>同$_SERVER['HTTP_HOST']</td></tr><tr><td>REMOTE_ADDR</td><td>127.0.0.1</td><td>string</td><td>同$_SERVER['REMOTE_ADDR']</td></tr><tr><td>REMOTE_PORT</td><td>8888</td><td>int</td><td>同$_SERVER['REMOTE_PORT']</td></tr><tr><td>REQUEST_METHOD</td><td>GET</td><td>string</td><td>同$_SERVER['REQUEST_METHOD']</td></tr><tr><td>REQUEST_SCHEME</td><td>http</td><td>string</td><td>同$_SERVER['REQUEST_SCHEME']</td></tr><tr><td>REQUEST_URI</td><td></td><td>string</td><td>同$_SERVER['REQUEST_URI']，默认由程序算出</td></tr><tr><td>QUERY_STRING</td><td></td><td>string</td><td>同$_SERVER['QUERY_STRING']，默认由程序算出</td></tr><tr><td>PATH_INFO</td><td></td><td>string</td><td>同$_SERVER['PATH_INFO']，默认由程序算出</td></tr><tr><td>HTTP_COOKIE</td><td></td><td>string</td><td>同$_SERVER['HTTP_COOKIE']，如：PHPSESSID=xxx</td></tr><tr><td>HTTP_USER_AGENT</td><td>Console boaPHP/5.5</td><td>string</td><td>同$_SERVER['HTTP_USER_AGENT']</td></tr></table></p>
+<p class="subtitle"><a href="../api/boa.console.output.html">命令行输出配置</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>border</td><td>false</td><td>bool</td><td>是否显示表格边框</td></tr><tr><td>border_h</td><td>-</td><td>char</td><td>单元格水平制表符，如：= + *</td></tr><tr><td>border_v</td><td>|</td><td>char</td><td>单元格垂直制表符</td></tr><tr><td>wrap</td><td>&lt;br&gt;</td><td>string</td><td>表格内容断行标志</td></tr></table></p>							</div>
+			<div class="navigate">
+				<a href="../config/78.html" class="prev">< 日志配置</a>
+				<a class="menu"></a>
+				<a href="../config/84.html" class="next">消息队列配置 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

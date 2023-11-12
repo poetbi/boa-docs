@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>消息设置 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">消息设置</div>
+			<div class="content">
+				<p>系统或用户经常会产生一些消息（错误、通知、提示等），该类消息主要由 <a href="../api/boa.msg.html">msg类</a> 产生，然后借助 <a href="../api/boa.view.html">view类</a> 以多种格式输出，所以也可以直接用view类的msg()等方法输出。</p>
+<p class="subtitle">输出格式</p>
+<p>有时因为需要以不同格式输出消息，比如前端在以json格式获取数据，数据输出之前如果产生错误消息，那么也需要以json格式输出（错误码会自动作为Json的code），便于前端判断：</p>
+<ul>
+	<li>1.配置 MSG_TYPE	指定默认输出类型，作用域最广（整个实例），优先级最低（可被动态覆盖）</li>
+	<li>2.在请求URL中添加 _msg 参数（参数名称可由 MSG_TYPE_VAR 配置）来指定，也可以添加在表单的action或隐藏域中</li>
+	<li>3.在程序中用 msg::set_type() 方法来指定，在同一页面中只需设置一次即可</li>
+	<li>4.消息都是借助view类输出，可以直接使用view类中的相应方法，比如：<i>$this->view->json()</i> </li>
+</ul>
+<p class="tip tip-help">优先级从1-4依次增大，后面覆盖前面</p>
+<p class="tip tip-help">输出消息 code 字段为0表示无错，不为0时 msg 字段为具体错误；前端程序务必要先判断json对象是否存在，只要对象存在，其中 code 字段一定为数字。</p>
+
+<p>消息输出格式（type）有以下值：</p>
+<ul><li>xml：以XML格式输出</li><li>json：以JSON格式输出</li><li>str：以HTML片段输出</li><li>msg：使用消息模板输出</li><li>cli：命令行下输出</li><li>jsonp：以JSONP格式输出</li></ul>
+<p class="tip tip-help">输出的消息 msg 字段中出现日志跟踪，关闭 DEBUG 即可：'DEBUG' => false</p>
+<p class="subtitle">自定义模板</p>
+<p>当消息输出格式：type=msg 时，可以使用模板，这也是默认的输出方式。系统（msg类）默认只产生两类消息：info和error，其模板位于 boa/view/msg 目录下，用户也可以在 www/tpl/模块/msg 目录下为其定制模板，系统优先使用用户模板。 除了info和error，如果想添加新的消息类型，比如：notice</p>
+<ul>
+	<li>1.使用语言包，比如在home模块language/zh-cn目录中添加notice.php文件如下，然后使用 <i>msg::set('home.notice.test')</i>，最后定制 notice 模板
+<pre><code class="language language-php">
+	return [
+		'test' => '...',
+		...
+	];
+</code></pre></li>
+	<li>2.直接使用：<i>$this->view->msg($msg, 'notice', $data)</i>，然后定制 notice 模板</li>
+</ul>
+<p class="subtitle">控制消息输出</p>
+<p>msg类设置的消息会立即输出，并会终止后续程序的执行，有时我们需要手动控制消息输出</p>
+<pre><code class="language-php">
+	msg::begin(); // 关闭消息自动输出
+	echo '......';
+	msg::set('boa.error.1', '错误1');
+	echo '......';
+	msg::set('boa.error.2', '错误2');
+	echo '......';
+	msg::commit(); // 手动确认输出，上面echo的内容并不会输出
+</code></pre>							</div>
+			<div class="navigate">
+				<a href="../message/75.html" class="prev">< 消息配置</a>
+				<a class="menu"></a>
+				<a href="../log/index.html" class="next">日志 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

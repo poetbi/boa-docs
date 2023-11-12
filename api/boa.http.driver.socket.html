@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../res/index.js"></script>
+    <title>socket类 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">socket类</div>
+			<div class="api">
+				<table>
+					<tr>
+						<td width="10%" align="right">版本</td>
+						<td>1.0+</td>
+					</tr>
+					<tr>
+						<td align="right">命名空间</td>
+						<td>boa\http\driver</td>
+					</tr>
+					<tr>
+						<td align="right">文件</td>
+						<td>boa/http/driver/socket.php</td>
+					</tr>
+					<tr>
+						<td align="right">说明</td>
+						<td>socket请求驱动类，继承driver类</td>
+					</tr>
+				</table>
+
+														<div class="subtitle">配置</div>
+										<table class="config">
+						<tr>
+							<th>配置项</th>
+							<th>默认值</th>
+							<th>类型</th>
+							<th>说明</th>
+						</tr>
+											<tr>
+							<td>ssl</td>
+							<td>0</td>
+							<td>int</td>
+							<td>SSL连接；0=关闭，1=开启； 证书可在php.ini中配置<br>openssl_get_cert_locations()检索可用证书位置</td>
+						</tr>
+											<tr>
+							<td>proxy</td>
+							<td></td>
+							<td>string</td>
+							<td>HTTP代理，格式：<b>IP:端口</b></td>
+						</tr>
+											<tr>
+							<td>posttype</td>
+							<td>form</td>
+							<td>string</td>
+							<td>POST请求类型，可选值：form, json, xml</td>
+						</tr>
+											<tr>
+							<td>mimetype</td>
+							<td>application/x-www-form-urlencoded</td>
+							<td>string</td>
+							<td>POST请求头Content-type，无需手动设置</td>
+						</tr>
+											<tr>
+							<td>timeout_connect</td>
+							<td>15</td>
+							<td>int</td>
+							<td>请求连接超时（秒）</td>
+						</tr>
+											<tr>
+							<td>timeout_execute</td>
+							<td>0</td>
+							<td>int</td>
+							<td>请求执行超时（秒），0=默认</td>
+						</tr>
+											<tr>
+							<td>header</td>
+							<td>[]</td>
+							<td>array</td>
+							<td>附加请求头</td>
+						</tr>
+										</table>
+									
+				<div class="subtitle">目录</div>
+				<table class="index">
+					<tr>
+						<th>方法</th>
+						<th>说明</th>
+					</tr>
+									<tr>
+						<td align="center"><a href="#__construct">__construct()</a></td>
+						<td>初始化</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#set_cookie">set_cookie()</a></td>
+						<td>设置请求头Cookie</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#get">get()</a></td>
+						<td>GET请求</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#post">post()</a></td>
+						<td>POST请求</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#upload">upload()</a></td>
+						<td>POST传输文件</td>
+					</tr>
+								</table>	
+
+				<div class="subtitle">方法</div>
+							<a name="__construct"></a>
+				<table>
+					<caption>
+						<h3>__construct()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">初始化</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$cfg</td>
+						<td></td>
+						<td>[]</td>
+						<td>array</td>
+						<td>配置数据</td>
+					</tr>
+																				</table>
+							<a name="set_cookie"></a>
+				<table>
+					<caption>
+						<h3>set_cookie()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置请求头Cookie</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$cookie</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>cookie字符串</td>
+					</tr>
+																				</table>
+							<a name="get"></a>
+				<table>
+					<caption>
+						<h3>get()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">GET请求</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$url</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>要请求的URL</td>
+					</tr>
+																				</table>
+							<a name="post"></a>
+				<table>
+					<caption>
+						<h3>post()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">POST请求</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$url</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>要请求的URL</td>
+					</tr>
+									<tr class="param">
+						<td>$data</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>请求正文</td>
+					</tr>
+																				</table>
+							<a name="upload"></a>
+				<table>
+					<caption>
+						<h3>upload()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">POST传输文件</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$url</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>要请求的URL</td>
+					</tr>
+									<tr class="param">
+						<td>$file</td>
+						<td>Y</td>
+						<td></td>
+						<td>array</td>
+						<td>上传文件</td>
+					</tr>
+									<tr class="param">
+						<td>$form</td>
+						<td>Y</td>
+						<td></td>
+						<td>array</td>
+						<td>附加数据</td>
+					</tr>
+																				</table>
+						</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>空控制器 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">空控制器</div>
+			<div class="content">
+				<p>空控制器是指当指定控制器不存在的时候，系统会尝试访问该模块下的空控制器类（_empty.php）。例如，home模块下一个空控制器：
+	<pre><code class="language-php">
+namespace mod\home\controller;
+
+class _empty{
+	public function __call($method, $args){
+		//do something
+	}
+}
+	</code></pre>
+</p>							</div>
+			<div class="navigate">
+				<a href="../controller/19.html" class="prev">< 控制器定义</a>
+				<a class="menu"></a>
+				<a href="../validater/index.html" class="next">验证 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

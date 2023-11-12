@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>变量验证 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">变量验证</div>
+			<div class="content">
+				<p>当你访问一个请求变量时，系统会自动按动作名加载验证配置文件（一个动作对应一个配置文件），以变量名为键名检索对应验证规则，按条件的定义顺序依次执行，可根据需要设置检查和过滤的先后顺序</p>
+<p class="subtitle">配置文件</p>
+<p>配置文件命名规则：<b>模块/variable/控制器/动作.php</b> ，一个完整的配置文件示例（<a href="http://boasoft.top/tool.php?type=validate" target="_blank">验证规则测试工具</a>）：
+	<pre><code class="language-php">
+return [
+	'user' =&gt; [ // 前端表单字段名称
+		'label' =&gt; '用户名', // 出错时会输出给前端
+		'check' =&gt; 'required&is_name', // &表示需同时满足2项检查（检查器中的方法）
+		'filter' =&gt; 'htmlspecialchars' // 通过以上各项检查后，再用PHP内置函数过滤
+	],
+
+	'pass' =&gt; [
+		'label' =&gt; '密码',
+		'chars' =&gt; '&gt;=6 & &lt;=16', // 密码字符数需要在6-16之间
+		'equal' =&gt; 'repass' // 密码内容要和 repass 字段的内容相同
+	],
+
+	'age' =&gt; [
+		'label' =&gt; 'home.user.age', // 也可以使用语言标签
+		'filter' =&gt; 'intval', // 过滤成整数
+		'value' =&gt; '&gt;=18' // 年龄字段的值要大于等于18
+	],
+
+	'skill' =&gt; [
+		'label' =&gt; '技能',
+		'items' =&gt; '&gt;2&&lt;6' // 技能项选择要2-6个之间
+	],
+	
+	'content' => [
+		'label' =&gt; '内容',
+		'check' =&gt; 'required',
+		'filter' =&gt; 'xss' // 进行XSS过滤
+	]
+]
+	</code></pre>
+</p>
+<p class="subtitle">验证规则复用</p>
+<p>多个动作验证规则中如果大量重复的部分，不想每次重复定义，可以在配置文件中用如下方式进行复用：</p>
+<pre><code class="language language-php">
+&lt;?php
+	$common = include('../common.php'); // 将重复部分定义在公用验证规则里
+	$arr = [
+		'name' => ['...']
+	]; // 当前验证规则，去除公共重复的部分
+	$arr = array_merge($common, $arr); // 合并验证规则
+	return $arr; // 返回规则数组
+?&gt;
+</code></pre>
+
+<p class="subtitle">逻辑运算符</p>
+<ul>
+	<li>|：条件或（OR）</li>
+	<li>&：条件与（AND）</li>
+</ul>
+<p>比如：a&b|c&d|e 等于：(a AND b) OR (c AND d) OR e</p>
+<p class="subtitle">算术运算符</p>
+<ul>
+	<li>&gt;：大于</li>
+	<li>&lt;：小于</li>
+	<li>&gt;=：大于等于</li>
+	<li>&lt;=：小于等于</li>
+	<li>=：等于</li>
+	<li>!=：不等于</li>
+	<li>&lt;&gt;：不等于</li>
+</ul>
+<p class="subtitle">label</p>
+<p>标签名，支持语言标签（如：a.b.c），会出现输出结果中</p>
+<p class="subtitle">chars</p>
+<p>字符数，支持|和&，验证字符长度，对于数组则逐项验证</p>
+<p class="subtitle">value</p>
+<p>数值，支持|和&，验证值大小，对于数组则逐项验证</p>
+<p class="subtitle">items</p>
+<p>选择项，支持|和&，验证多选项选中数目</p>
+<p class="subtitle">equal</p>
+<p>值等于，验证值是否等于指定字段值，多用于密码重复验证</p>
+<p class="subtitle">check</p>
+<p>检查器，支持&，用<b>检查器中方法</b>检查变量，对于数组则逐项验证</p>
+<p>默认检查器位置：<b>boa/validater/checker.php</b>，您也可以创建一个继承默认检查器的自定义检查器，比如：<b>mod/home/validater/checker.php</b>，系统优先使用自定义检查器（同时具有默认检查器所有功能）</p>
+<p class="tip tip-help">默认检查器参见：<a href="../api/boa.validater.checker.html">checker类</a></p>
+<p class="subtitle">filter</p>
+<p>过滤器，支持&，用<b>过滤器中方法</b>或<b>PHP内置函数</b>过滤变量（函数和方法同名情况下，优先使用过滤器方法），对于数组则逐项过滤，返回处理后的结果</p>
+<p>默认过滤器位置：<b>boa/validater/filter.php</b>，您也可以创建一个继承默认过滤器的自定义过滤器，比如：<b>mod/home/validater/filter.php</b>，系统优先使用自定义过滤器（同时具有默认过滤器所有功能）</p>
+<p>如果未定义过滤器，则使用系统过滤器：FILTER；如果定义过滤器为空值，也会覆盖FILTER的定义；若FILTER也未定义，则不执行过滤</p>
+<p>如果过滤器定义在其他规则前，则会先过滤，再对过滤结果执行验证，反之亦然</p>
+<p class="tip tip-help">默认过滤器参见：<a href="../api/boa.validater.filter.html">filter类</a></p>
+							</div>
+			<div class="navigate">
+				<a href="../security/50.html" class="prev">< 安全防御</a>
+				<a class="menu"></a>
+				<a href="../network/index.html" class="next">网络 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>权限验证 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">权限验证</div>
+			<div class="content">
+				<p>权限验证使用 <a href="../api/boa.permission.html">permission类</a>，需配置权限表，位于实例cfg目录下（如：<i>/www/cfg/perm.php</i>），支持按组定义多个权限表，每个表支持allow（允许）和deny（拒绝）两项
+<ul>
+  <li>perm.php：默认权限表</li>
+  <li>perm-*.php：组权限表，*为组标识</li>
+</ul>
+<p class="tip tip-help">实际中可以使用数据库来管理权限，使用程序来生成权限表</p>
+</p>
+<p class="subtitle">权限定义</p>
+<p>查看、修改、删除等操作在程序眼里只是不同动作，可以通过对动作访问的限制来达到权限控制。每个权限项（模块.控制器.动作）支持任意位置使用通配符*，省略的节点均代表*，多个权限项之间用逗号（,）隔开。<a href="http://boasoft.top/tool.php?type=perm" target="_blank">权限规则测试工具</a></p>
+<pre><code class="language-php">
+	'allow' => '*',
+	'deny' => 'admin.*.do_*, 
+			   user.news.*'
+</code></pre>
+<p class="tip tip-help">出于性能考虑，尽可能的使用通配符*，减少定义项目</p>
+
+<p class="subtitle">权限验证</p>
+<p>验证时将当前权限（模块.控制器.动作）与用户所在组或默认权限表进行校验</p>
+<pre><code class="language-php">
+	public function __construct(){
+		/* 检测登录，获取Session中用户组$group_id */
+		boa::permission()->validate($group_id, 'a'); // 对用户组（group_id=1）使用perm-1.php权限表验证，并指定验证模式
+	}
+</code></pre>
+<p class="tip tip-help">实际中可能不想每个动作中都要写一次验证，可以放在common共用库或各控制器 __construct() 中</p>
+
+<p class="subtitle">验证模式</p>
+<p>选择验证模式主要基于权限表设计便捷性来决定（默认：da），就是选择某种模式，权限规则写的更少更方便更符合需求。
+以下对于动作 admin.news.add 的验证来举例：</p>
+<table>
+	<tr><th>模式</th><th>说明</th><th>例子</th><th>解释</th></tr>
+	<tr><td align="center">a</td><td>只验证allow权限，匹配则通过，否则拒绝</td><td><pre><code class="language-php">'allow' => '*'</code></pre></td><td>全部允许，匹配所以通过</td></tr>
+	<tr><td align="center">d</td><td>只验证deny权限，匹配则拒绝，否则则通过</td><td><pre><code class="language-php">'deny' => '*'</code></pre></td><td>全部拒绝，匹配所以拒绝</td></tr>
+	<tr><td align="center">ad</td><td>先验证allow再验证deny，各自含义同前，两者同时通过才通过（拒绝优先）</td><td><pre><code class="language-php">'allow' => '*',
+'deny' => 'admin.news.*'</code></pre></td><td>前者通过而后者拒绝，所以拒绝；如果前者拒绝则不验证后者，直接拒绝；对于允许多拒绝少的情况，采用这种模式权限规则写的少，先全部允许然后指定少量具体的拒绝</td></tr>
+	<tr><td align="center">da</td><td>先验证deny再验证allow，各自含义同前，两者同时拒绝才拒绝（通过优先）</td><td><pre><code class="language-php">'deny' => '*',
+'allow' => 'admin.news.*'</code></pre></td><td>前者拒绝而后者通过，所以通过；如果前者通过则不验证后者，直接通过；对于允许少拒绝多的情况，采用这种模式权限规则写的少，先全部拒绝然后指定少量具体的允许</td></tr>
+</table>
+
+<p class="tip tip-alert">开发中遇到权限表修改后不生效的问题，请先尝试删除临时目录下的缓存（var/www/cache/）</p>
+							</div>
+			<div class="navigate">
+				<a href="../security/46.html" class="prev">< 安全配置</a>
+				<a class="menu"></a>
+				<a href="../security/49.html" class="next">加密解密 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

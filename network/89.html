@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>网络请求 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">网络请求</div>
+			<div class="content">
+				<p>网络请求使用 <a href="../api/boa.http.html">http类</a>，是从自己服务器向远程地址发起请求/上传等</p>
+<p class="subtitle">GET请求</p>
+<pre><code class="language-php">
+	$http = boa::http();
+	$http->get('http://boasoft.top/test.php'); // GET请求
+	$header = $http->get_header(); // 响应头
+	$status = $http->get_status(); // 状态码/错误码
+	if($status == 200){
+		$body = $http->get_body(); // 正文
+	}else{
+		$error = $http->get_error(); // 错误
+	}
+</code></pre>
+<p class="subtitle">POST请求</p>
+<pre><code class="language-php">
+	$http = boa::http();
+	$data = ['name' => 'test', 'age' => 18];
+	$http->get('http://boasoft.top/test.php', $data); // POST请求，发送表单数据
+	$posttype = $http->get_posttype(); // POST类型，默认form
+	$body = $http->get_body();
+</code></pre>
+<p class="subtitle">发送JSON/XML</p>
+<pre><code class="language-php">
+	$http = boa::http();
+	$http->cfg('posttype', 'json'); // 设置POST类型，或者为：xml
+	$data = ['name' => 'test', 'age' => 18];
+	$http->get('http://boasoft.top/test.php', $data); // POST请求，发送JSON/XML数据
+	$posttype = $http->get_posttype(); // POST类型
+	$body = $http->get_body();
+</code></pre>
+<p class="subtitle">上传文件</p>
+<pre><code class="language-php">
+	$http = boa::http();
+	$file = [ //上传1个图片+1个TXT文件
+		'avatar' => BS_WWW .'res/img.gif;image/gif', // '表单字段' => '文件路径;MIME类型'，
+		'readme' => BS_WWW .'/res/file.txt' // MIME类型省略的话由程序检测
+	];
+	$data = ['name' => 'test', 'age' => 18]; // 附加表单数据
+	$http->upload('http://boasoft.top/test.php', $file, $data);
+	$body = $http->get_body();
+</code></pre>
+<p class="subtitle">使用代理</p>
+<pre><code class="language-php">
+	$http = boa::http();
+	$http->cfg('proxy', '127.0.0.1:8888'); // 设置为Fiddler端口，可以用Fiddler测试网络请求
+	$http->get('http://www.sina.com.cn');
+	$body = $http->get_body();
+</code></pre>
+<p class="subtitle">设置Cookie</p>
+<pre><code class="language-php">
+	$http = boa::http();
+	/* 通过设置Cookie可以访问授权页面。
+	   Cookie可以从浏览器中获得；
+	   也可以通过POST数据登录成功后，从响应HTTP头中获取；
+	   将其存储下来，每次访问时可以用set_cookie()设置；
+	   注意管理Cookie的过期问题。
+	*/
+	$http->set_cookie('PHPSESSID=4oipi9oep7a0qdvrtha81bges4; uid=1');
+	$http->get('http://www.xxxx.com/admin/');
+	$body = $http->get_body();
+</code></pre>
+<p class="subtitle">请求HTTPS</p>
+<pre><code class="language-php">
+	$http = boa::http();
+	$http->cfg('ssl', 1); // 设置为单向认证，查看ssl配置项说明来放置证书
+	$http->get('https://www.xxxx.com/vip.php');
+	$body = $http->get_body();
+</code></pre>
+<p class="subtitle">附加请求头</p>
+<pre><code class="language-php">
+	$http = boa::http();
+	$http->cfg('header', [
+		'Referer' => 'http://xxxxx.com', // 模拟来路
+		'User-Agent' => 'Mozilla/5.0 (Linux; Android 9; ELE-AL00 Build/HUAWEIELE-AL0001; wv)
+		AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/63.0.3239.83 Mobile Safari/537.36
+		T7/11.15 baiduboxapp/11.15.5.10 (Baidu; P1 9)' // 伪装成华为手机发送请求
+	]);
+	$http->get('https://www.xxxx.com/vip.php');
+	$body = $http->get_body();
+</code></pre>
+<p class="subtitle">处理压缩页面</p>
+<pre><code class="language-php">
+	$http = boa::http();
+	$http->get('https://www.xxxx.com/vip.php');
+	$body = $http->get_body('gzip'); // 对方页面压缩传输时，支持gzip和deflate解压
+</code></pre>
+<p class="subtitle">只获取HTTP头</p>
+<pre><code class="language-php">
+	$arr = boa::http()->head('http://baidu.com'); // 响应头数组
+</code></pre>
+<p class="tip tip-help">各种设置或配置一定要放在请求发起之前</p>
+							</div>
+			<div class="navigate">
+				<a href="../network/55.html" class="prev">< 下载配置</a>
+				<a class="menu"></a>
+				<a href="../network/90.html" class="next">上传下载 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

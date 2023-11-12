@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../res/index.js"></script>
+    <title>input类 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">input类</div>
+			<div class="api">
+				<table>
+					<tr>
+						<td width="10%" align="right">版本</td>
+						<td>1.0+</td>
+					</tr>
+					<tr>
+						<td align="right">命名空间</td>
+						<td>boa\console</td>
+					</tr>
+					<tr>
+						<td align="right">文件</td>
+						<td>boa/console/input.php</td>
+					</tr>
+					<tr>
+						<td align="right">说明</td>
+						<td>控制台输入类</td>
+					</tr>
+				</table>
+
+													
+				<div class="subtitle">目录</div>
+				<table class="index">
+					<tr>
+						<th>方法</th>
+						<th>说明</th>
+					</tr>
+									<tr>
+						<td align="center"><a href="#prompt">prompt()</a></td>
+						<td>获取控制台输入信息</td>
+					</tr>
+								</table>	
+
+				<div class="subtitle">方法</div>
+							<a name="prompt"></a>
+				<table>
+					<caption>
+						<h3>prompt()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">获取控制台输入信息</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$tip</td>
+						<td></td>
+						<td></td>
+						<td>string</td>
+						<td>输入提示</td>
+					</tr>
+									<tr class="param">
+						<td>$rule</td>
+						<td></td>
+						<td>[]</td>
+						<td>array</td>
+						<td>输入验证（单个字段规则），规则参见 <a href="../validater/22.html">自动验证</a></td>
+					</tr>
+									<tr class="param">
+						<td>$key</td>
+						<td></td>
+						<td>input</td>
+						<td>string</td>
+						<td>指定字段，相当于验证规则中的表单字段</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$in = new \boa\console\input();
+$res = $in-&gt;prompt('请输入数字');
+echo "您输入了：$res";</code></pre>
+						</td>
+					</tr>
+								</table>
+						</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

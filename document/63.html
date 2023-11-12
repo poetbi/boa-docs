@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>图像配置 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">图像配置</div>
+			<div class="content">
+				<p class="subtitle">config.php</p>
+<pre><code class="language-php">'IMAGE' => [
+	//配置项
+],
+</code></pre>
+<p class="subtitle"><a href="../api/boa.image.html">图像配置</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>driver</td><td>gd</td><td>string</td><td>图像驱动；可选值：gd, imagick</td></tr><tr><td>wm_type</td><td>2</td><td>int</td><td>水印类型；0=关闭 1=文字 2=图片</td></tr><tr><td>wm_ratio</td><td>0.4</td><td>int</td><td>水印与图像大小比例大于该值则不添加水印</td></tr><tr><td>wm_margin</td><td>5</td><td>int</td><td>当水印靠边时边距（像素）</td></tr><tr><td>wm_text</td><td>boasoft.top</td><td>string</td><td>水印文字</td></tr><tr><td>wm_font</td><td>font.ttf</td><td>string</td><td>水印字体，位于 BS_VAR .'image/'</td></tr><tr><td>wm_size</td><td>13</td><td>int</td><td>水印文字大小</td></tr><tr><td>wm_color</td><td>#CC0000</td><td>string</td><td>水印文字颜色</td></tr><tr><td>wm_logo</td><td>watermark.png</td><td>string</td><td>水印图片，位于 BS_VAR .'image/'</td></tr><tr><td>wm_alpha</td><td>65</td><td>int</td><td>水印图片透明度</td></tr><tr><td>wm_pos</td><td>0</td><td>int</td><td>水印位置：0=随机，<br>1=上左，2=上中，3=上右，<br>4=中左，5=居中，6=中右，<br>7=下左，8=下中，9=下右</td></tr><tr><td>tb_width</td><td>320</td><td>int</td><td>缩略图宽度，-1=自动</td></tr><tr><td>tb_height</td><td>200</td><td>int</td><td>缩略图高度，-1=自动，宽高不能同时为-1</td></tr></table></p>							</div>
+			<div class="navigate">
+				<a href="../document/62.html" class="prev">< 压缩解压配置</a>
+				<a class="menu"></a>
+				<a href="../document/64.html" class="next">JSON配置 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

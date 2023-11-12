@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../res/index.js"></script>
+    <title>cache类 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">cache类</div>
+			<div class="api">
+				<table>
+					<tr>
+						<td width="10%" align="right">版本</td>
+						<td>1.0+</td>
+					</tr>
+					<tr>
+						<td align="right">命名空间</td>
+						<td>boa</td>
+					</tr>
+					<tr>
+						<td align="right">文件</td>
+						<td>boa/cache.php</td>
+					</tr>
+					<tr>
+						<td align="right">说明</td>
+						<td>缓存类，配置：'CACHE' => [],</td>
+					</tr>
+				</table>
+
+														<div class="subtitle">配置</div>
+										<table class="config">
+						<tr>
+							<th>配置项</th>
+							<th>默认值</th>
+							<th>类型</th>
+							<th>说明</th>
+						</tr>
+											<tr>
+							<td>driver</td>
+							<td>file</td>
+							<td>string</td>
+							<td>缓存驱动，可选值：apcu, file, memcache, memcached, redis, wincache, xcache</td>
+						</tr>
+										</table>
+									
+				<div class="subtitle">目录</div>
+				<table class="index">
+					<tr>
+						<th>方法</th>
+						<th>说明</th>
+					</tr>
+									<tr>
+						<td align="center"><a href="#__construct">__construct()</a></td>
+						<td>初始化</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#key">key()</a></td>
+						<td>返回最新成功缓存的键名，比如缓存器动态产生的键</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#get">get()</a></td>
+						<td>读取缓存</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#set">set()</a></td>
+						<td>设置缓存</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#xget">xget()</a></td>
+						<td>读取缓存器</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#del">del()</a></td>
+						<td>删除缓存</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#clear">clear()</a></td>
+						<td>清除所有缓存</td>
+					</tr>
+								</table>	
+
+				<div class="subtitle">方法</div>
+							<a name="__construct"></a>
+				<table>
+					<caption>
+						<h3>__construct()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">初始化</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$cfg</td>
+						<td></td>
+						<td>[]</td>
+						<td>array</td>
+						<td>配置数据</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$cache = boa::cache();</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="key"></a>
+				<table>
+					<caption>
+						<h3>key()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">返回最新成功缓存的键名，比如缓存器动态产生的键</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回键（string），缓存器不一定每次新设缓存，只有新设置时才有值</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$key = $cache-&gt;key();</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="get"></a>
+				<table>
+					<caption>
+						<h3>get()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">读取缓存</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$name</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>缓存键名</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回缓存结果（mixed）；失败返回false（bool）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$val = $cache-&gt;get('key');</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="set"></a>
+				<table>
+					<caption>
+						<h3>set()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置缓存</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$name</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>缓存键名</td>
+					</tr>
+									<tr class="param">
+						<td>$val</td>
+						<td>Y</td>
+						<td></td>
+						<td>mixed</td>
+						<td>缓存值，支持标量、数组、对象等类型</td>
+					</tr>
+									<tr class="param">
+						<td>$ttl</td>
+						<td></td>
+						<td>0</td>
+						<td>int</td>
+						<td>缓存有效期（秒），0=默认</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回true（bool）；失败返回false（bool）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$res = $cache-&gt;set('key', $val, 3600); // 缓存有效期1个小时</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="xget"></a>
+				<table>
+					<caption>
+						<h3>xget()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">读取缓存器</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$name</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>缓存器名</td>
+					</tr>
+									<tr class="param">
+						<td>$args</td>
+						<td></td>
+						<td>[]</td>
+						<td>array</td>
+						<td>缓存器参数</td>
+					</tr>
+									<tr class="param">
+						<td>$ttl</td>
+						<td></td>
+						<td>0</td>
+						<td>int</td>
+						<td>缓存有效期（秒），0=跟随expire配置</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回缓存结果（mixed）；失败返回false（bool）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$arr = $cache-&gt;xget('home.test', ['pid' =&gt; 1], 7200); // 创建缓存时，设置缓存有效期2个小时</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="del"></a>
+				<table>
+					<caption>
+						<h3>del()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">删除缓存</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$name</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>缓存键名</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">成功返回true（bool）；失败返回false（bool）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$cache-&gt;del('key');</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="clear"></a>
+				<table>
+					<caption>
+						<h3>clear()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">清除所有缓存</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$cache-&gt;clear();</code></pre>
+						</td>
+					</tr>
+								</table>
+						</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

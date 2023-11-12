@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>类的访问 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">类的访问</div>
+			<div class="content">
+				<p>所有boa命名空间下的类（除静态类）都可以通过 <b>boa::类名($cfg = [])</b> 来访问，例如：
+	<pre><code class="language-php">
+$res = boa::db()-&gt;query('...'); //database类query()
+$path = boa::file()-&gt;realpath($path); //file类realpath()
+$html = boa::http(['driver' =&gt; 'curl'])-&gt;get('...') //http类get()
+	</code></pre>
+</p>
+<p class="tip tip-help">更多参见 <a href="../api/boa.boa.html">boa类__callStatic()方法</a></p>
+<p class="tip tip-help">boa::db 为 boa::database 的别名</p>
+
+<p class="subtitle">配置参数</p>
+<p>支持传入配置参数$cfg（array），可选
+<ul>
+	<li>如果传入配置参数，则覆盖现有配置</li>
+	<li>如果未传入配置参数，则使用config.php中的相应配置</li>
+	<li>如果config.php中未定义相应配置，则使用程序默认配置</li>
+</ul></p>
+<p class="tip tip-help">更多参见 <a href="../start/4.html">配置结构</a></p>							</div>
+			<div class="navigate">
+				<a href="../master/15.html" class="prev">< 语言使用</a>
+				<a class="menu"></a>
+				<a href="../master/17.html" class="next">生成静态 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

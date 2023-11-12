@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>上传下载 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">上传下载</div>
+			<div class="content">
+				<p>上传使用 <a href="../api/boa.upload.html">upload类</a>，是从浏览器向自己服务器上传文件；下载使用 <a href="../api/boa.download.html">download类</a>，是从远程地址下载文件到自己服务器；从自己服务器向浏览器输出文件请使用：$this->view->file(...)</p>
+
+<p class="subtitle">上传</p>
+<pre><code class="language language-php">
+	$up = boa::upload();
+	$up->cfg('size', 2.5); // 上传大小限制2.5M
+	$res = $up->one('file', BS_WWW .'file/1.gif'); // 表单字段：file
+	$file = $up->get_file();
+	if($res){
+		$img = boa::file()->file2url($file['file']); // 得到上传文件绝对路径并转化
+	}else{
+		echo $file['error']; // 输出错误
+	}
+</code></pre>
+<p>上传单个文件用one()，Javascript上传base64格式的文件用base64()，上传多个文件（表单字段如：file[]）用more()，具体参见upload类</p>
+
+
+<p class="subtitle">下载</p>
+<pre><code class="language language-php">
+	$dn = boa::download();
+	$dn->cfg('size', 2.5); // 上传大小限制2.5M
+	$res = $dn->one('http://xxxx.com/logo.gif', BS_WWW .'file/2.gif'); // 下载远程文件
+	$file = $dn->get_file();
+	if($res){
+		$img = $file['file']; // 得到下载文件绝对路径
+	}else{
+		echo $file['error']; // 输出错误
+	}
+</code></pre>
+<p>下载单个文件用one()，下载多个文件用more()，具体参见download类</p>							</div>
+			<div class="navigate">
+				<a href="../network/89.html" class="prev">< 网络请求</a>
+				<a class="menu"></a>
+				<a href="../document/index.html" class="next">文档 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

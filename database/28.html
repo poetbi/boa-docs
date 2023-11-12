@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>数据库连接 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">数据库连接</div>
+			<div class="content">
+				<p>通过配置name、user、pass即可实现常规数据库连接，详见数据库配置
+<pre><code class="language-php">
+'DATABASE' => [
+	'name' => 'boa',
+	'user' => 'test',
+	'pass' => '12345678'
+]
+</code></pre></p>
+<p class="subtitle">数据库类型</p>
+<p>mysqli仅支持mysql数据库，pdo可以支持多种数据库，可以通过type来配置，默认为mysql
+<table>
+	<tr><th>type</th><th>数据库</th><th>DSN模板</th></tr>
+	<tr><td>mysql</td><td>MySQL</td><td>（port > 0）mysql:host={host};port={port};dbname={name}<br>（port = 0）mysql:unix_socket={host};dbname={name}</td></tr>
+	<tr><td>sqlsrv</td><td>MS SQL Server</td><td>（port > 0）sqlsrv:Server={host},{port};Database={name}<br>（port = 0）sqlsrv:Server={host};Database={name}</td></tr>
+	<tr><td>oci</td><td>Oracle</td><td>（port > 0）oci:dbname=//{host}:{port}/{name}<br>（port = 0）oci:dbname={name}</td></tr>
+	<tr><td>pgsql</td><td>PostgreSQL</td><td>（port > 0）pgsql:host={host};port={port};dbname={name}</td></tr>
+	<tr><td>ibm</td><td>IBM DB2</td><td>（port > 0）ibm:DRIVER={IBM DB2 ODBC DRIVER};DATABASE={name};HOSTNAME={host};PORT={port};PROTOCOL=TCPIP<br>（port = 0）ibm:DSN={name}</td></tr>
+	<tr><td>sqlite</td><td>SQLite</td><td>（port > 0）sqlite:{name}<br>（port = 0）sqlite::memory:</td></tr>
+	<tr><td>sqlite2</td><td>SQLite2</td><td>（port > 0）sqlite2:{name}<br>（port = 0）sqlite2::memory:</td></tr>
+	<tr><td>odbc</td><td>ODBC</td><td>（port > 0）odbc:Driver={Microsoft Access Driver (*.mdb)};Dbq={name}<br>（port = 0）odbc:{name}</td></tr>
+	<tr><td>firebird</td><td>Firebird</td><td>（port > 0）firebird:dbname={host}/{port}:{name}<br>（port = 0）firebird:dbname={name}</td></tr>
+	<tr><td>cubrid</td><td>CUBRID</td><td>（port > 0）cubrid:host={host};port={port};dbname={name}</td></tr>
+	<tr><td>4D</td><td>4D</td><td>4D:host={host}</td></tr>
+</table>
+</p>
+<p class="subtitle">连接方式</p>
+<p>默认为tcp连接，当port=0时使用socket或pipe连接，详见上表DSN模板</p>
+<p class="subtitle">持久连接</p>
+<p>当persist=true时使用持久化连接，默认false</p>
+<p class="subtitle">驱动选项</p>
+<p>可以通过option为每个驱动设置属性，具体参见PHP官方文档PDO::setAttribute()和mysqli::options()</p>
+<p class="subtitle">读写分离</p>
+<p>通过配置master和slave开启读写分离模式，<em>无须改动SQL或程序</em>。支持一组或多组（子数组）配置信息，每组配置信息省略的字段由外层对应字段替代
+<pre><code class="language-php">
+'DATABASE' => [
+	'name' => 'boa',
+	'user' => 'test',
+	'pass' => '12345678',
+	'slave' => [
+		['host' => '192.168.0.2'],
+		['host' => '192.168.0.3'],
+		['host' => '192.168.0.4']
+	],
+	'master' => [
+		'host' => '192.168.0.1'
+	]
+]
+</code></pre></p>
+							</div>
+			<div class="navigate">
+				<a href="../database/26.html" class="prev">< 数据库配置</a>
+				<a class="menu"></a>
+				<a href="../database/29.html" class="next">原生查询 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

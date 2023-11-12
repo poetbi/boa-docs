@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>基础控制器 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">基础控制器</div>
+			<div class="content">
+				<p>基础控制器主要是用来被其他控制器继承的，其中默认初始化好三个常用类：</p>
+<ul>
+	<li>request请求类，可用 <b>$this->request</b> 来访问</li>
+	<li>view视图类，可用 <b>$this->view</b> 来访问</li>
+	<li>common公用库，可用 <b>$this->common</b> 来访问</li>
+</ul>
+<p class="subtitle">common公用库</p>
+<p>这个库位于模块下library目录中，用户自定义方法，可以实现一些全模块公用的函数，比如写个数组排序方法来使用：$this->common->sort($arr)</p>
+<p>其中 __construct() 方法很重要，写在其中的代码会在各控制器和动作之前执行，所以常用来做初始化配置、检测用户登录、用户权限验证等</p>
+<p class="tip tip-help">其实除了common，用户还可以在library中定义更多类库，用 boa::lib('模块.类库')->方法() 来使用 </p>
+
+<p class="subtitle">默认动作</p>
+<p>基础控制器还提供了一个 <b>__call</b> 魔术方法，当访问一个不存在的动作时便调用该动作，响应404错误</p>
+<p class="tip tip-help">详情参见 <a href="../api/boa.controller.html">controller类</a></p>
+							</div>
+			<div class="navigate">
+				<a href="../controller/index.html" class="prev">< 控制器</a>
+				<a class="menu"></a>
+				<a href="../controller/19.html" class="next">控制器定义 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>
