@@ -133,7 +133,7 @@
 						<th colspan="5">返回值</th>
 					</tr>
 					<tr>
-						<td colspan="5">如果设定$k和$v：则配置$k项；<br>
+						<td colspan="5">如果设定$k和$v：则配置$k项，返回$this<br>
 如果只设定$k：则返回$k项的值（string）；<br>
 如果都未设定：则返回整个配置数据（array）；</td>
 					</tr>
@@ -215,7 +215,13 @@ echo $obj-&gt;cfg('option.test'); // 1
 						<td>string</td>
 						<td>值</td>
 					</tr>
-																				</table>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回$this</td>
+					</tr>
+												</table>
 						</div>
 		</div>
 	</article>
