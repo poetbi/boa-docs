@@ -41,7 +41,7 @@
 <pre><code class="language-php">
 	$http = boa::http();
 	$data = ['name' => 'test', 'age' => 18];
-	$http->get('http://boasoft.top/test.php', $data); // POST请求，发送表单数据
+	$http->post('http://boasoft.top/test.php', $data); // POST请求，发送表单数据
 	$posttype = $http->get_posttype(); // POST类型，默认form
 	$body = $http->get_body();
 </code></pre>
@@ -50,7 +50,7 @@
 	$http = boa::http();
 	$http->cfg('posttype', 'json'); // 设置POST类型，或者为：xml
 	$data = ['name' => 'test', 'age' => 18];
-	$http->get('http://boasoft.top/test.php', $data); // POST请求，发送JSON/XML数据
+	$http->post('http://boasoft.top/test.php', $data); // POST请求，发送JSON/XML数据
 	$posttype = $http->get_posttype(); // POST类型
 	$body = $http->get_body();
 </code></pre>
@@ -114,8 +114,7 @@
 <pre><code class="language-php">
 	$arr = boa::http()->head('http://baidu.com'); // 响应头数组
 </code></pre>
-<p class="tip tip-help">各种设置或配置一定要放在请求发起之前</p>
-							</div>
+<p class="tip tip-help">各种设置或配置一定要放在请求发起之前</p>							</div>
 			<div class="navigate">
 				<a href="../network/55.html" class="prev">< 下载配置</a>
 				<a class="menu"></a>
