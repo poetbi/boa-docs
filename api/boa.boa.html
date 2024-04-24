@@ -158,6 +158,26 @@
 						<td>根据常量值获取常量键</td>
 					</tr>
 									<tr>
+						<td align="center"><a href="#conf">conf()</a></td>
+						<td>初始配置，定义全局常量</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#mod">mod()</a></td>
+						<td>模块配置，定义模块常量，并触发module监听器</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#con">con()</a></td>
+						<td>初始化控制器，并触发controller监听器</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#head">head()</a></td>
+						<td>设置默认响应头</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#type">type()</a></td>
+						<td>设置全局消息输出类型</td>
+					</tr>
+									<tr>
 						<td align="center"><a href="#finish">finish()</a></td>
 						<td>生成静态和写日志等，PHP请求结束会自动调用，使用boa::call()时可以手动调用此方法来模拟每个页面执行结束</td>
 					</tr>
@@ -704,6 +724,105 @@ $key = boa::getkey($v, 0, 'json', 'JSON_ERROR_'); // 获取json常量</code></pr
 						</td>
 					</tr>
 								</table>
+							<a name="conf"></a>
+				<table>
+					<caption>
+						<h3>conf()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">初始配置，定义全局常量</td>
+					</tr>
+																				</table>
+							<a name="mod"></a>
+				<table>
+					<caption>
+						<h3>mod()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">模块配置，定义模块常量，并触发module监听器</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$mod</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>模块名</td>
+					</tr>
+																				</table>
+							<a name="con"></a>
+				<table>
+					<caption>
+						<h3>con()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">初始化控制器，并触发controller监听器</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$key</td>
+						<td></td>
+						<td>null</td>
+						<td>string</td>
+						<td>[模块.]控制器（节点式），省略取当前环境值</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回初始化后的控制器类（object）</td>
+					</tr>
+												</table>
+							<a name="head"></a>
+				<table>
+					<caption>
+						<h3>head()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置默认响应头</td>
+					</tr>
+																				</table>
+							<a name="type"></a>
+				<table>
+					<caption>
+						<h3>type()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">设置全局消息输出类型</td>
+					</tr>
+																				</table>
 							<a name="finish"></a>
 				<table>
 					<caption>

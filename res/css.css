@@ -277,7 +277,7 @@ b{
 	text-align: left;
 }
 
-@media screen and (max-width:640px){
+@media (max-width:800px) OR (max-height:800px){
 	*{font-weight: normal}
 	img{
 		max-width: 100%;
