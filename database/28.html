@@ -37,20 +37,23 @@
 <table>
 	<tr><th>type</th><th>数据库</th><th>DSN模板</th></tr>
 	<tr><td>mysql</td><td>MySQL</td><td>（port > 0）mysql:host={host};port={port};dbname={name}<br>（port = 0）mysql:unix_socket={host};dbname={name}</td></tr>
-	<tr><td>sqlsrv</td><td>MS SQL Server</td><td>（port > 0）sqlsrv:Server={host},{port};Database={name}<br>（port = 0）sqlsrv:Server={host};Database={name}</td></tr>
+	<tr><td>sqlsrv</td><td>SQL Server/Azure</td><td>（port > 0）sqlsrv:Server={host},{port};Database={name}<br>（port = 0）sqlsrv:Server={host};Database={name}</td></tr>
 	<tr><td>oci</td><td>Oracle</td><td>（port > 0）oci:dbname=//{host}:{port}/{name}<br>（port = 0）oci:dbname={name}</td></tr>
-	<tr><td>pgsql</td><td>PostgreSQL</td><td>（port > 0）pgsql:host={host};port={port};dbname={name}</td></tr>
 	<tr><td>ibm</td><td>IBM DB2</td><td>（port > 0）ibm:DRIVER={IBM DB2 ODBC DRIVER};DATABASE={name};HOSTNAME={host};PORT={port};PROTOCOL=TCPIP<br>（port = 0）ibm:DSN={name}</td></tr>
 	<tr><td>sqlite</td><td>SQLite</td><td>（port > 0）sqlite:{name}<br>（port = 0）sqlite::memory:</td></tr>
 	<tr><td>sqlite2</td><td>SQLite2</td><td>（port > 0）sqlite2:{name}<br>（port = 0）sqlite2::memory:</td></tr>
 	<tr><td>odbc</td><td>ODBC</td><td>（port > 0）odbc:Driver={Microsoft Access Driver (*.mdb)};Dbq={name}<br>（port = 0）odbc:{name}</td></tr>
 	<tr><td>firebird</td><td>Firebird</td><td>（port > 0）firebird:dbname={host}/{port}:{name}<br>（port = 0）firebird:dbname={name}</td></tr>
-	<tr><td>cubrid</td><td>CUBRID</td><td>（port > 0）cubrid:host={host};port={port};dbname={name}</td></tr>
-	<tr><td>4D</td><td>4D</td><td>4D:host={host}</td></tr>
+	<tr><td>pgsql</td><td>PostgreSQL</td><td>pgsql:host={host};port={port};dbname={name}</td></tr>
+	<tr><td>cubrid</td><td>CUBRID</td><td>cubrid:host={host};port={port};dbname={name}</td></tr>
+	<tr><td>mssql</td><td>SQL Server</td><td>mssql:host={host};dbname={name}</td></tr>
+	<tr><td>sybase</td><td>Sybase</td><td>sybase:host={host};dbname={name}</td></tr>
+	<tr><td>dblib</td><td>DbLib</td><td>dblib:host={host};dbname={name}</td></tr>
+	<tr><td>informix</td><td>Informix</td><td>informix:DSN={name}</td></tr>
 </table>
 </p>
 <p class="subtitle">连接方式</p>
-<p>默认为tcp连接，当port=0时使用socket或pipe连接，详见上表DSN模板</p>
+<p>默认为tcp连接，当port=0时使用socket、pipe等方式连接，详见上表DSN模板</p>
 <p class="subtitle">持久连接</p>
 <p>当persist=true时使用持久化连接，默认false</p>
 <p class="subtitle">驱动选项</p>
