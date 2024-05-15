@@ -42,7 +42,8 @@
 	<tr><td>ibm</td><td>IBM DB2</td><td>（port > 0）ibm:DRIVER={IBM DB2 ODBC DRIVER};DATABASE={name};HOSTNAME={host};PORT={port};PROTOCOL=TCPIP<br>（port = 0）ibm:DSN={name}</td></tr>
 	<tr><td>sqlite</td><td>SQLite</td><td>（port > 0）sqlite:{name}<br>（port = 0）sqlite::memory:</td></tr>
 	<tr><td>sqlite2</td><td>SQLite2</td><td>（port > 0）sqlite2:{name}<br>（port = 0）sqlite2::memory:</td></tr>
-	<tr><td>odbc</td><td>ODBC</td><td>（port > 0）odbc:Driver={Microsoft Access Driver (*.mdb)};Dbq={name}<br>（port = 0）odbc:{name}</td></tr>
+	<tr><td>access</td><td>Access</td><td>（port > 0）odbc:Driver={Microsoft Access Driver (*.mdb)};Dbq={name}<br>（port = 0）odbc:{name}</td></tr>
+	<tr><td>excel</td><td>Excel</td><td>（port > 0）odbc:Driver={Microsoft Excel Driver (*.xls, *.xlsx, *.xlsm, *.xlsb)};Dbq={name};Readonly=0<br>（port = 0）odbc:{name}</td></tr>
 	<tr><td>firebird</td><td>Firebird</td><td>（port > 0）firebird:dbname={host}/{port}:{name}<br>（port = 0）firebird:dbname={name}</td></tr>
 	<tr><td>pgsql</td><td>PostgreSQL</td><td>pgsql:host={host};port={port};dbname={name}</td></tr>
 	<tr><td>cubrid</td><td>CUBRID</td><td>cubrid:host={host};port={port};dbname={name}</td></tr>
