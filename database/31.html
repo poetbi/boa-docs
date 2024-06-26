@@ -64,7 +64,7 @@ foreach($data as $v){
 <p>all()方法可以获得整个查询结果，one()方法仅获取一条记录
 <pre><code class="language-php">
 $stmt = boa::db()->stmt_query('SELECT * FROM @bs_news WHERE cid = ?');
-$stmt->execute(10, 'i');
+$stmt->execute([10], 'i');
 $arr = $stmt->all();
 
 </code></pre></p>

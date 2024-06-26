@@ -29,10 +29,9 @@
 <pre><code class="language-php">
 $db = boa::db();
 
-$stmt = $db->stmt_execute('CALL sp_test');
-$stmt->execute();
+$stmt = $db->execute('CALL sp_test');
 
-$stmt = $db->stmt_execute('CALL sp_test(?, ?, ?)');
+$stmt = $db->stmt_query('CALL sp_test(?, ?, ?)');
 $param = [
 	'in',
 	[10, PDO::PARAM_INT],

@@ -614,7 +614,7 @@ foreach($data as $v){
 					<tr>
 						<td colspan="5" class="example">
 						<pre><code class="language-php">$stmt = boa::db()-&gt;stmt_query('SELECT * FROM @bs_news WHERE id = ?');
-$stmt-&gt;execute(1, 'i');
+$stmt-&gt;execute([1], 'i');
 $rs = $stmt-&gt;one();</code></pre>
 						</td>
 					</tr>

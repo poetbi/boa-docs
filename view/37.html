@@ -38,6 +38,7 @@
 <pre><code class="language-javascript">
 {CHARSET}
 {DATABASE.user} //数组常量用节点式写法
+{DATABASE.{$k}} //嵌套变量
 </code></pre></p>
 <p class="subtitle">变量标签</p>
 <p>输出变量，语法：<b>{$变量}</b>，必须以$开头。系统环境变量为：<b>$_ENV</b>
@@ -47,6 +48,7 @@
 {$_COOKIE.name}
 {$_SESSION.user.id}
 {$_ENV.var.page} //环境变量['var']['page']
+{$test.{$k}.{$v}} //嵌套变量
 </code></pre></p>
 <p class="subtitle">语言标签</p>
 <p>用于多语言环境，语法：<b>{@语言标签}</b>，必须以@开头，语言标签采用节点式写法，分别表示模块.语言文件.键
@@ -54,6 +56,7 @@
 {@boa.error.100}
 {@home.index.title}
 {@home.index.status.0}
+{@home.error.{$code}} //嵌套变量
 </code></pre></p>
 <p class="subtitle">条件标签</p>
 <p>进行条件判断，语法：<b>{if 条件表达式}...{elseif 条件表达式}...{else}...{/if}</b>，{elseif}和{else}可选，条件表达式支持标签</p>
@@ -100,8 +103,7 @@
 <p>使用PHP函数，语法：<b>{函数名 参数1 参数2 ...}</b>，参数可选（空值使用引号：''），并支持标签
 <pre><code class="language-javascript">
 {date Y-m-d {time}}
-</code></pre></p>
-							</div>
+</code></pre></p>							</div>
 			<div class="navigate">
 				<a href="../view/36.html" class="prev">< 视图配置</a>
 				<a class="menu"></a>
