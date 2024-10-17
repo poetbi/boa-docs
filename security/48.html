@@ -32,7 +32,7 @@
 <p class="tip tip-help">实际中可以使用数据库来管理权限，使用程序来生成权限表</p>
 </p>
 <p class="subtitle">权限定义</p>
-<p>查看、修改、删除等操作在程序眼里只是不同动作，可以通过对动作访问的限制来达到权限控制。每个权限项（模块.控制器.动作）支持任意位置使用通配符*，省略的节点均代表*，多个权限项之间用逗号（,）隔开。<a href="http://boasoft.top/tool.php?type=perm" target="_blank">权限规则测试工具</a></p>
+<p>可以通过对动作访问的限制来达到权限控制，每个权限项（模块.控制器.动作）支持任意位置使用通配符*，省略的节点均代表*，多个权限项之间用逗号（,）隔开。<a href="http://boasoft.top/tool.php?type=perm" target="_blank">权限规则测试工具</a></p>
 <pre><code class="language-php">
 	'allow' => '*',
 	'deny' => 'admin.*.do_*, 

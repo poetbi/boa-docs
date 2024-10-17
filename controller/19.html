@@ -56,10 +56,10 @@ class index extends controller{
 <p class="tip tip-help">具体请参见变量及自动验证等相关章节</p>
 
 <p class="subtitle">输出</p>
-<p>动作中业务执行完后可以调用 <b>$this->view->html($tpl = '', $return = false)</b> 输出模板内容，html() 支持两个参数：
+<p>动作中业务执行完后可以调用 <b>$this->view->html($tpl, false)</b> 输出模板内容，html() 支持两个参数：
 <ul>
-	<li>第一个参数表示模板相对路径，可选</li>
-	<li>第二个参数表示输出还是返回，可选</li>
+	<li>第一个参数表示模板相对路径，可选，默认为当前动作对应的模板文件</li>
+	<li>第二个参数表示输出还是返回，可选，默认为输出</li>
 </ul>
 </p>
 

@@ -271,7 +271,7 @@
 						<td></td>
 						<td>[]</td>
 						<td>array</td>
-						<td>设置环境var参数</td>
+						<td>设置环境var参数，类似于URL中的参数</td>
 					</tr>
 																	<tr>
 						<th colspan="5">返回值</th>
@@ -284,9 +284,9 @@
 					</tr>
 					<tr>
 						<td colspan="5" class="example">
-						<pre><code class="language-php">$res = boa::call('news.content.show', ['id' =&gt; $id]);
+						<pre><code class="language-php">$res = boa::call('news.content.show', ['id' =&gt; $id]); //等同：?m=news&c=content&a=show&id=$id
 
-$res = boa::call('list', ['page' =&gt; 1]);</code></pre>
+$res = boa::call('list', ['page' =&gt; 1]); ////等同：?m=news&c=content&a=list&page=1</code></pre>
 						</td>
 					</tr>
 								</table>

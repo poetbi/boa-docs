@@ -40,7 +40,7 @@
 	<tr><td>run</td><td>-r</td><td>根据参数执行程序，支持输入多个参数，<br>第一个参数指定要执行的程序，必填，其结构：<b>模块.控制器.动作</b>。<br>例如：-r news.index.count arg3=1 arg4=2</td></tr>
 </table>
 <p class="subtitle">特点</p>
-<p>除少量涉及浏览器终端功能，如cookie（可以通过配置HTTP_COOKIE来实现）等无效外，绝大部分动作都可以直接使用run命令执行</p>
+<p>动作同时也可以使用run命令执行，速度更快点。对于缺少的值可以通过配置来模拟，如cookie，配置HTTP_COOKIE</p>
 <p>对<b>模块.控制器.动作</b>传参可以使用URL访问时键值对模式，如：a=1 b=2 c=3。在动作中像正常一样取值： <i>$this->参数</i></p>
 
 <p class="subtitle">交互</p>
