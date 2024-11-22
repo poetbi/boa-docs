@@ -25,11 +25,15 @@
 			<div class="title">安装器</div>
 			<div class="content">
 				<p class="subtitle">定义</p>
-<p>每个模块可以带有一个安装器（如：<i>/mod/home/installer/installer.php</i>），里面含有 install() 和 uninstall() 两个方法，通过<b>boa::installer()</b>调用其中相关方法实现模块的安装卸载（常见的是在命令行中执行）。具体功能由开发者自行实现，比如执行SQL，设置文件等</p>
+<p>每个模块可以带有一个安装器（如：<i>/mod/home/installer/installer.php</i>），通过<b>boa::installer()</b>调用其中相应方法实现模块的安装、升级和卸载（常见的是在命令行中执行）。具体功能由开发者自行实现，比如执行SQL，设置文件等</p>
 <pre><code class="language language-php">
 	class installer{
 		public function install(){ // 安装
 			// 执行SQL创建表，设置文件等
+		}
+
+		public function upgrade(){ // 升级
+			// 执行SQL修改，更改文件等
 		}
 
 		public function uninstall(){ // 卸载
@@ -41,6 +45,9 @@
 <p class="tip tip-help">与创建新模块不同，这要求模块已经开发好，并放到/mod/目录下，下面以 /mod/demo 模块为例，更多参见 <a href="../console/80.html">命令行用法</a></p>
 <p class="subtitle">安装</p>
 <pre><code class="language language-bash">	php boa -i demo</code></pre>
+
+<p class="subtitle">升级</p>
+<pre><code class="language language-bash">	php boa -g demo</code></pre>
 
 <p class="subtitle">卸载</p>
 <pre><code class="language language-bash">	php boa -u demo</code></pre>

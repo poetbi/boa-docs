@@ -425,7 +425,7 @@ $page = $this-&gt;view-&gt;page($db-&gt;page());</code></pre>
 						<td></td>
 						<td></td>
 						<td>string</td>
-						<td>模板相对路径，省略则等于当前“控制器/动作”；在实例和模块中，程序优先查找实例中的模板</td>
+						<td>模板名称，节点式写法:“模块.控制器.动作”，默认为当前动作</td>
 					</tr>
 									<tr class="param">
 						<td>$return</td>
@@ -445,8 +445,9 @@ $page = $this-&gt;view-&gt;page($db-&gt;page());</code></pre>
 					</tr>
 					<tr>
 						<td colspan="5" class="example">
-						<pre><code class="language-php">$this-&gt;view-&gt;html('index/custom'); // 输出
-$res = $this-&gt;view-&gt;html('', true); // 返回</code></pre>
+						<pre><code class="language-php">$this-&gt;view-&gt;html(); // 输出
+$this-&gt;view-&gt;html('home.index.other'); // 输出
+$res = $this-&gt;view-&gt;html('home.index.test', true); // 返回</code></pre>
 						</td>
 					</tr>
 								</table>

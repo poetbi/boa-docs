@@ -24,7 +24,11 @@
 		<div class="main">
 			<div class="title">视图输出</div>
 			<div class="content">
-				<p>对于404、500、跳转、消息、错误等页面，优先调用实例（如www）/tpl/模块/msg目录下用户定制的页面，默认和系统页面名称相对应，如：404.html、500.html、error.html、info.html、jump.html等，也可以添加自定义消息输出页面***.html等，系统页面位于boa/view/msg目录下</p>
+				<p>404、500、跳转、消息、错误等页面位于boa/view/msg目录下，用户也可以自定义错误页面，和系统页面名称相对应，如：404.html、500.html、error.html、info.html、jump.html等，也可以添加自定义消息输出页面***.html等，程序会按照以下顺序优先查找：<ul>
+	<li>tpl/模块/msg</li>
+	<li>tpl/msg</li>
+	<li>boa/view/msg</li>
+</ul></p>
 <p class="tip tip-help">详情可以参看 <a href="../api/boa.view.html">view类</a></p>
 <p class="subtitle">变量赋值</p>
 <p>使用assign()为view类各种输出进行变量赋值，适用于模板类输出</p>
@@ -43,13 +47,13 @@
 <p class="subtitle">JSONP输出</p>
 <p>使用jsonp()输出JSONP数据</p>
 <p class="subtitle">消息输出</p>
-<p>使用msg()输出系统消息，优先使用用户定制消息页面</p>
+<p>使用msg()输出系统消息</p>
 <p class="subtitle">页面跳转</p>
-<p>使用jump()进行页面跳转，优先使用用户定制跳转页面</p>
+<p>使用jump()进行页面跳转</p>
 <p class="subtitle">404页面</p>
-<p>使用lost()输出404页面，优先使用用户定制404页面</p>
+<p>使用lost()输出404页面</p>
 <p class="subtitle">500页面</p>
-<p>使用error()输出500页面，优先使用用户定制500页面</p>
+<p>使用error()输出500页面</p>
 <p class="subtitle">文件输出</p>
 <p>使用file()输出文件到浏览器</p>
 							</div>

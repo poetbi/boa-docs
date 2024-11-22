@@ -71,7 +71,7 @@
 					</tr>
 									<tr>
 						<td align="center"><a href="#key">key()</a></td>
-						<td>返回最新成功缓存的键名，比如缓存器动态产生的键</td>
+						<td>返回当前xget()方法缓存键名</td>
 					</tr>
 									<tr>
 						<td align="center"><a href="#get">get()</a></td>
@@ -92,6 +92,10 @@
 									<tr>
 						<td align="center"><a href="#clear">clear()</a></td>
 						<td>清除所有缓存</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#cname">cname()</a></td>
+						<td>依据参数计算xget()方法键名</td>
 					</tr>
 								</table>	
 
@@ -141,20 +145,21 @@
 						<th colspan="5">说明</th>
 					</tr>
 					<tr>
-						<td colspan="5" align="left">返回最新成功缓存的键名，比如缓存器动态产生的键</td>
+						<td colspan="5" align="left">返回当前xget()方法缓存键名</td>
 					</tr>
 																	<tr>
 						<th colspan="5">返回值</th>
 					</tr>
 					<tr>
-						<td colspan="5">返回键（string），缓存器不一定每次新设缓存，只有新设置时才有值</td>
+						<td colspan="5">返回键（string）</td>
 					</tr>
 													<tr>
 						<th colspan="5">示例</th>
 					</tr>
 					<tr>
 						<td colspan="5" class="example">
-						<pre><code class="language-php">$key = $cache-&gt;key();</code></pre>
+						<pre><code class="language-php">$arr = $cache-&gt;xget(...);
+$key = $cache-&gt;key();</code></pre>
 						</td>
 					</tr>
 								</table>
@@ -368,6 +373,55 @@
 					<tr>
 						<td colspan="5" class="example">
 						<pre><code class="language-php">$cache-&gt;clear();</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="cname"></a>
+				<table>
+					<caption>
+						<h3>cname()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">依据参数计算xget()方法键名</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$name</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>缓存器名</td>
+					</tr>
+									<tr class="param">
+						<td>$args</td>
+						<td></td>
+						<td>[]</td>
+						<td>array</td>
+						<td>缓存器参数</td>
+					</tr>
+																	<tr>
+						<th colspan="5">返回值</th>
+					</tr>
+					<tr>
+						<td colspan="5">返回键（string）</td>
+					</tr>
+													<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$cname = $cache-&gt;cname('permission', ['group' =&gt; $gid]);
+$cache-&gt;del($cname);</code></pre>
 						</td>
 					</tr>
 								</table>
