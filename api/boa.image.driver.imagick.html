@@ -51,6 +51,10 @@
 						<th>说明</th>
 					</tr>
 									<tr>
+						<td align="center"><a href="#open">open()</a></td>
+						<td>打开图片</td>
+					</tr>
+									<tr>
 						<td align="center"><a href="#watermark">watermark()</a></td>
 						<td>添加水印</td>
 					</tr>
@@ -86,9 +90,40 @@
 						<td align="center"><a href="#output">output()</a></td>
 						<td>输出图像</td>
 					</tr>
+									<tr>
+						<td align="center"><a href="#clear">clear()</a></td>
+						<td>销毁图片</td>
+					</tr>
 								</table>	
 
 				<div class="subtitle">方法</div>
+							<a name="open"></a>
+				<table>
+					<caption>
+						<h3>open()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">打开图片</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$img</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>图片地址</td>
+					</tr>
+																				</table>
 							<a name="watermark"></a>
 				<table>
 					<caption>
@@ -317,7 +352,7 @@
 						<td>Y</td>
 						<td></td>
 						<td>array</td>
-						<td>同父类text()</td>
+						<td>同image类text()</td>
 					</tr>
 																				</table>
 							<a name="save"></a>
@@ -375,10 +410,23 @@
 					</tr>
 									<tr class="param">
 						<td>$type</td>
+						<td>Y</td>
 						<td></td>
-						<td>null</td>
 						<td>string</td>
-						<td>输出类型，可选值：png, jpeg, gif</td>
+						<td>输出类型，如：png, jpeg, gif</td>
+					</tr>
+																				</table>
+							<a name="clear"></a>
+				<table>
+					<caption>
+						<h3>clear()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">销毁图片</td>
 					</tr>
 																				</table>
 						</div>

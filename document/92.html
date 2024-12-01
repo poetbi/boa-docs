@@ -24,24 +24,31 @@
 		<div class="main">
 			<div class="title">图像处理</div>
 			<div class="content">
-				<p class="subtitle">水印</p>
+				<p class="subtitle">格式转换</p>
 <pre><code class="language language-php">
-	$image = boa::image();
-	$image->cfg('wm_type', 1);
+	$im = boa::image();
+	$im->open(BS_WWW .'file/1.webp');
+	$im->save(BS_WWW .'file/1.png');
+</code></pre>
+
+<p class="subtitle">水印</p>
+<pre><code class="language language-php">
+	$im = boa::image();
+	$im->cfg('wm_type', 1);
 	for(...){ // 批量加文字水印
-		$image->open(BS_WWW ."res/$i.png");
-		$image->watermark();
-		$image->save(BS_WWW ."file/$i.png");
+		$im->open(BS_WWW ."res/$i.png");
+		$im->watermark();
+		$im->save(BS_WWW ."file/$i.png");
 	}
 </code></pre>
 
 <p class="subtitle">缩略图</p>
 <pre><code class="language language-php">
-	$image = boa::image();
+	$im = boa::image();
 	for(...){ // 批量生成缩略图
-		$image->open(BS_WWW ."res/$i.png");
-		$image->thumbnail();
-		$image->save(BS_WWW ."thumb/$i.png");
+		$im->open(BS_WWW ."res/$i.png");
+		$im->thumbnail();
+		$im->save(BS_WWW ."thumb/$i.png");
 	}
 </code></pre>
 

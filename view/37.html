@@ -25,7 +25,7 @@
 			<div class="title">模板语法</div>
 			<div class="content">
 				<p>为简化写法，模板语法设计原则上不使用单引号、双引号、逗号等，元素和元素之间一律使用空格，每个标签使用{和}包括起来，<em>支持标签中多层嵌套标签</em></p>
-<p class="tip tip-alert">如果遇到含有空格的元素，可以使用单引号或双引号包括起来，比如：{date 'Y-m-d h:i:s' {time}}，否则会被当做不同元素；空值也可以使用引号，如：''</p>
+<p class="tip tip-alert">如果遇到含有空格的元素，可以使用单引号或双引号包括起来，比如：{date 'Y-m-d h:i:s' {$time}}，否则会被当做不同元素；空值也可以使用引号，如：''</p>
 <p class="subtitle">包含标签</p>
 <p>用来包含其他模板文件，语法：<b>{inc 模块.控制器.模板}</b>，模块和控制器可省略，省略则代表当前所处环境
 <pre><code class="language-javascript">
@@ -100,9 +100,9 @@
 </code></pre>
 可以使用循环标签{list}展示获得的数据</p>
 <p class="subtitle">函数标签</p>
-<p>使用PHP函数，语法：<b>{函数名 参数1 参数2 ...}</b>，参数可选（空值使用引号：''），并支持标签
+<p>使用PHP函数，语法：<b>{函数名 参数1 参数2 ...}</b>，参数可选，可以使用true/false/null（空值使用引号 ''），并支持标签
 <pre><code class="language-javascript">
-{date Y-m-d {time}}
+{date Y-m-d {$time}}
 </code></pre></p>							</div>
 			<div class="navigate">
 				<a href="../view/36.html" class="prev">< 视图配置</a>

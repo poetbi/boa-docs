@@ -59,7 +59,7 @@
 						</tr>
 											<tr>
 							<td>wm_type</td>
-							<td>2</td>
+							<td>1</td>
 							<td>int</td>
 							<td>水印类型；0=关闭 1=文字 2=图片</td>
 						</tr>
@@ -195,7 +195,11 @@
 					</tr>
 									<tr>
 						<td align="center"><a href="#save">save()</a></td>
-						<td>保存图像，并销毁图像对象</td>
+						<td>保存图像，后缀不同时自动转换图片格式</td>
+					</tr>
+									<tr>
+						<td align="center"><a href="#clear">clear()</a></td>
+						<td>销毁图像</td>
 					</tr>
 								</table>	
 
@@ -814,7 +818,7 @@
 						<th colspan="5">说明</th>
 					</tr>
 					<tr>
-						<td colspan="5" align="left">保存图像，并销毁图像对象</td>
+						<td colspan="5" align="left">保存图像，后缀不同时自动转换图片格式</td>
 					</tr>
 													<tr>
 						<th>参数</th>
@@ -849,6 +853,27 @@
 					<tr>
 						<td colspan="5" class="example">
 						<pre><code class="language-php">$file = $im-&gt;save('D:/1.png');</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="clear"></a>
+				<table>
+					<caption>
+						<h3>clear()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">销毁图像</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">$im-&gt;clear();</code></pre>
 						</td>
 					</tr>
 								</table>
