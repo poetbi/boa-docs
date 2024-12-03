@@ -52,7 +52,7 @@
 					</tr>
 									<tr>
 						<td align="center"><a href="#open">open()</a></td>
-						<td>打开图片</td>
+						<td>打开图像</td>
 					</tr>
 									<tr>
 						<td align="center"><a href="#watermark">watermark()</a></td>
@@ -92,7 +92,7 @@
 					</tr>
 									<tr>
 						<td align="center"><a href="#clear">clear()</a></td>
-						<td>销毁图片</td>
+						<td>销毁图像</td>
 					</tr>
 								</table>	
 
@@ -107,7 +107,7 @@
 						<th colspan="5">说明</th>
 					</tr>
 					<tr>
-						<td colspan="5" align="left">打开图片</td>
+						<td colspan="5" align="left">打开图像</td>
 					</tr>
 													<tr>
 						<th>参数</th>
@@ -121,7 +121,14 @@
 						<td>Y</td>
 						<td></td>
 						<td>string</td>
-						<td>图片地址</td>
+						<td>图片绝对路径或二进制字符串</td>
+					</tr>
+									<tr class="param">
+						<td>$type</td>
+						<td></td>
+						<td>0</td>
+						<td>int</td>
+						<td>打开类型，0=文件路径 1=二进制串</td>
 					</tr>
 																				</table>
 							<a name="watermark"></a>
@@ -413,7 +420,7 @@
 						<td>Y</td>
 						<td></td>
 						<td>string</td>
-						<td>输出类型，如：png, jpeg, gif</td>
+						<td>输出类型，如：png, jpeg, gif, webp, bmp等</td>
 					</tr>
 																				</table>
 							<a name="clear"></a>
@@ -426,7 +433,7 @@
 						<th colspan="5">说明</th>
 					</tr>
 					<tr>
-						<td colspan="5" align="left">销毁图片</td>
+						<td colspan="5" align="left">销毁图像</td>
 					</tr>
 																				</table>
 						</div>

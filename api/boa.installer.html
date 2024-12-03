@@ -59,6 +59,10 @@
 						<td>安装模块，具体执行模块中安装器安装</td>
 					</tr>
 									<tr>
+						<td align="center"><a href="#upgrade">upgrade()</a></td>
+						<td>升级模块，具体执行模块中安装器升级</td>
+					</tr>
+									<tr>
 						<td align="center"><a href="#uninstall">uninstall()</a></td>
 						<td>卸载模块，具体执行模块中安装器卸载</td>
 					</tr>
@@ -143,6 +147,42 @@ php boa -w boasoft.top //创建boasoft.top实例</code></pre>
 						<td colspan="5" class="example">
 						<pre><code class="language-php">命令行中执行：
 php boa -i demo // 安装demo模块</code></pre>
+						</td>
+					</tr>
+								</table>
+							<a name="upgrade"></a>
+				<table>
+					<caption>
+						<h3>upgrade()</h3>
+						<a href="#">↑</a>
+					</caption>
+									<tr>
+						<th colspan="5">说明</th>
+					</tr>
+					<tr>
+						<td colspan="5" align="left">升级模块，具体执行模块中安装器升级</td>
+					</tr>
+													<tr>
+						<th>参数</th>
+						<th>必须</th>
+						<th>默认值</th>
+						<th>类型</th>
+						<th>说明</th>
+					</tr>
+									<tr class="param">
+						<td>$mod</td>
+						<td>Y</td>
+						<td></td>
+						<td>string</td>
+						<td>模块名</td>
+					</tr>
+																					<tr>
+						<th colspan="5">示例</th>
+					</tr>
+					<tr>
+						<td colspan="5" class="example">
+						<pre><code class="language-php">命令行中执行：
+php boa -g demo // 升级demo模块</code></pre>
 						</td>
 					</tr>
 								</table>

@@ -32,7 +32,7 @@
 <p class="subtitle"><a href="../api/boa.log.html">日志配置</a></p>
 <p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>enable</td><td>false</td><td>bool</td><td>是否开启日志功能</td></tr><tr><td>driver</td><td>file</td><td>string</td><td>日志驱动；可选值：file, net</td></tr><tr><td>type</td><td>error,php_exception,php_error</td><td>string</td><td>日志记录类型，支持自定义值；可选值：info, error, header, php_warning, php_error, php_deprecated, php_strict, php_exception</td></tr></table></p>
 <p class="subtitle"><a href="../api/boa.log.driver.file.html">文件驱动</a></p>
-<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>timeline</td><td>false</td><td>bool</td><td>是否显示日志时间线</td></tr><tr><td>file</td><td>%Y%m/%d.log</td><td>string</td><td>日志保存地址，位于BS_VAR .'log/'目录下</td></tr></table></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>timeline</td><td>false</td><td>bool</td><td>是否显示日志时间线</td></tr><tr><td>file</td><td>Ym/d</td><td>string</td><td>日志保存地址，date()函数支持的格式，位于BS_VAR .'log/'目录下</td></tr></table></p>
 <p class="subtitle"><a href="../api/boa.log.driver.net.html">网络驱动</a></p>
 <p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>timeline</td><td>false</td><td>bool</td><td>是否显示日志时间线</td></tr><tr><td>host</td><td>http://127.0.0.1:8888</td><td>string</td><td>日志保存服务器</td></tr></table></p>							</div>
 			<div class="navigate">

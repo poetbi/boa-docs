@@ -30,7 +30,7 @@
 ],
 </code></pre>
 <p class="subtitle"><a href="../api/boa.upload.html">上传配置</a></p>
-<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>strict</td><td>false</td><td>bool</td><td>严格模式，开启后将验证文件的MIME类型</td></tr><tr><td>size</td><td>2</td><td>float</td><td>允许的文件大小（MB），0=不限</td></tr><tr><td>exts</td><td>jpg,png,gif</td><td>string</td><td>允许的文件后缀</td></tr><tr><td>path</td><td>BS_WWW .'file/'</td><td>string</td><td>文件保存位置</td></tr><tr><td>name</td><td>null</td><td>mixed</td><td>自定义文件保存名称，支持单个（string）或多个（array），名称可以包含目录</td></tr></table></p>							</div>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>strict</td><td>false</td><td>bool</td><td>严格模式，开启后将验证文件的MIME类型</td></tr><tr><td>size</td><td>2</td><td>float</td><td>允许的文件大小（MB），0=不限</td></tr><tr><td>exts</td><td>jpg,png,gif</td><td>string</td><td>允许的文件后缀</td></tr><tr><td>path</td><td>BS_WWW .'file/'</td><td>string</td><td>文件存放根目录</td></tr><tr><td>name</td><td>null</td><td>mixed</td><td>自定义文件保存名称（不含后缀，可以包含目录），支持单个（string）或多个（array）</td></tr><tr><td>ext</td><td>null</td><td>mixed</td><td>自定义文件保存后缀，不设定则自动使用原来文件后缀，支持单个（string）或多个（array），与name对应，单个的话所有文件均使用该后缀</td></tr><tr><td>default</td><td>Y/m/d/Hisv</td><td>string</td><td>没有自定义的情况下按此格式自动生成文件名称，date_format()函数支持的格式</td></tr><tr><td>break</td><td>false</td><td>bool</td><td>同时上传多个文件时，遇到失败是否终止，默认继续</td></tr><tr><td>auto</td><td>false</td><td>bool</td><td>上传图片时是否自动转换图片格式，默认否</td></tr></table></p>							</div>
 			<div class="navigate">
 				<a href="../network/53.html" class="prev">< 邮件配置</a>
 				<a class="menu"></a>

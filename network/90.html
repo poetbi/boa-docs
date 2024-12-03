@@ -30,7 +30,8 @@
 <pre><code class="language language-php">
 	$up = boa::upload();
 	$up->cfg('size', 2.5); // 上传大小限制2.5M
-	$res = $up->one('file', BS_WWW .'file/1.gif'); // 表单字段：file
+	$up->cfg('path', 'D:/file/'); //文件存放目录
+	$res = $up->one('file', 'img/123'); // 表单字段：file 文件路径：D:/file/img/123.原本后缀
 	$file = $up->get_file();
 	if($res){
 		$img = boa::file()->file2url($file['file']); // 得到上传文件绝对路径并转化
@@ -45,7 +46,7 @@
 <pre><code class="language language-php">
 	$dn = boa::download();
 	$dn->cfg('size', 2.5); // 上传大小限制2.5M
-	$res = $dn->one('http://xxxx.com/logo.gif', BS_WWW .'file/2.gif'); // 下载远程文件
+	$res = $dn->one('http://xxxx.com/logo.gif'); // 下载远程文件
 	$file = $dn->get_file();
 	if($res){
 		$img = $file['file']; // 得到下载文件绝对路径
