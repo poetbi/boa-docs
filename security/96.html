@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+	<link href="../res/css.css" rel="stylesheet" type="text/css" />
+	<link href="../res/prism.css" rel="stylesheet" type="text/css" />
+ 	<script type="text/javascript" src="../res/index.js"></script>
+   <title>权限配置 - boaPHP开发手册</title>
+</head>
+<body class="column">
+	<header class="head">
+		<h2>boaPHP开发手册<span>v5.5</span></h2>
+		<div></div>
+	</header>
+	<article class="body">
+		<div class="menu">
+			
+		</div>
+		<div class="main">
+			<div class="title">权限配置</div>
+			<div class="content">
+				<p class="subtitle">config.php</p>
+<pre><code class="language-php">
+'PERMISSION' => [
+	//配置项
+]
+</code></pre>
+<p class="subtitle"><a href="../api/boa.permission.html">权限配置</a></p>
+<p><table class="config"><tr><th>配置项</th><th>默认值</th><th>类型</th><th>说明</th></tr><tr><td>cacher</td><td>permission</td><td>string</td><td>定义权限数据整理缓存器，默认使用系统自带的/boa/cache/cacher/permission.php</td></tr><tr><td>mode</td><td>a</td><td>string</td><td>验证模式，可选值如下：<br>a ：只验证allow权限，匹配则通过，否则拒绝；<br>d ：只验证deny权限，匹配则拒绝，否则通过；<br>ad ：先验证allow再验证deny，各自含义同前；<br>da ：先验证deny再验证allow，各自含义同前；</td></tr></table></p>							</div>
+			<div class="navigate">
+				<a href="../security/46.html" class="prev">< 安全配置</a>
+				<a class="menu"></a>
+				<a href="../security/48.html" class="next">权限验证 ></a></a>
+			</div>
+		</div>
+	</article>
+	<script type="text/javascript" src="../res/menu.js"></script>
+	<script type="text/javascript" src="../res/prism.js"></script>
+</body>
+</html>

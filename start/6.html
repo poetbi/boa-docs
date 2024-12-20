@@ -43,7 +43,7 @@
 <p>后面按照文件路径命名，子命名空间分隔符请用 \</p>
 
 <p class="subtitle">SQL保留字</p>
-<p>数据库字段设计请不要使用SQL保留字</p>
+<p>数据库字段命名请不要使用SQL保留字，如果必须要用，可以使用原生查询</p>
 
 <p class="subtitle">目录分隔符</p>
 <p>不论在Windows、Linux还是Mac OS中，所有文件路径中的目录分隔符，除命名空间外请统一用 /</p>
@@ -84,6 +84,7 @@
 		<li>语言：boa::lang('<b>模块.语言文件.键</b>') <span class="explain">首个节点为 boa 表示内核</span></li>
 		<li>缓存：boa::cache()->get('<b>模块.缓存器</b>') <span class="explain">首个节点省略表示内核</span></li>
 		<li>模型：boa::model('<b>模块.模型</b>')</li>
+		<li>模板：$this->view->html('<b>模块.控制器.动作</b>') <span class="explain">全部省略表示当前动作</span></li>
 		<li>路由表：'<b>模块.控制器.动作</b>' <span class="explain">二和三节点可省略</span></li>
 		<li>权限表：'<b>模块.控制器.动作</b>' <span class="explain">二和三节点可省略</span></li>
 		<li>命令行：php boa -r <b>模块.控制器.动作</b> <span class="explain">二和三节点可省略</span></li>

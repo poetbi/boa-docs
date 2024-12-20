@@ -51,22 +51,21 @@
 <p class="tip tip-help">实际中可能不想每个动作中都要写一次验证，可以放在common共用库或各控制器 __construct() 中</p>
 
 <p class="subtitle">验证模式</p>
-<p>选择验证模式主要基于权限表设计便捷性来决定（默认：da），就是选择某种模式，权限规则写的更少更方便更符合需求。
+<p>选择验证模式主要基于权限表设计便捷性来决定，就是选择某种模式，权限规则写的更少更方便更符合需求。
 以下对于动作 admin.news.add 的验证来举例：</p>
 <table>
 	<tr><th>模式</th><th>说明</th><th>例子</th><th>解释</th></tr>
 	<tr><td align="center">a</td><td>只验证allow权限，匹配则通过，否则拒绝</td><td><pre><code class="language-php">'allow' => '*'</code></pre></td><td>全部允许，匹配所以通过</td></tr>
-	<tr><td align="center">d</td><td>只验证deny权限，匹配则拒绝，否则则通过</td><td><pre><code class="language-php">'deny' => '*'</code></pre></td><td>全部拒绝，匹配所以拒绝</td></tr>
-	<tr><td align="center">ad</td><td>先验证allow再验证deny，各自含义同前，两者同时通过才通过（拒绝优先）</td><td><pre><code class="language-php">'allow' => '*',
+	<tr><td align="center">d</td><td>只验证deny权限，匹配则拒绝，否则通过</td><td><pre><code class="language-php">'deny' => '*'</code></pre></td><td>全部拒绝，匹配所以拒绝</td></tr>
+	<tr><td align="center">ad</td><td>先验证allow再验证deny，各自含义同前</td><td><pre><code class="language-php">'allow' => '*',
 'deny' => 'admin.news.*'</code></pre></td><td>前者通过而后者拒绝，所以拒绝；如果前者拒绝则不验证后者，直接拒绝；对于允许多拒绝少的情况，采用这种模式权限规则写的少，先全部允许然后指定少量具体的拒绝</td></tr>
-	<tr><td align="center">da</td><td>先验证deny再验证allow，各自含义同前，两者同时拒绝才拒绝（通过优先）</td><td><pre><code class="language-php">'deny' => '*',
+	<tr><td align="center">da</td><td>先验证deny再验证allow，各自含义同前</td><td><pre><code class="language-php">'deny' => '*',
 'allow' => 'admin.news.*'</code></pre></td><td>前者拒绝而后者通过，所以通过；如果前者通过则不验证后者，直接通过；对于允许少拒绝多的情况，采用这种模式权限规则写的少，先全部拒绝然后指定少量具体的允许</td></tr>
 </table>
 
-<p class="tip tip-alert">开发中遇到权限表修改后不生效的问题，请先尝试删除临时目录下的缓存（var/www/cache/）</p>
-							</div>
+<p class="tip tip-alert">开发中遇到权限表修改后不生效的问题，请先尝试删除临时目录下的缓存（var/www/cache/）</p>							</div>
 			<div class="navigate">
-				<a href="../security/46.html" class="prev">< 安全配置</a>
+				<a href="../security/96.html" class="prev">< 权限配置</a>
 				<a class="menu"></a>
 				<a href="../security/49.html" class="next">加密解密 ></a></a>
 			</div>

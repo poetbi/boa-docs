@@ -31,10 +31,10 @@
 <pre><code class="language-php">
 namespace mod\home\cacher;
 
+use boa\boa;
 use boa\msg;
-use boa\cache\cacher;
 
-class test implements cacher{
+class test implements \boa\cache\cacher{
 	private $res;
 
 	public function __construct($args){
